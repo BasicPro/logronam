@@ -42,8 +42,8 @@ export const PintxoCard: React.FC<PintxoCardProps> = ({
     currentLocale
   );
   // const localizedIngredients = getLocalizedText(pintxo.ingredients, currentLocale);
-  const localizedOrigin = getLocalizedText(pintxo.origin, currentLocale);
-  const localizedTags = getLocalizedText(pintxo.tags, currentLocale);
+  const localizedOrigin = pintxo.origin ? getLocalizedText(pintxo.origin, currentLocale) : '';
+  const localizedTags = getLocalizedText(pintxo.tags as any, currentLocale);
 
   return (
     <Card className="overflow-hidden hover:shadow-lg transition-shadow duration-300">

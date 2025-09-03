@@ -113,7 +113,14 @@
     "unlike": "Unlike",
     "readMore": "Read more",
     "showLess": "Show less",
-    "viewDetails": "View details"
+    "viewDetails": "View details",
+    "popularity": "Popularity",
+    "category": "Category",
+    "difficulty": "Difficulty",
+    "origin": "Origin",
+    "ingredients": "Ingredients",
+    "tags": "Tags",
+    "bars": "bars"
   },
   "categories": {
     "bar": "Bar",
@@ -176,6 +183,13 @@
     "allPrices": "All prices",
     "availableAt": "Available at",
     "moreBars": "{{count}} more bars",
-    "viewDetails": "View details"
+    "viewDetails": "View details",
+    "popularity": "Popularity",
+    "category": "Category",
+    "difficulty": "Difficulty",
+    "origin": "Origin",
+    "ingredients": "Ingredients",
+    "tags": "Tags",
+    "bars": "bars"
   }
 }

@@ -69,14 +69,14 @@ export default function BarDetailPage() {
         <div className="h-96 relative">
           <Image
             src={bar.images.main}
-            alt={bar.name}
+            alt={typeof bar.name === 'string' ? bar.name : bar.name.es || bar.name.en}
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-black/40"></div>
           <div className="absolute bottom-8 left-8 right-8 text-white">
             <div className="flex justify-between items-end">
               <div>
-                <h1 className="text-4xl font-bold mb-2">{bar.name}</h1>
+                <h1 className="text-4xl font-bold mb-2">{typeof bar.name === 'string' ? bar.name : bar.name.es || bar.name.en}</h1>
                 <p className="text-xl text-gray-200 capitalize">{t(`categories.${bar.category}`)}</p>
               </div>
               <div className="flex items-center gap-4">
@@ -119,7 +119,7 @@ export default function BarDetailPage() {
                 </div>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-700 mb-6">{bar.description}</p>
+                <p className="text-gray-700 mb-6">{typeof bar.description === 'string' ? bar.description : bar.description.es || bar.description.en}</p>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>

@@ -32,7 +32,7 @@ export const BarCard: React.FC<BarCardProps> = ({
       <div className="relative h-48">
         <Image
           src={bar.images.main}
-          alt={bar.name}
+          alt={typeof bar.name === 'string' ? bar.name : bar.name.es || bar.name.en}
           className="w-full h-full"
         />
         <div className="absolute top-4 right-4">
@@ -53,7 +53,7 @@ export const BarCard: React.FC<BarCardProps> = ({
       <CardHeader>
         <div className="flex justify-between items-start">
           <div>
-            <h3 className="text-lg font-semibold text-gray-900">{bar.name}</h3>
+            <h3 className="text-lg font-semibold text-gray-900">{typeof bar.name === 'string' ? bar.name : bar.name.es || bar.name.en}</h3>
             <p className="text-sm text-gray-600 capitalize">{t(`categories.${bar.category}`)}</p>
           </div>
         </div>
@@ -62,7 +62,7 @@ export const BarCard: React.FC<BarCardProps> = ({
       {showDetails && (
         <CardContent>
           <p className="text-gray-700 text-sm mb-4 line-clamp-2">
-            {bar.description}
+            {typeof bar.description === 'string' ? bar.description : bar.description.es || bar.description.en}
           </p>
           
           <div className="space-y-2 mb-4">
@@ -85,13 +85,13 @@ export const BarCard: React.FC<BarCardProps> = ({
                 <div className="w-12 h-12 rounded-lg overflow-hidden">
                   <Image
                     src={bar.bestPintxo.image}
-                    alt={bar.bestPintxo.name}
+                    alt={typeof bar.bestPintxo.name === 'string' ? bar.bestPintxo.name : bar.bestPintxo.name.es || bar.bestPintxo.name.en}
                     className="w-full h-full"
                   />
                 </div>
                 <div className="flex-1">
                   <p className="text-sm font-medium text-gray-900">
-                    {bar.bestPintxo.name}
+                    {typeof bar.bestPintxo.name === 'string' ? bar.bestPintxo.name : bar.bestPintxo.name.es || bar.bestPintxo.name.en}
                   </p>
                   <p className="text-sm text-gray-600">
                     {formatPrice(bar.bestPintxo.price)}

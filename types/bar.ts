@@ -19,8 +19,8 @@ export interface BarReview {
 
 export interface Bar {
   id: string;
-  name: string;
-  description: string;
+  name: string | Record<string, string>;
+  description: string | Record<string, string>;
   location: BarLocation;
   images: {
     main: string;
@@ -63,15 +63,15 @@ export interface BarRanking {
 
 export interface Pintxo {
   id: string;
-  name: string;
-  description: string;
+  name: string | Record<string, string>;
+  description: string | Record<string, string>;
   image: string;
   price: number;
   category: 'traditional' | 'modern' | 'fusion' | 'vegetarian' | 'seafood' | 'meat';
-  ingredients: string[];
+  ingredients: string[] | Record<string, string[]>;
   bars: string[]; // Array of bar IDs that serve this pintxo
   popularity: number; // 1-5 scale
   difficulty: 'easy' | 'medium' | 'hard'; // For preparation
-  origin?: string; // Where the pintxo originated
-  tags: string[];
+  origin?: string | Record<string, string>; // Where the pintxo originated
+  tags: string[] | Record<string, string[]>;
 }

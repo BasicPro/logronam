@@ -96,12 +96,12 @@ html {
     font-size: 1.5rem;
     line-height: 2rem;
   }
-  
+
   .text-responsive-2xl {
     font-size: 1.875rem;
     line-height: 2.25rem;
   }
-  
+
   .text-responsive-3xl {
     font-size: 2.25rem;
     line-height: 2.5rem;
@@ -113,12 +113,12 @@ html {
     font-size: 1.25rem;
     line-height: 1.75rem;
   }
-  
+
   .text-responsive-2xl {
     font-size: 1.5rem;
     line-height: 2rem;
   }
-  
+
   .text-responsive-3xl {
     font-size: 1.875rem;
     line-height: 2.25rem;
@@ -130,14 +130,33 @@ html {
     font-size: 1.5rem;
     line-height: 2rem;
   }
-  
+
   .text-responsive-2xl {
     font-size: 2rem;
     line-height: 2.5rem;
   }
-  
+
   .text-responsive-3xl {
     font-size: 2.5rem;
     line-height: 3rem;
   }
+}
+
+theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  /* Custom red color palette */
+  --color-red-50: #fef2f2;
+  --color-red-100: #fee2e2;
+  --color-red-200: #fecaca;
+  --color-red-300: #fca5a5;
+  --color-red-400: #f87171;
+  --color-red-500: #d42a32;
+  --color-red-600: #c01f27; /* Your primary color */
+  --color-red-700: #a01a20;
+  --color-red-800: #7f1d1d;
+  --color-red-900: #450a0a;
 }

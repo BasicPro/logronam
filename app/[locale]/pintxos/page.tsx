@@ -186,7 +186,7 @@ export default function PintxosPage() {
               </SelectContent>
             </Select>
 
-            <Select value={filterByBar} onValueChange={setFilterByBar}>
+            <Select value={filterByBar} onChange={(e) => setFilterByBar(e.target.value)}>
               <SelectTrigger className="w-[180px]">
                 <SelectValue placeholder={t('pintxos.bar')} />
               </SelectTrigger>
@@ -198,7 +198,7 @@ export default function PintxosPage() {
               </SelectContent>
             </Select>
 
-            <Select value={filterByDifficulty} onValueChange={setFilterByDifficulty}>
+            <Select value={filterByDifficulty} onChange={(e) => setFilterByDifficulty(e.target.value)}>
               <SelectTrigger className="w-[180px]">
                 <SelectValue placeholder={t('pintxos.difficulty')} />
               </SelectTrigger>
@@ -210,7 +210,7 @@ export default function PintxosPage() {
               </SelectContent>
             </Select>
 
-            <Select value={filterByPriceRange} onValueChange={setFilterByPriceRange}>
+            <Select value={filterByPriceRange} onChange={(e) => setFilterByPriceRange(e.target.value)}>
               <SelectTrigger className="w-[180px]">
                 <SelectValue placeholder={t('pintxos.priceRange')} />
               </SelectTrigger>

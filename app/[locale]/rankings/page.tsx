@@ -60,7 +60,7 @@ export default function RankingsPage() {
           comparison = a.totalReviews - b.totalReviews;
           break;
         case 'name':
-          comparison = a.name.localeCompare(b.name);
+          comparison = (typeof a.name === 'string' ? a.name : a.name.es || a.name.en).localeCompare(typeof b.name === 'string' ? b.name : b.name.es || b.name.en);
           break;
       }
 
@@ -193,7 +193,7 @@ export default function RankingsPage() {
                 <div className="flex-shrink-0 w-32 h-32">
                   <Image
                     src={bar.images.main}
-                    alt={bar.name}
+                    alt={typeof bar.name === 'string' ? bar.name : bar.name.es || bar.name.en}
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -203,13 +203,13 @@ export default function RankingsPage() {
                   <div className="flex justify-between items-start">
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-2">
-                        <h3 className="text-xl font-bold text-gray-900">{bar.name}</h3>
+                        <h3 className="text-xl font-bold text-gray-900">{typeof bar.name === 'string' ? bar.name : bar.name.es || bar.name.en}</h3>
                         <span className="bg-red-100 text-red-800 text-sm px-2 py-1 rounded-full capitalize">
                           {t(`categories.${bar.category}`)}
                         </span>
                       </div>
                       
-                      <p className="text-gray-600 mb-3 line-clamp-2">{bar.description}</p>
+                      <p className="text-gray-600 mb-3 line-clamp-2">{typeof bar.description === 'string' ? bar.description : bar.description.es || bar.description.en}</p>
                       
                       <div className="flex items-center gap-6 text-sm text-gray-500">
                         <div className="flex items-center gap-1">

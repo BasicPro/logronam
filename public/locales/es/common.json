@@ -113,7 +113,14 @@
     "unlike": "No me gusta",
     "readMore": "Leer más",
     "showLess": "Mostrar menos",
-    "viewDetails": "Ver detalles"
+    "viewDetails": "Ver detalles",
+    "popularity": "Popularidad",
+    "category": "Categoría",
+    "difficulty": "Dificultad",
+    "origin": "Origen",
+    "ingredients": "Ingredientes",
+    "tags": "Etiquetas",
+    "bars": "bares"
   },
   "categories": {
     "bar": "Bar",
@@ -176,6 +183,13 @@
     "allPrices": "Todos los precios",
     "availableAt": "Disponible en",
     "moreBars": "{{count}} bares más",
-    "viewDetails": "Ver detalles"
+    "viewDetails": "Ver detalles",
+    "popularity": "Popularidad",
+    "category": "Categoría",
+    "difficulty": "Dificultad",
+    "origin": "Origen",
+    "ingredients": "Ingredientes",
+    "tags": "Etiquetas",
+    "bars": "bares"
   }
 }
