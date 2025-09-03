@@ -1,3 +1,4 @@
+import { Pintxo } from "./pintxo";
 
 export interface BarLocation {
   address: string;
@@ -29,8 +30,8 @@ export interface Bar {
   };
   rating: number;
   totalReviews: number;
-  bestPintxo: Pintxo;
-  pintxos: Pintxo[];
+  bestPintxo: string; // Now just the pintxo ID
+  pintxos: string[]; // Now just an array of pintxo IDs
   reviews: BarReview[];
   openingHours: {
     monday: string;
@@ -47,8 +48,8 @@ export interface Bar {
     instagram?: string;
   };
   features: string[];
-  priceRange: '€' | '€€' | '€€€' | '€€€€';
-  category: 'bar' | 'restaurant' | 'taberna' | 'bodega';
+  priceRange: "€" | "€€" | "€€€" | "€€€€";
+  category: "bar" | "restaurant" | "taberna" | "bodega";
   createdAt: string;
   updatedAt: string;
 }
@@ -57,21 +58,9 @@ export interface BarRanking {
   position: number;
   bar: Bar;
   score: number;
-  change: 'up' | 'down' | 'same';
+  change: "up" | "down" | "same";
   changeAmount: number;
 }
 
-export interface Pintxo {
-  id: string;
-  name: string | Record<string, string>;
-  description: string | Record<string, string>;
-  image: string;
-  price: number;
-  category: 'traditional' | 'modern' | 'fusion' | 'vegetarian' | 'seafood' | 'meat';
-  ingredients: string[] | Record<string, string[]>;
-  bars: string[]; // Array of bar IDs that serve this pintxo
-  popularity: number; // 1-5 scale
-  difficulty: 'easy' | 'medium' | 'hard'; // For preparation
-  origin?: string | Record<string, string>; // Where the pintxo originated
-  tags: string[] | Record<string, string[]>;
-}
+// Import the new Pintxo type from the dedicated types file
+export type { Pintxo } from "./pintxo";

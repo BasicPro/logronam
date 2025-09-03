@@ -7,7 +7,7 @@ import { useParams } from "next/navigation";
 import { Card, CardContent, CardFooter } from "../ui/Card";
 import { Button } from "../ui/Button";
 import { Image } from "../ui/Image";
-import { Pintxo } from "../../types/bar";
+import { Pintxo } from "../../types/pintxo";
 import { getBarsByIds } from "../../data/bars";
 import { MapPin, Users, Euro, Star, ChefHat } from "lucide-react";
 
@@ -26,24 +26,10 @@ export const PintxoCard: React.FC<PintxoCardProps> = ({
 
   const bars = getBarsByIds(pintxo.bars);
 
-  // Helper function to get localized text
-  const getLocalizedText = (
-    text: string | Record<string, string | string[]>,
-    locale: string
-  ): string | string[] => {
-    if (typeof text === "string") return text;
-    if (typeof text === "object" && text[locale]) return text[locale];
-    return text.es || text.en || Object.values(text)[0] || "";
-  };
-
-  const localizedName = getLocalizedText(pintxo.name, currentLocale);
-  const localizedDescription = getLocalizedText(
-    pintxo.description,
-    currentLocale
-  );
-  // const localizedIngredients = getLocalizedText(pintxo.ingredients, currentLocale);
-  const localizedOrigin = pintxo.origin ? getLocalizedText(pintxo.origin, currentLocale) : '';
-  const localizedTags = getLocalizedText(pintxo.tags as any, currentLocale);
+  const localizedName = pintxo.name;
+  const localizedDescription = pintxo.description;
+  const localizedOrigin = pintxo.origin || "";
+  const localizedTags = pintxo.tags;
 
   return (
     <Card className="overflow-hidden hover:shadow-lg transition-shadow duration-300">
@@ -123,13 +109,23 @@ export const PintxoCard: React.FC<PintxoCardProps> = ({
                       <div className="w-8 h-8 rounded-full overflow-hidden">
                         <Image
                           src={bar.images.main}
-                          alt={bar.name}
+                          alt={
+                            typeof bar.name === "string"
+                              ? bar.name
+                              : bar.name[currentLocale] ||
+                                bar.name.es ||
+                                "Unknown"
+                          }
                           className="w-full h-full object-cover"
                         />
                       </div>
                       <div>
                         <p className="text-sm font-medium text-gray-900">
-                          {bar.name}
+                          {typeof bar.name === "string"
+                            ? bar.name
+                            : bar.name[currentLocale] ||
+                              bar.name.es ||
+                              "Unknown"}
                         </p>
                         <p className="text-xs text-gray-600">
                           {bar.location.address}

@@ -1,16 +1,17 @@
-'use client';
+"use client";
 
-import React from 'react';
-import Link from 'next/link';
-import { useParams } from 'next/navigation';
-import { useTranslation } from 'react-i18next';
-import { MapPin, Clock, Euro } from 'lucide-react';
-import { Card, CardContent, CardHeader } from '../ui/Card';
-import { Rating } from '../ui/Rating';
-import { Image } from '../ui/Image';
-import { Button } from '../ui/Button';
-import { Bar } from '../../types/bar';
-import { formatPrice, getPriceRangeSymbol } from '../../lib/utils';
+import React from "react";
+import Link from "next/link";
+import { useParams } from "next/navigation";
+import { useTranslation } from "react-i18next";
+import { MapPin, Clock, Euro } from "lucide-react";
+import { Card, CardContent, CardHeader } from "../ui/Card";
+import { Rating } from "../ui/Rating";
+import { Image } from "../ui/Image";
+import { Button } from "../ui/Button";
+import { Bar } from "../../types/bar";
+import { formatPrice, getPriceRangeSymbol } from "../../lib/utils";
+import { getPintxoById } from "../../lib/pintxos";
 
 interface BarCardProps {
   bar: Bar;
@@ -21,18 +22,39 @@ interface BarCardProps {
 export const BarCard: React.FC<BarCardProps> = ({
   bar,
   showDetails = true,
-  className
+  className,
 }) => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation("common");
   const params = useParams();
   const currentLocale = params.locale as string;
+  const [bestPintxo, setBestPintxo] = React.useState<any>(null);
+
+  React.useEffect(() => {
+    const loadBestPintxo = async () => {
+      try {
+        const pintxo = await getPintxoById(
+          bar.bestPintxo,
+          currentLocale as any
+        );
+        setBestPintxo(pintxo);
+      } catch (error) {
+        console.error("Failed to load best pintxo:", error);
+      }
+    };
+
+    if (bar.bestPintxo) {
+      loadBestPintxo();
+    }
+  }, [bar.bestPintxo, currentLocale]);
 
   return (
     <Card className={`overflow-hidden ${className}`} hover>
       <div className="relative h-48">
         <Image
           src={bar.images.main}
-          alt={typeof bar.name === 'string' ? bar.name : bar.name.es || bar.name.en}
+          alt={
+            typeof bar.name === "string" ? bar.name : bar.name.es || bar.name.en
+          }
           className="w-full h-full"
         />
         <div className="absolute top-4 right-4">
@@ -49,12 +71,18 @@ export const BarCard: React.FC<BarCardProps> = ({
           </div>
         </div>
       </div>
-      
+
       <CardHeader>
         <div className="flex justify-between items-start">
           <div>
-            <h3 className="text-lg font-semibold text-gray-900">{typeof bar.name === 'string' ? bar.name : bar.name.es || bar.name.en}</h3>
-            <p className="text-sm text-gray-600 capitalize">{t(`categories.${bar.category}`)}</p>
+            <h3 className="text-lg font-semibold text-gray-900">
+              {typeof bar.name === "string"
+                ? bar.name
+                : bar.name.es || bar.name.en}
+            </h3>
+            <p className="text-sm text-gray-600 capitalize">
+              {t(`categories.${bar.category}`)}
+            </p>
           </div>
         </div>
       </CardHeader>
@@ -62,9 +90,11 @@ export const BarCard: React.FC<BarCardProps> = ({
       {showDetails && (
         <CardContent>
           <p className="text-gray-700 text-sm mb-4 line-clamp-2">
-            {typeof bar.description === 'string' ? bar.description : bar.description.es || bar.description.en}
+            {typeof bar.description === "string"
+              ? bar.description
+              : bar.description.es || bar.description.en}
           </p>
-          
+
           <div className="space-y-2 mb-4">
             <div className="flex items-center gap-2 text-sm text-gray-600">
               <MapPin className="w-4 h-4" />
@@ -72,29 +102,31 @@ export const BarCard: React.FC<BarCardProps> = ({
             </div>
             <div className="flex items-center gap-2 text-sm text-gray-600">
               <Clock className="w-4 h-4" />
-              <span>{bar.totalReviews} {t('bar.reviews')}</span>
+              <span>
+                {bar.totalReviews} {t("bar.reviews")}
+              </span>
             </div>
           </div>
 
-          {bar.bestPintxo && (
+          {bestPintxo && (
             <div className="border-t pt-4">
               <h4 className="text-sm font-medium text-gray-900 mb-2">
-                {t('bar.bestPintxo')}
+                {t("bar.bestPintxo")}
               </h4>
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-lg overflow-hidden">
                   <Image
-                    src={bar.bestPintxo.image}
-                    alt={typeof bar.bestPintxo.name === 'string' ? bar.bestPintxo.name : bar.bestPintxo.name.es || bar.bestPintxo.name.en}
+                    src={bestPintxo.image}
+                    alt={bestPintxo.name}
                     className="w-full h-full"
                   />
                 </div>
                 <div className="flex-1">
                   <p className="text-sm font-medium text-gray-900">
-                    {typeof bar.bestPintxo.name === 'string' ? bar.bestPintxo.name : bar.bestPintxo.name.es || bar.bestPintxo.name.en}
+                    {bestPintxo.name}
                   </p>
                   <p className="text-sm text-gray-600">
-                    {formatPrice(bar.bestPintxo.price)}
+                    {formatPrice(bestPintxo.price)}
                   </p>
                 </div>
               </div>
@@ -103,9 +135,7 @@ export const BarCard: React.FC<BarCardProps> = ({
 
           <div className="mt-4">
             <Link href={`/${currentLocale}/bars/${bar.id}`}>
-              <Button className="w-full">
-                {t('common.viewDetails')}
-              </Button>
+              <Button className="w-full">{t("common.viewDetails")}</Button>
             </Link>
           </div>
         </CardContent>

@@ -8,7 +8,7 @@ import { Footer } from "../../../../components/layout/Footer";
 import { Button } from "../../../../components/ui/Button";
 import { Card, CardContent, CardHeader } from "../../../../components/ui/Card";
 import { Image } from "../../../../components/ui/Image";
-import { getPintxoById } from "../../../../data/pintxos";
+import { getPintxoById } from "../../../../lib/pintxos";
 import { getBarsByIds } from "../../../../data/bars";
 import {
   MapPin,
@@ -22,13 +22,13 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
-export default function PintxoDetailPage() {
+export default async function PintxoDetailPage() {
   const { t } = useTranslation("common");
   const params = useParams();
   const currentLocale = params.locale as string;
   const pintxoId = params.id as string;
 
-  const pintxo = getPintxoById(pintxoId);
+  const pintxo = await getPintxoById(pintxoId, currentLocale as any);
 
   if (!pintxo) {
     notFound();
@@ -46,23 +46,11 @@ export default function PintxoDetailPage() {
     return text.es || text.en || Object.values(text)[0] || "";
   };
 
-  const localizedName = getLocalizedText(pintxo.name, currentLocale) as string;
-  const localizedDescription = getLocalizedText(
-    pintxo.description,
-    currentLocale
-  ) as string;
-  const localizedIngredients = getLocalizedText(
-    pintxo.ingredients,
-    currentLocale
-  ) as string[];
-  const localizedOrigin = getLocalizedText(
-    pintxo.origin,
-    currentLocale
-  ) as string;
-  const localizedTags = getLocalizedText(
-    pintxo.tags,
-    currentLocale
-  ) as string[];
+  const localizedName = pintxo.name;
+  const localizedDescription = pintxo.description;
+  const localizedIngredients = pintxo.ingredients;
+  const localizedOrigin = pintxo.origin || "";
+  const localizedTags = pintxo.tags;
 
   return (
     <div className="min-h-screen bg-gray-50">

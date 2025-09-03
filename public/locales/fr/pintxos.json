@@ -1,0 +1,42 @@
+{
+  "champinon-plancha": {
+    "name": "Champignon grillé",
+    "description": "Champignons frais grillés avec ail, persil et huile d'olive extra vierge.",
+    "ingredients": ["champignons", "ail", "persil", "huile d'olive", "sel"],
+    "origin": "Rue Laurel",
+    "tags": ["végétarien", "traditionnel", "populaire"]
+  },
+  "foie-manzana": {
+    "name": "Foie avec pomme caramélisée",
+    "description": "Foie gras de canard avec pomme caramélisée et réduction de Pedro Ximénez.",
+    "ingredients": [
+      "foie gras",
+      "pomme",
+      "sucre",
+      "vin Pedro Ximénez",
+      "beurre"
+    ],
+    "origin": "Rue San Juan",
+    "tags": ["gourmet", "moderne", "sucré"]
+  },
+  "pimientos-piquillo": {
+    "name": "Poivrons Piquillo farcis",
+    "description": "Poivrons Piquillo farcis de morue émiettée avec sauce basque.",
+    "ingredients": ["poivrons piquillo", "morue", "oignon", "ail", "paprika"],
+    "origin": "La Rioja",
+    "tags": ["traditionnel", "poisson", "épicé"]
+  },
+  "tortilla-patatas": {
+    "name": "Omelette espagnole",
+    "description": "Omelette espagnole traditionnelle avec pommes de terre, oignon et œufs, juteuse à l'intérieur.",
+    "ingredients": [
+      "œufs",
+      "pommes de terre",
+      "oignon",
+      "huile d'olive",
+      "sel"
+    ],
+    "origin": "Espagne",
+    "tags": ["traditionnel", "populaire", "végétarien"]
+  }
+}
