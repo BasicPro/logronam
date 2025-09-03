@@ -2,35 +2,21 @@
   "champinon-plancha": {
     "name": "Grilled Mushroom",
     "description": "Fresh mushrooms grilled with garlic, parsley, and extra virgin olive oil.",
-    "ingredients": ["mushrooms", "garlic", "parsley", "olive oil", "salt"],
-    "origin": "Laurel Street",
-    "tags": ["vegetarian", "traditional", "popular"]
+    "origin": "Laurel Street"
   },
   "foie-manzana": {
     "name": "Foie with Caramelized Apple",
     "description": "Duck foie gras with caramelized apple and Pedro Ximénez reduction.",
-    "ingredients": [
-      "foie gras",
-      "apple",
-      "sugar",
-      "Pedro Ximénez wine",
-      "butter"
-    ],
-    "origin": "San Juan Street",
-    "tags": ["gourmet", "modern", "sweet"]
+    "origin": "San Juan Street"
   },
   "pimientos-piquillo": {
     "name": "Stuffed Piquillo Peppers",
     "description": "Piquillo peppers stuffed with shredded cod and Basque sauce.",
-    "ingredients": ["piquillo peppers", "cod", "onion", "garlic", "paprika"],
-    "origin": "La Rioja",
-    "tags": ["traditional", "fish", "spicy"]
+    "origin": "La Rioja"
   },
   "tortilla-patatas": {
     "name": "Spanish Omelette",
     "description": "Traditional Spanish omelette with potatoes, onion, and eggs, juicy on the inside.",
-    "ingredients": ["eggs", "potatoes", "onion", "olive oil", "salt"],
-    "origin": "Spain",
-    "tags": ["traditional", "popular", "vegetarian"]
+    "origin": "Spain"
   }
 }

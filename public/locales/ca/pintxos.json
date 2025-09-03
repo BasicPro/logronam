@@ -2,35 +2,21 @@
   "champinon-plancha": {
     "name": "Xampinyó a la planxa",
     "description": "Xampinyons frescos a la planxa amb all, julivert i oli d'oliva verge extra.",
-    "ingredients": ["xampinyons", "all", "julivert", "oli d'oliva", "sal"],
-    "origin": "Carrer Laurel",
-    "tags": ["vegetarià", "tradicional", "popular"]
+    "origin": "Carrer Laurel"
   },
   "foie-manzana": {
     "name": "Foie amb poma caramelitzada",
     "description": "Foie gras d'ànec amb poma caramelitzada i reducció de Pedro Ximénez.",
-    "ingredients": [
-      "foie gras",
-      "poma",
-      "sucre",
-      "vi Pedro Ximénez",
-      "mantega"
-    ],
-    "origin": "Carrer San Juan",
-    "tags": ["gourmet", "modern", "dolç"]
+    "origin": "Carrer San Juan"
   },
   "pimientos-piquillo": {
     "name": "Pebrots Piquillo farcits",
     "description": "Pebrots Piquillo farcits de bacallà desmigat amb salsa basca.",
-    "ingredients": ["pebrots piquillo", "bacallà", "ceba", "all", "paprika"],
-    "origin": "La Rioja",
-    "tags": ["tradicional", "peix", "picant"]
+    "origin": "La Rioja"
   },
   "tortilla-patatas": {
     "name": "Truita de patates",
     "description": "Truita espanyola tradicional amb patates, ceba i ous, jugosa per dins.",
-    "ingredients": ["ous", "patates", "ceba", "oli d'oliva", "sal"],
-    "origin": "Espanya",
-    "tags": ["tradicional", "popular", "vegetarià"]
+    "origin": "Espanya"
   }
 }

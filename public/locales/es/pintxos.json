@@ -2,41 +2,21 @@
   "champinon-plancha": {
     "name": "Champiñón a la plancha",
     "description": "Champiñones frescos a la plancha con ajo, perejil y aceite de oliva virgen extra.",
-    "ingredients": ["champiñones", "ajo", "perejil", "aceite de oliva", "sal"],
-    "origin": "Calle Laurel",
-    "tags": ["vegetariano", "tradicional", "popular"]
+    "origin": "Calle Laurel"
   },
   "foie-manzana": {
     "name": "Foie con manzana caramelizada",
     "description": "Foie gras de pato con manzana caramelizada y reducción de Pedro Ximénez.",
-    "ingredients": [
-      "foie gras",
-      "manzana",
-      "azúcar",
-      "vino Pedro Ximénez",
-      "mantequilla"
-    ],
-    "origin": "Calle San Juan",
-    "tags": ["gourmet", "moderno", "dulce"]
+    "origin": "Calle San Juan"
   },
   "pimientos-piquillo": {
     "name": "Pimientos del Piquillo rellenos",
     "description": "Pimientos del Piquillo rellenos de bacalao desmigado con salsa vizcaína.",
-    "ingredients": [
-      "pimientos del piquillo",
-      "bacalao",
-      "cebolla",
-      "ajo",
-      "pimentón"
-    ],
-    "origin": "La Rioja",
-    "tags": ["tradicional", "pescado", "picante"]
+    "origin": "La Rioja"
   },
   "tortilla-patatas": {
     "name": "Tortilla de patatas",
     "description": "Tortilla española tradicional con patatas, cebolla y huevos, jugosa por dentro.",
-    "ingredients": ["huevos", "patatas", "cebolla", "aceite de oliva", "sal"],
-    "origin": "España",
-    "tags": ["tradicional", "popular", "vegetariano"]
+    "origin": "España"
   }
 }

@@ -2,41 +2,21 @@
   "champinon-plancha": {
     "name": "Cogumelo grelhado",
     "description": "Cogumelos frescos grelhados com alho, salsa e azeite de oliva extra virgem.",
-    "ingredients": ["cogumelos", "alho", "salsa", "azeite de oliva", "sal"],
-    "origin": "Rua Laurel",
-    "tags": ["vegetariano", "tradicional", "popular"]
+    "origin": "Rua Laurel"
   },
   "foie-manzana": {
     "name": "Foie com maçã caramelizada",
     "description": "Foie gras de pato com maçã caramelizada e redução de Pedro Ximénez.",
-    "ingredients": [
-      "foie gras",
-      "maçã",
-      "açúcar",
-      "vinho Pedro Ximénez",
-      "manteiga"
-    ],
-    "origin": "Rua San Juan",
-    "tags": ["gourmet", "moderno", "doce"]
+    "origin": "Rua San Juan"
   },
   "pimientos-piquillo": {
     "name": "Pimentões Piquillo recheados",
     "description": "Pimentões Piquillo recheados com bacalhau desfiado e molho basco.",
-    "ingredients": [
-      "pimentões piquillo",
-      "bacalhau",
-      "cebola",
-      "alho",
-      "paprika"
-    ],
-    "origin": "La Rioja",
-    "tags": ["tradicional", "peixe", "picante"]
+    "origin": "La Rioja"
   },
   "tortilla-patatas": {
     "name": "Tortilha espanhola",
     "description": "Tortilha espanhola tradicional com batatas, cebola e ovos, suculenta por dentro.",
-    "ingredients": ["ovos", "batatas", "cebola", "azeite de oliva", "sal"],
-    "origin": "Espanha",
-    "tags": ["tradicional", "popular", "vegetariano"]
+    "origin": "Espanha"
   }
 }

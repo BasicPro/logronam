@@ -2,41 +2,21 @@
   "champinon-plancha": {
     "name": "Gegrillter Pilz",
     "description": "Frische Pilze gegrillt mit Knoblauch, Petersilie und nativem Olivenöl extra.",
-    "ingredients": ["Pilze", "Knoblauch", "Petersilie", "Olivenöl", "Salz"],
-    "origin": "Laurel Straße",
-    "tags": ["vegetarisch", "traditionell", "beliebt"]
+    "origin": "Laurel Straße"
   },
   "foie-manzana": {
     "name": "Foie mit karamellisiertem Apfel",
     "description": "Entenfoie gras mit karamellisiertem Apfel und Pedro Ximénez Reduktion.",
-    "ingredients": [
-      "Foie gras",
-      "Apfel",
-      "Zucker",
-      "Pedro Ximénez Wein",
-      "Butter"
-    ],
-    "origin": "San Juan Straße",
-    "tags": ["gourmet", "modern", "süß"]
+    "origin": "San Juan Straße"
   },
   "pimientos-piquillo": {
     "name": "Gefüllte Piquillo-Paprika",
     "description": "Piquillo-Paprika gefüllt mit zerfasertem Kabeljau und baskischer Sauce.",
-    "ingredients": [
-      "Piquillo-Paprika",
-      "Kabeljau",
-      "Zwiebel",
-      "Knoblauch",
-      "Paprika"
-    ],
-    "origin": "La Rioja",
-    "tags": ["traditionell", "Fisch", "würzig"]
+    "origin": "La Rioja"
   },
   "tortilla-patatas": {
     "name": "Spanisches Omelett",
     "description": "Traditionelles spanisches Omelett mit Kartoffeln, Zwiebeln und Eiern, saftig von innen.",
-    "ingredients": ["Eier", "Kartoffeln", "Zwiebeln", "Olivenöl", "Salz"],
-    "origin": "Spanien",
-    "tags": ["traditionell", "beliebt", "vegetarisch"]
+    "origin": "Spanien"
   }
 }

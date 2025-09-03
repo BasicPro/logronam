@@ -2,41 +2,21 @@
   "champinon-plancha": {
     "name": "Fungo alla griglia",
     "description": "Funghi freschi alla griglia con aglio, prezzemolo e olio extravergine di oliva.",
-    "ingredients": ["funghi", "aglio", "prezzemolo", "olio d'oliva", "sale"],
-    "origin": "Via Laurel",
-    "tags": ["vegetariano", "tradizionale", "popolare"]
+    "origin": "Via Laurel"
   },
   "foie-manzana": {
     "name": "Foie con mela caramellata",
     "description": "Foie gras d'anatra con mela caramellata e riduzione di Pedro Ximénez.",
-    "ingredients": [
-      "foie gras",
-      "mela",
-      "zucchero",
-      "vino Pedro Ximénez",
-      "burro"
-    ],
-    "origin": "Via San Juan",
-    "tags": ["gourmet", "moderno", "dolce"]
+    "origin": "Via San Juan"
   },
   "pimientos-piquillo": {
     "name": "Peperoni Piquillo ripieni",
     "description": "Peperoni Piquillo ripieni di merluzzo sbriciolato con salsa basca.",
-    "ingredients": [
-      "peperoni piquillo",
-      "merluzzo",
-      "cipolla",
-      "aglio",
-      "paprika"
-    ],
-    "origin": "La Rioja",
-    "tags": ["tradizionale", "pesce", "piccante"]
+    "origin": "La Rioja"
   },
   "tortilla-patatas": {
     "name": "Frittata spagnola",
     "description": "Frittata spagnola tradizionale con patate, cipolla e uova, succosa all'interno.",
-    "ingredients": ["uova", "patate", "cipolla", "olio d'oliva", "sale"],
-    "origin": "Spagna",
-    "tags": ["tradizionale", "popolare", "vegetariano"]
+    "origin": "Spagna"
   }
 }

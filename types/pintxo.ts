@@ -14,14 +14,14 @@ export interface PintxoBase {
   bars: string[];
   popularity: number;
   difficulty: "easy" | "medium" | "hard";
+  ingredients: string[]; // Now in base - these are ingredient IDs
+  tags: string[]; // Now in base - these are tag IDs
 }
 
 export interface PintxoI18n {
   name: string;
   description: string;
-  ingredients: string[];
   origin?: string;
-  tags: string[];
 }
 
 export interface Pintxo extends PintxoBase, PintxoI18n {}
