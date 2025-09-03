@@ -1,0 +1,141 @@
+{
+  "navigation": {
+    "home": "Accueil",
+    "rankings": "Classements",
+    "bars": "Bars",
+    "about": "À propos",
+    "contact": "Contact"
+  },
+  "home": {
+    "title": "Logroñam",
+    "subtitle": "Découvrez les meilleurs bars et pintxos de Logroño",
+    "description": "Votre guide définitif pour explorer la gastronomie riojane. Découvrez les meilleurs bars, tavernes et restaurants de Logroño avec nos avis détaillés et classements mis à jour.",
+    "featuredBars": "Bars en vedette",
+    "topRated": "Mieux notés",
+    "newDiscoveries": "Nouvelles découvertes",
+    "viewAll": "Voir tout",
+    "exploreNow": "Explorer maintenant",
+    "stats": {
+      "bars": "Bars et restaurants",
+      "reviews": "Avis vérifiés",
+      "pintxos": "Pintxos uniques"
+    },
+    "neighborhoods": {
+      "title": "Explorer par Quartiers",
+      "subtitle": "Découvrez la diversité gastronomique de Logroño",
+      "laurel": {
+        "name": "Calle Laurel",
+        "description": "La rue la plus célèbre de Logroño, pleine de tavernes traditionnelles",
+        "count": "25+ bars"
+      },
+      "casco": {
+        "name": "Vieille Ville",
+        "description": "Le cœur historique de la ville avec des bars centenaires",
+        "count": "15+ bars"
+      },
+      "granvia": {
+        "name": "Gran Vía",
+        "description": "Bars modernes et restaurants haut de gamme",
+        "count": "10+ bars"
+      }
+    }
+  },
+  "bar": {
+    "rating": "Note",
+    "reviews": "avis",
+    "priceRange": "Gamme de prix",
+    "location": "Emplacement",
+    "openingHours": "Heures d'ouverture",
+    "contact": "Contact",
+    "features": "Caractéristiques",
+    "bestPintxo": "Meilleur pintxo",
+    "allPintxos": "Tous les pintxos",
+    "writeReview": "Écrire un avis",
+    "getDirections": "Itinéraire",
+    "share": "Partager",
+    "about": "À propos de ce bar",
+    "priceRangeLabel": "Gamme de prix",
+    "verified": "Vérifié",
+    "actions": "Actions",
+    "notFound": {
+      "title": "Bar introuvable",
+      "description": "Le bar que vous recherchez n'existe pas ou a été supprimé.",
+      "backHome": "Retour à l'accueil"
+    },
+    "backToRankings": "Retour aux classements"
+  },
+  "rankings": {
+    "title": "Classements des Bars",
+    "subtitle": "Les meilleurs bars de Logroño selon nos utilisateurs",
+    "position": "Position",
+    "bar": "Bar",
+    "rating": "Note",
+    "reviews": "Avis",
+    "priceRange": "Prix",
+    "change": "Changement",
+    "up": "Haut",
+    "down": "Bas",
+    "same": "Identique",
+    "filterBy": "Filtrer par",
+    "category": "Catégorie",
+    "neighborhood": "Quartier",
+    "all": "Tous",
+    "sortBy": "Trier par",
+    "numberOfReviews": "Nombre d'avis",
+    "name": "Nom",
+    "noResults": {
+      "title": "Aucun bar trouvé",
+      "description": "Essayez d'ajuster les filtres pour voir plus de résultats.",
+      "clearFilters": "Effacer les filtres"
+    },
+    "viewAllRankings": "Voir tous les classements"
+  },
+  "pintxo": {
+    "taste": "Goût",
+    "ingredients": "Ingrédients"
+  },
+  "common": {
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "retry": "Réessayer",
+    "search": "Rechercher",
+    "filter": "Filtrer",
+    "sort": "Trier",
+    "close": "Fermer",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "share": "Partager",
+    "like": "J'aime",
+    "unlike": "Je n'aime pas",
+    "readMore": "Lire plus",
+    "showLess": "Afficher moins",
+    "viewDetails": "Voir les détails"
+  },
+  "categories": {
+    "bar": "Bar",
+    "restaurant": "Restaurant",
+    "taberna": "Taverne",
+    "bodega": "Cave à vin"
+  },
+  "priceRanges": {
+    "€": "Budget",
+    "€€": "Modéré",
+    "€€€": "Cher",
+    "€€€€": "Très cher"
+  },
+  "metadata": {
+    "title": "Logroñam - Les meilleurs bars et pintxos de Logroño",
+    "description": "Votre guide définitif pour explorer la gastronomie riojane. Découvrez les meilleurs bars, tavernes et restaurants de Logroño avec nos avis détaillés et classements mis à jour.",
+    "keywords": "Logroño, bars, pintxos, gastronomie, La Rioja, tavernes, restaurants, classements",
+    "author": "Équipe Logroñam"
+  },
+  "footer": {
+    "quickLinks": "Liens rapides",
+    "location": "Logroño, La Rioja, Espagne",
+    "email": "info@logronam.com",
+    "phone": "+34 941 123 456",
+    "copyright": "© 2024 Logroñam. Tous droits réservés."
+  }
+}
