@@ -1,13 +1,3 @@
-export interface Pintxo {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  image: string;
-  taste: string;
-  ingredients: string[];
-  rating: number;
-}
 
 export interface BarLocation {
   address: string;
@@ -69,4 +59,19 @@ export interface BarRanking {
   score: number;
   change: 'up' | 'down' | 'same';
   changeAmount: number;
+}
+
+export interface Pintxo {
+  id: string;
+  name: string;
+  description: string;
+  image: string;
+  price: number;
+  category: 'traditional' | 'modern' | 'fusion' | 'vegetarian' | 'seafood' | 'meat';
+  ingredients: string[];
+  bars: string[]; // Array of bar IDs that serve this pintxo
+  popularity: number; // 1-5 scale
+  difficulty: 'easy' | 'medium' | 'hard'; // For preparation
+  origin?: string; // Where the pintxo originated
+  tags: string[];
 }

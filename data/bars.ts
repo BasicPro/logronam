@@ -15,6 +15,7 @@ export const bars: Bar[] = [
       interior: '/images/bars/soriano-interior.svg',
       exterior: '/images/bars/soriano-exterior.svg'
     },
+    
     rating: 4.8,
     totalReviews: 342,
     bestPintxo: {
@@ -23,9 +24,13 @@ export const bars: Bar[] = [
       description: 'Champiñón fresco a la plancha con ajo, perejil y aceite de oliva virgen extra.',
       price: 2.50,
       image: '/images/pintxos/champinon-plancha.svg',
-      taste: 'Intenso sabor a champiñón con el toque perfecto de ajo y perejil',
-      ingredients: ['Champiñones', 'Ajo', 'Perejil', 'Aceite de oliva', 'Sal'],
-      rating: 4.9
+      
+      ingredients: ["Champiñones", "Ajo", "Perejil", "Aceite de oliva", "Sal"],
+      category: "traditional",
+      bars: ["bar-laurel-1"],
+      popularity: 5,
+      difficulty: "easy",
+      tags: ["vegetariano", "tradicional"],
     },
     pintxos: [
       {
@@ -34,9 +39,13 @@ export const bars: Bar[] = [
         description: 'Champiñón fresco a la plancha con ajo, perejil y aceite de oliva virgen extra.',
         price: 2.50,
         image: '/images/pintxos/champinon-plancha.svg',
-        taste: 'Intenso sabor a champiñón con el toque perfecto de ajo y perejil',
-        ingredients: ['Champiñones', 'Ajo', 'Perejil', 'Aceite de oliva', 'Sal'],
-        rating: 4.9
+        
+        ingredients: ["Champiñones", "Ajo", "Perejil", "Aceite de oliva", "Sal"],
+      category: "traditional",
+      bars: ["bar-laurel-1"],
+      popularity: 5,
+      difficulty: "easy",
+      tags: ["vegetariano", "tradicional"],
       },
       {
         id: 'pintxo-2',
@@ -44,15 +53,20 @@ export const bars: Bar[] = [
         description: 'Tortilla española tradicional con cebolla, jugosa por dentro.',
         price: 3.00,
         image: '/images/pintxos/tortilla-patatas.svg',
-        taste: 'Cremosa y sabrosa, perfecta textura',
-        ingredients: ['Huevos', 'Patatas', 'Cebolla', 'Aceite de oliva', 'Sal'],
-        rating: 4.7
+        
+        ingredients: ["Champiñones", "Ajo", "Perejil", "Aceite de oliva", "Sal"],
+      category: "traditional",
+      bars: ["bar-laurel-1"],
+      popularity: 5,
+      difficulty: "easy",
+      tags: ["vegetariano", "tradicional"],
       }
     ],
     reviews: [
       {
         id: 'review-1',
         rating: 5,
+        
         comment: 'El mejor champiñón de Logroño, sin duda. Ambiente auténtico y servicio excelente.',
         author: 'María González',
         date: '2024-01-15',
@@ -91,17 +105,22 @@ export const bars: Bar[] = [
       main: '/images/bars/blanco-negro-main.svg',
       interior: '/images/bars/blanco-negro-interior.svg'
     },
-    rating: 4.6,
-    totalReviews: 287,
+    
+    rating: 4.8,
+    totalReviews: 342,
     bestPintxo: {
       id: 'pintxo-3',
       name: 'Foie con manzana',
       description: 'Foie gras con compota de manzana y reducción de Pedro Ximénez.',
       price: 4.50,
       image: '/images/pintxos/foie-manzana.svg',
-      taste: 'Delicado equilibrio entre el foie y la acidez de la manzana',
-      ingredients: ['Foie gras', 'Manzana', 'Pedro Ximénez', 'Pan tostado'],
-      rating: 4.8
+      
+      ingredients: ["Champiñones", "Ajo", "Perejil", "Aceite de oliva", "Sal"],
+      category: "traditional",
+      bars: ["bar-laurel-1"],
+      popularity: 5,
+      difficulty: "easy",
+      tags: ["vegetariano", "tradicional"],
     },
     pintxos: [
       {
@@ -110,15 +129,20 @@ export const bars: Bar[] = [
         description: 'Foie gras con compota de manzana y reducción de Pedro Ximénez.',
         price: 4.50,
         image: '/images/pintxos/foie-manzana.svg',
-        taste: 'Delicado equilibrio entre el foie y la acidez de la manzana',
-        ingredients: ['Foie gras', 'Manzana', 'Pedro Ximénez', 'Pan tostado'],
-        rating: 4.8
+        
+        ingredients: ["Champiñones", "Ajo", "Perejil", "Aceite de oliva", "Sal"],
+      category: "traditional",
+      bars: ["bar-laurel-1"],
+      popularity: 5,
+      difficulty: "easy",
+      tags: ["vegetariano", "tradicional"],
       }
     ],
     reviews: [
       {
-        id: 'review-2',
-        rating: 4,
+        id: 'review-1',
+        rating: 5,
+        
         comment: 'Muy buenos pinchos creativos, aunque un poco caros. Ambiente moderno.',
         author: 'Carlos Ruiz',
         date: '2024-01-10',
@@ -158,17 +182,22 @@ export const bars: Bar[] = [
       main: '/images/bars/herrerias-main.svg',
       interior: '/images/bars/herrerias-interior.svg'
     },
-    rating: 4.7,
-    totalReviews: 198,
+    
+    rating: 4.8,
+    totalReviews: 342,
     bestPintxo: {
       id: 'pintxo-4',
       name: 'Pimientos del piquillo rellenos',
       description: 'Pimientos del piquillo rellenos de bacalao con salsa vizcaína.',
       price: 3.50,
       image: '/images/pintxos/pimientos-piquillo.svg',
-      taste: 'Sabor intenso del pimiento con la suavidad del bacalao',
-      ingredients: ['Pimientos del piquillo', 'Bacalao', 'Cebolla', 'Tomate', 'Aceite'],
-      rating: 4.8
+      
+      ingredients: ["Champiñones", "Ajo", "Perejil", "Aceite de oliva", "Sal"],
+      category: "traditional",
+      bars: ["bar-laurel-1"],
+      popularity: 5,
+      difficulty: "easy",
+      tags: ["vegetariano", "tradicional"],
     },
     pintxos: [
       {
@@ -177,15 +206,20 @@ export const bars: Bar[] = [
         description: 'Pimientos del piquillo rellenos de bacalao con salsa vizcaína.',
         price: 3.50,
         image: '/images/pintxos/pimientos-piquillo.svg',
-        taste: 'Sabor intenso del pimiento con la suavidad del bacalao',
-        ingredients: ['Pimientos del piquillo', 'Bacalao', 'Cebolla', 'Tomate', 'Aceite'],
-        rating: 4.8
+        
+        ingredients: ["Champiñones", "Ajo", "Perejil", "Aceite de oliva", "Sal"],
+      category: "traditional",
+      bars: ["bar-laurel-1"],
+      popularity: 5,
+      difficulty: "easy",
+      tags: ["vegetariano", "tradicional"],
       }
     ],
     reviews: [
       {
-        id: 'review-3',
+        id: 'review-1',
         rating: 5,
+        
         comment: 'Auténtica taberna riojana. Los pimientos del piquillo son espectaculares.',
         author: 'Ana Martín',
         date: '2024-01-08',
@@ -229,3 +263,8 @@ export const getBarsByCategory = (category: string): Bar[] => {
 export const getBarsByNeighborhood = (neighborhood: string): Bar[] => {
   return bars.filter(bar => bar.location.neighborhood === neighborhood);
 };
+
+// Helper function to get bars by IDs
+export function getBarsByIds(barIds: string[]): Bar[] {
+  return bars.filter(bar => barIds.includes(bar.id));
+}

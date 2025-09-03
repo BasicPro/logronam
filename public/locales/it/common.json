@@ -2,19 +2,20 @@
   "navigation": {
     "home": "Home",
     "rankings": "Rankings",
+    "pintxos": "Pintxos",
     "bars": "Bars",
-    "about": "About us",
+    "about": "About",
     "contact": "Contact"
   },
   "home": {
     "title": "Logroñam",
     "subtitle": "Discover the best bars and pintxos in Logroño",
     "description": "Your definitive guide to explore Riojan gastronomy. Discover the best bars, taverns and restaurants in Logroño with our detailed reviews and updated rankings.",
-    "featuredBars": "Featured bars",
-    "topRated": "Top rated",
-    "newDiscoveries": "New discoveries",
-    "viewAll": "View all",
-    "exploreNow": "Explore now",
+    "featuredBars": "Featured Bars",
+    "topRated": "Top Rated",
+    "newDiscoveries": "New Discoveries",
+    "viewAll": "View All",
+    "exploreNow": "Explore Now",
     "stats": {
       "bars": "Bars and restaurants",
       "reviews": "Verified reviews",
@@ -35,7 +36,7 @@
       },
       "granvia": {
         "name": "Gran Vía",
-        "description": "Modern bars and high-end restaurants",
+        "description": "Modern bars and haute cuisine restaurants",
         "count": "10+ bars"
       }
     }

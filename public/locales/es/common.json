@@ -4,7 +4,8 @@
     "rankings": "Rankings",
     "bars": "Bares",
     "about": "Sobre nosotros",
-    "contact": "Contacto"
+    "contact": "Contacto",
+    "pintxos": "Pintxos"
   },
   "home": {
     "title": "Logroñam",
@@ -47,6 +48,7 @@
     "location": "Ubicación",
     "openingHours": "Horarios",
     "contact": "Contacto",
+    "pintxos": "Pintxos",
     "features": "Características",
     "bestPintxo": "Mejor pincho",
     "allPintxos": "Todos los pinchos",
@@ -137,5 +139,43 @@
     "email": "info@logronam.com",
     "phone": "+34 941 123 456",
     "copyright": "© 2024 Logroñam. Todos los derechos reservados."
+  },
+  "pintxos": {
+    "title": "Todos los Pinchos",
+    "subtitle": "Descubre la increíble variedad de pinchos de Logroño",
+    "searchPlaceholder": "Buscar pinchos, ingredientes, tags...",
+    "filters": "Filtros",
+    "clearFilters": "Limpiar filtros",
+    "results": "{{count}} resultados",
+    "noResults": {
+      "title": "No se encontraron pinchos",
+      "description": "Intenta ajustar los filtros para ver más resultados.",
+      "clearFilters": "Limpiar filtros"
+    },
+    "sortBy": "Ordenar por",
+    "name": "Nombre",
+    "price": "Precio",
+    "popularity": "Popularidad",
+    "bars": "Bares",
+    "category": "Categoría",
+    "allCategories": "Todas las categorías",
+    "traditional": "Tradicional",
+    "modern": "Moderno",
+    "fusion": "Fusión",
+    "vegetarian": "Vegetariano",
+    "seafood": "Marisco",
+    "meat": "Carne",
+    "bar": "Bar",
+    "allBars": "Todos los bares",
+    "difficulty": "Dificultad",
+    "allDifficulties": "Todas las dificultades",
+    "easy": "Fácil",
+    "medium": "Medio",
+    "hard": "Difícil",
+    "priceRange": "Rango de precio",
+    "allPrices": "Todos los precios",
+    "availableAt": "Disponible en",
+    "moreBars": "{{count}} bares más",
+    "viewDetails": "Ver detalles"
   }
 }

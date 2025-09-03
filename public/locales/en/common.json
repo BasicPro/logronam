@@ -4,7 +4,8 @@
     "rankings": "Rankings",
     "bars": "Bars",
     "about": "About us",
-    "contact": "Contact"
+    "contact": "Contact",
+    "pintxos": "Pintxos"
   },
   "home": {
     "title": "Logroñam",
@@ -47,6 +48,7 @@
     "location": "Location",
     "openingHours": "Opening hours",
     "contact": "Contact",
+    "pintxos": "Pintxos",
     "features": "Features",
     "bestPintxo": "Best pintxo",
     "allPintxos": "All pintxos",
@@ -137,5 +139,43 @@
     "email": "info@logronam.com",
     "phone": "+34 941 123 456",
     "copyright": "© 2024 Logroñam. All rights reserved."
+  },
+  "pintxos": {
+    "title": "All Pintxos",
+    "subtitle": "Discover the incredible variety of pintxos in Logroño",
+    "searchPlaceholder": "Search pintxos, ingredients, tags...",
+    "filters": "Filters",
+    "clearFilters": "Clear filters",
+    "results": "{{count}} results",
+    "noResults": {
+      "title": "No pintxos found",
+      "description": "Try adjusting the filters to see more results.",
+      "clearFilters": "Clear filters"
+    },
+    "sortBy": "Sort by",
+    "name": "Name",
+    "price": "Price",
+    "popularity": "Popularity",
+    "bars": "Bars",
+    "category": "Category",
+    "allCategories": "All categories",
+    "traditional": "Traditional",
+    "modern": "Modern",
+    "fusion": "Fusion",
+    "vegetarian": "Vegetarian",
+    "seafood": "Seafood",
+    "meat": "Meat",
+    "bar": "Bar",
+    "allBars": "All bars",
+    "difficulty": "Difficulty",
+    "allDifficulties": "All difficulties",
+    "easy": "Easy",
+    "medium": "Medium",
+    "hard": "Hard",
+    "priceRange": "Price range",
+    "allPrices": "All prices",
+    "availableAt": "Available at",
+    "moreBars": "{{count}} more bars",
+    "viewDetails": "View details"
   }
 }
