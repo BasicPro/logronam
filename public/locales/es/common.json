@@ -51,6 +51,20 @@
     "features": "Características",
     "bestPintxo": "Mejor pincho",
     "viewDetails": "Ver detalles",
+    "allPintxos": "Todos los pinchos",
+    "writeReview": "Escribir reseña",
+    "getDirections": "Cómo llegar",
+    "share": "Compartir",
+    "about": "Sobre este bar",
+    "priceRangeLabel": "Rango de precios",
+    "verified": "Verificado",
+    "actions": "Acciones",
+    "notFound": {
+      "title": "Bar no encontrado",
+      "description": "El bar que buscas no existe o ha sido eliminado.",
+      "backHome": "Volver al inicio"
+    },
+    "backToRankings": "Volver a rankings",
     "categories": {
       "bar": "Bar",
       "restaurant": "Restaurante",
@@ -72,6 +86,9 @@
     "allNeighborhoods": "Todos los barrios",
     "allPriceRanges": "Todos los rangos",
     "results": "{{count}} bares encontrados",
+    "all": "Todos",
+    "numberOfReviews": "Número de reseñas",
+    "viewAllRankings": "Ver todos los rankings",
     "noResults": {
       "title": "No se encontraron bares",
       "description": "Intenta ajustar los filtros para encontrar más resultados.",
@@ -114,19 +131,13 @@
     "meat": "Carne",
     "easy": "Fácil",
     "medium": "Medio",
-    "hard": "Difícil"
-  },
-  "pintxoDetail": {
+    "hard": "Difícil",
+    "bars": "Bares",
     "backToPintxos": "Volver a Pinchos",
-    "availableAt": "Disponible en",
     "ingredients": "Ingredientes",
     "tags": "Etiquetas",
     "origin": "Origen",
-    "difficulty": "Dificultad",
-    "category": "Categoría",
-    "price": "Precio",
-    "viewBar": "Ver Bar",
-    "bars": "bares"
+    "viewBar": "Ver Bar"
   },
   "ingredients": {
     "mushrooms": "champiñones",
@@ -164,6 +175,58 @@
     "termsOfService": "Términos de Servicio",
     "cookies": "Política de Cookies",
     "allRightsReserved": "Todos los derechos reservados",
-    "madeWith": "Hecho con ❤️ en Logroño"
+    "madeWith": "Hecho con ❤️ en Logroño",
+    "location": "Logroño, La Rioja, España",
+    "email": "info@logronam.com",
+    "phone": "+34 941 123 456",
+    "copyright": "© 2024 Logroñam. Todos los derechos reservados."
+  },
+  "pintxo": {
+    "taste": "Sabor",
+    "ingredients": "Ingredientes"
+  },
+  "common": {
+    "loading": "Cargando...",
+    "error": "Error",
+    "retry": "Reintentar",
+    "search": "Buscar",
+    "filter": "Filtrar",
+    "sort": "Ordenar",
+    "close": "Cerrar",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "share": "Compartir",
+    "like": "Me gusta",
+    "unlike": "No me gusta",
+    "readMore": "Leer más",
+    "showLess": "Mostrar menos",
+    "viewDetails": "Ver detalles",
+    "popularity": "Popularidad",
+    "category": "Categoría",
+    "difficulty": "Dificultad",
+    "origin": "Origen",
+    "ingredients": "Ingredientes",
+    "tags": "Etiquetas",
+    "bars": "bares"
+  },
+  "categories": {
+    "bar": "Bar",
+    "restaurant": "Restaurante",
+    "taberna": "Taberna",
+    "bodega": "Bodega"
+  },
+  "priceRanges": {
+    "€": "Económico",
+    "€€": "Moderado",
+    "€€€": "Caro",
+    "€€€€": "Muy caro"
+  },
+  "metadata": {
+    "title": "Logroñam - Los mejores bares y pinchos de Logroño",
+    "description": "Descubre los mejores bares, tabernas y restaurantes de Logroño con nuestras reseñas detalladas y rankings actualizados. Tu guía definitiva para la gastronomía riojana.",
+    "keywords": "Logroño, bares, pinchos, gastronomía, La Rioja, tabernas, restaurantes, rankings",
+    "author": "Logroñam Team"
   }
 }
