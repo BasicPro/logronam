@@ -1,5 +1,4 @@
 "use client";
-
 import React from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
@@ -11,7 +10,7 @@ import { Image } from "../ui/Image";
 import { Button } from "../ui/Button";
 import { Bar } from "../../types/bar";
 import { formatPrice, getPriceRangeSymbol } from "../../lib/utils";
-import { getPintxoById } from "../../lib/pintxos";
+import { getPintxoVariationById } from "../../lib/pintxos";
 
 interface BarCardProps {
   bar: Bar;
@@ -27,115 +26,110 @@ export const BarCard: React.FC<BarCardProps> = ({
   const { t } = useTranslation("common");
   const params = useParams();
   const currentLocale = params.locale as string;
-  const [bestPintxo, setBestPintxo] = React.useState<any>(null);
+  const [bestPintxoVariation, setBestPintxoVariation] = React.useState<any>(null);
 
   React.useEffect(() => {
-    const loadBestPintxo = async () => {
+    const loadBestPintxoVariation = async () => {
       try {
-        const pintxo = await getPintxoById(
-          bar.bestPintxo,
+        // Find the variation for this bar's best pintxo
+        const variation = await getPintxoVariationById(
+          `${bar.bestPintxo}-${bar.id.split('-').pop()}`,
           currentLocale as any
         );
-        setBestPintxo(pintxo);
+        setBestPintxoVariation(variation);
       } catch (error) {
-        console.error("Failed to load best pintxo:", error);
+        console.error("Failed to load best pintxo variation:", error);
       }
     };
 
     if (bar.bestPintxo) {
-      loadBestPintxo();
+      loadBestPintxoVariation();
     }
-  }, [bar.bestPintxo, currentLocale]);
+  }, [bar.bestPintxo, bar.id, currentLocale]);
 
   return (
     <Card className={`overflow-hidden ${className}`} hover>
-      <div className="relative h-48">
-        <Image
-          src={bar.images.main}
-          alt={
-            typeof bar.name === "string" ? bar.name : bar.name.es || bar.name.en
-          }
-          className="w-full h-full"
-        />
-        <div className="absolute top-4 right-4">
-          <div className="bg-white/90 backdrop-blur-sm rounded-full px-2 py-1">
-            <Rating rating={bar.rating} size="sm" />
-          </div>
-        </div>
-        <div className="absolute bottom-4 left-4">
-          <div className="bg-white/90 backdrop-blur-sm rounded-full px-2 py-1 flex items-center gap-1">
-            <Euro className="w-3 h-3" />
-            <span className="text-sm font-medium">
-              {getPriceRangeSymbol(bar.priceRange)}
-            </span>
-          </div>
-        </div>
-      </div>
-
-      <CardHeader>
-        <div className="flex justify-between items-start">
-          <div>
-            <h3 className="text-lg font-semibold text-gray-900">
-              {typeof bar.name === "string"
+      <CardHeader className="p-0">
+        <div className="relative h-48">
+          <Image
+            src={bar.images.main}
+            alt={
+              typeof bar.name === "string"
                 ? bar.name
-                : bar.name.es || bar.name.en}
-            </h3>
-            <p className="text-sm text-gray-600 capitalize">
-              {t(`categories.${bar.category}`)}
-            </p>
+                : bar.name[currentLocale] || bar.name.es || "Unknown"
+            }
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm rounded-full px-2 py-1">
+            <Rating rating={bar.rating} size="sm" />
           </div>
         </div>
       </CardHeader>
 
       {showDetails && (
         <CardContent>
-          <p className="text-gray-700 text-sm mb-4 line-clamp-2">
-            {typeof bar.description === "string"
-              ? bar.description
-              : bar.description.es || bar.description.en}
-          </p>
+          <div className="p-4">
+            <h3 className="text-xl font-bold text-gray-900 mb-2 line-clamp-1">
+              {typeof bar.name === "string"
+                ? bar.name
+                : bar.name[currentLocale] || bar.name.es || "Unknown"}
+            </h3>
+            <p className="text-gray-600 text-sm mb-3 line-clamp-2">
+              {typeof bar.description === "string"
+                ? bar.description
+                : bar.description[currentLocale] || bar.description.es || ""}
+            </p>
 
-          <div className="space-y-2 mb-4">
-            <div className="flex items-center gap-2 text-sm text-gray-600">
-              <MapPin className="w-4 h-4" />
-              <span>{bar.location.neighborhood}</span>
+            <div className="space-y-2 mb-4">
+              <div className="flex items-center gap-2 text-sm text-gray-600">
+                <MapPin className="w-4 h-4 text-red-500" />
+                <span>{bar.location.address}</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm text-gray-600">
+                <Clock className="w-4 h-4 text-red-500" />
+                <span>{bar.openingHours.monday}</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm text-gray-600">
+                <Euro className="w-4 h-4 text-red-500" />
+                <span>{getPriceRangeSymbol(bar.priceRange)}</span>
+              </div>
             </div>
-            <div className="flex items-center gap-2 text-sm text-gray-600">
-              <Clock className="w-4 h-4" />
+
+            <div className="flex items-center justify-between text-sm text-gray-600 mb-4">
               <span>
                 {bar.totalReviews} {t("bar.reviews")}
               </span>
+              <span className="capitalize">{bar.category}</span>
             </div>
-          </div>
 
-          {bestPintxo && (
-            <div className="border-t pt-4">
-              <h4 className="text-sm font-medium text-gray-900 mb-2">
-                {t("bar.bestPintxo")}
-              </h4>
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-lg overflow-hidden">
-                  <Image
-                    src={bestPintxo.image}
-                    alt={bestPintxo.name}
-                    className="w-full h-full"
-                  />
-                </div>
-                <div className="flex-1">
-                  <p className="text-sm font-medium text-gray-900">
-                    {bestPintxo.name}
-                  </p>
-                  <p className="text-sm text-gray-600">
-                    {formatPrice(bestPintxo.price)}
-                  </p>
+            {bestPintxoVariation && (
+              <div className="border-t pt-4">
+                <h4 className="text-sm font-medium text-gray-900 mb-2">
+                  {t("bar.bestPintxo")}
+                </h4>
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-lg overflow-hidden">
+                    <Image
+                      src={bestPintxoVariation.image}
+                      alt="Best pintxo"
+                      className="w-full h-full"
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <p className="text-sm font-medium text-gray-900">
+                      {formatPrice(bestPintxoVariation.price)}
+                    </p>
+                    <div className="flex items-center gap-1">
+                      <span className="text-xs text-yellow-600">★</span>
+                      <span className="text-xs text-gray-600">{bestPintxoVariation.rating.toFixed(1)}</span>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          )}
+            )}
 
-          <div className="mt-4">
-            <Link href={`/${currentLocale}/bars/${bar.id}`}>
-              <Button className="w-full">{t("common.viewDetails")}</Button>
+            <Link href={`/${currentLocale}/bars/${bar.id}`} className="w-full mt-4">
+              <Button className="w-full">{t("bar.viewDetails")}</Button>
             </Link>
           </div>
         </CardContent>

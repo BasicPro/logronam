@@ -93,18 +93,15 @@
     "sortBy": "Sort by",
     "name": "Name",
     "price": "Price",
-    "taste": "Taste",
     "availableAt": "Available at",
     "moreBars": "{{count}} more bars",
     "viewDetails": "View details",
     "popularity": "Popularity",
     "category": "Category",
-    "difficulty": "Difficulty",
     "priceRange": "Price Range",
     "bar": "Bar",
     "allBars": "All Bars",
     "allCategories": "All Categories",
-    "allDifficulties": "All Difficulties",
     "allPriceRanges": "All Price Ranges",
     "traditional": "Traditional",
     "modern": "Modern",
@@ -112,21 +109,17 @@
     "vegetarian": "Vegetarian",
     "seafood": "Seafood",
     "meat": "Meat",
-    "easy": "Easy",
-    "medium": "Medium",
-    "hard": "Hard"
-  },
-  "pintxoDetail": {
+    "bars": "Bars",
     "backToPintxos": "Back to Pintxos",
-    "availableAt": "Available at",
     "ingredients": "Ingredients",
     "tags": "Tags",
-    "origin": "Origin",
-    "difficulty": "Difficulty",
-    "category": "Category",
-    "price": "Price",
     "viewBar": "View Bar",
-    "bars": "bars"
+    "notFound": {
+      "title": "Pintxo not found",
+      "description": "The pintxo you are looking for does not exist or has been removed."
+    },
+    "noBarsFound": "No bars found serving this pintxo",
+    "currentView": "Current view"
   },
   "ingredients": {
     "mushrooms": "mushrooms",
@@ -165,5 +158,44 @@
     "cookies": "Cookie Policy",
     "allRightsReserved": "All rights reserved",
     "madeWith": "Made with ❤️ in Logroño"
+  },
+  "common": {
+    "loading": "Loading...",
+    "rating": "Rating",
+    "error": "Error",
+    "retry": "Retry",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "close": "Close",
+    "save": "Save",
+    "cancel": "Cancel",
+    "edit": "Edit",
+    "delete": "Delete",
+    "share": "Share",
+    "like": "Like",
+    "unlike": "Unlike",
+    "readMore": "Read more",
+    "showLess": "Show less",
+    "viewDetails": "View details",
+    "view": "View"
+  },
+  "categories": {
+    "bar": "Bar",
+    "restaurant": "Restaurant",
+    "taberna": "Tavern",
+    "bodega": "Winery"
+  },
+  "priceRanges": {
+    "€": "Economical",
+    "€€": "Moderate",
+    "€€€": "Expensive",
+    "€€€€": "Very expensive"
+  },
+  "metadata": {
+    "title": "Logroñam - The best bars and pintxos in Logroño",
+    "description": "Discover the best bars, taverns and restaurants in Logroño with our detailed reviews and updated rankings. Your definitive guide to Riojan gastronomy.",
+    "keywords": "Logroño, bars, pintxos, gastronomy, La Rioja, taverns, restaurants, rankings",
+    "author": "Logroñam Team"
   }
 }

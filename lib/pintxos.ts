@@ -1,11 +1,13 @@
-import { pintxosBase } from '../data/pintxos/base';
-import { Pintxo, PintxoBase, PintxoI18n, PintxoLocaleMap, Locale } from '../types/pintxo';
+import { pintxosBase } from '../data/pintxos';
+import { pintxoVariationsBase } from '../data/pintxoVariations';
+import { Pintxo, PintxoBase, PintxoI18n, PintxoLocaleMap, Locale, PintxoVariation, PintxoVariationBase, PintxoVariationI18n, PintxoVariationLocaleMap } from '../types/pintxo';
 
 const DEFAULT_LOCALE: Locale = 'es';
 
 // Cache for loaded locale maps
 const localeCache = new Map<Locale, PintxoLocaleMap>();
 const commonCache = new Map<Locale, any>();
+const variationCache = new Map<Locale, PintxoVariationLocaleMap>();
 
 /**
  * Load locale map for a specific language
@@ -30,6 +32,36 @@ async function loadLocaleMap(locale: Locale): Promise<PintxoLocaleMap> {
     // If the requested locale fails, try to load the default locale
     if (locale !== DEFAULT_LOCALE) {
       return loadLocaleMap(DEFAULT_LOCALE);
+    }
+    
+    // If even the default locale fails, return empty map
+    return {};
+  }
+}
+
+/**
+ * Load variation translations for a specific language
+ */
+async function loadVariationLocaleMap(locale: Locale): Promise<PintxoVariationLocaleMap> {
+  // Check cache first
+  if (variationCache.has(locale)) {
+    return variationCache.get(locale)!;
+  }
+
+  try {
+    // Dynamic import of the variation locale file
+    const variationData = await import(`../public/locales/${locale}/pintxo-variations.json`);
+    const variationMap = variationData.default || variationData;
+    
+    // Cache the result
+    variationCache.set(locale, variationMap);
+    return variationMap;
+  } catch (error) {
+    console.warn(`Failed to load variation locale ${locale}, falling back to ${DEFAULT_LOCALE}`);
+    
+    // If the requested locale fails, try to load the default locale
+    if (locale !== DEFAULT_LOCALE) {
+      return loadVariationLocaleMap(DEFAULT_LOCALE);
     }
     
     // If even the default locale fails, return empty map
@@ -70,7 +102,7 @@ async function loadCommonTranslations(locale: Locale): Promise<any> {
 /**
  * Merge base pintxo data with translations
  */
-function merge(base: PintxoBase, translations: PintxoI18n, common: any): Pintxo {
+function mergePintxo(base: PintxoBase, translations: PintxoI18n, common: any): Pintxo {
   // Translate ingredients
   const translatedIngredients = base.ingredients.map(ingredientId => 
     common.ingredients?.[ingredientId] || ingredientId
@@ -86,6 +118,16 @@ function merge(base: PintxoBase, translations: PintxoI18n, common: any): Pintxo 
     ...translations,
     ingredients: translatedIngredients,
     tags: translatedTags,
+  };
+}
+
+/**
+ * Merge base pintxo variation data with translations
+ */
+function mergeVariation(base: PintxoVariationBase, translations: PintxoVariationI18n): PintxoVariation {
+  return {
+    ...base,
+    ...translations,
   };
 }
 
@@ -115,7 +157,7 @@ export async function getPintxos(locale: Locale): Promise<Pintxo[]> {
         ),
       };
     }
-    return merge(base, translations, common);
+    return mergePintxo(base, translations, common);
   });
 }
 
@@ -148,7 +190,48 @@ export async function getPintxoById(id: string, locale: Locale): Promise<Pintxo 
     };
   }
 
-  return merge(base, translations, common);
+  return mergePintxo(base, translations, common);
+}
+
+/**
+ * Get all pintxo variations for a specific pintxo
+ */
+export async function getPintxoVariations(pintxoId: string, locale: Locale): Promise<PintxoVariation[]> {
+  const variationBases = pintxoVariationsBase.filter(v => v.pintxoId === pintxoId);
+  const variationMap = await loadVariationLocaleMap(locale);
+  
+  return variationBases.map(base => {
+    const translations = variationMap[base.id];
+    if (!translations) {
+      console.warn(`Missing translations for variation ${base.id} in locale ${locale}`);
+      return {
+        ...base,
+        review: '',
+      };
+    }
+    return mergeVariation(base, translations);
+  });
+}
+
+/**
+ * Get a specific pintxo variation by ID
+ */
+export async function getPintxoVariationById(id: string, locale: Locale): Promise<PintxoVariation | undefined> {
+  const base = pintxoVariationsBase.find(v => v.id === id);
+  if (!base) return undefined;
+
+  const variationMap = await loadVariationLocaleMap(locale);
+  const translations = variationMap[id];
+  
+  if (!translations) {
+    console.warn(`Missing translations for variation ${id} in locale ${locale}`);
+    return {
+      ...base,
+      review: '',
+    };
+  }
+
+  return mergeVariation(base, translations);
 }
 
 /**
@@ -156,7 +239,10 @@ export async function getPintxoById(id: string, locale: Locale): Promise<Pintxo 
  */
 export async function getPintxosByBar(barId: string, locale: Locale): Promise<Pintxo[]> {
   const allPintxos = await getPintxos(locale);
-  return allPintxos.filter(pintxo => pintxo.bars.includes(barId));
+  const barVariations = pintxoVariationsBase.filter(v => v.barId === barId);
+  const pintxoIds = [...new Set(barVariations.map(v => v.pintxoId))];
+  
+  return allPintxos.filter(pintxo => pintxoIds.includes(pintxo.id));
 }
 
 /**
@@ -172,7 +258,12 @@ export async function getPintxosByCategory(category: Pintxo['category'], locale:
  */
 export async function getPintxosByPriceRange(min: number, max: number, locale: Locale): Promise<Pintxo[]> {
   const allPintxos = await getPintxos(locale);
-  return allPintxos.filter(pintxo => pintxo.price >= min && pintxo.price <= max);
+  return allPintxos.filter(pintxo => {
+    const variations = pintxoVariationsBase.filter(v => v.pintxoId === pintxo.id);
+    return variations.some(variation => 
+      variation.price >= min && variation.price <= max
+    );
+  });
 }
 
 /**
@@ -204,17 +295,11 @@ export function getCategories(): Pintxo['category'][] {
 }
 
 /**
- * Get all available difficulties
- */
-export function getDifficulties(): Pintxo['difficulty'][] {
-  return ['easy', 'medium', 'hard'];
-}
-
-/**
- * Get price range (min, max) from all pintxos
+ * Get price range (min, max) from all pintxos across all variations
  */
 export function getPriceRange(): { min: number; max: number } {
-  const prices = pintxosBase.map(p => p.price);
+  const prices = pintxoVariationsBase.map(v => v.price);
+  
   return {
     min: Math.min(...prices),
     max: Math.max(...prices),
@@ -226,4 +311,11 @@ export function getPriceRange(): { min: number; max: number } {
  */
 export function getPintxosBase(): PintxoBase[] {
   return pintxosBase;
+}
+
+/**
+ * Get all base pintxo variation data (for internal use)
+ */
+export function getPintxoVariationsBase(): PintxoVariationBase[] {
+  return pintxoVariationsBase;
 }

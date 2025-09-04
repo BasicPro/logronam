@@ -1,22 +1,18 @@
 {
   "champinon-plancha": {
     "name": "Gegrillter Pilz",
-    "description": "Frische Pilze gegrillt mit Knoblauch, Petersilie und nativem Olivenöl extra.",
-    "origin": "Laurel Straße"
+    "description": "Frische Pilze gegrillt mit Knoblauch, Petersilie und nativem Olivenöl extra."
   },
   "foie-manzana": {
     "name": "Foie mit karamellisiertem Apfel",
-    "description": "Entenfoie gras mit karamellisiertem Apfel und Pedro Ximénez Reduktion.",
-    "origin": "San Juan Straße"
+    "description": "Entenfoie gras mit karamellisiertem Apfel und Pedro Ximénez Reduktion."
   },
   "pimientos-piquillo": {
     "name": "Gefüllte Piquillo-Paprika",
-    "description": "Piquillo-Paprika gefüllt mit zerfasertem Kabeljau und baskischer Sauce.",
-    "origin": "La Rioja"
+    "description": "Piquillo-Paprika gefüllt mit zerfasertem Kabeljau und baskischer Sauce."
   },
   "tortilla-patatas": {
     "name": "Spanisches Omelett",
-    "description": "Traditionelles spanisches Omelett mit Kartoffeln, Zwiebeln und Eiern, saftig von innen.",
-    "origin": "Spanien"
+    "description": "Traditionelles spanisches Omelett mit Kartoffeln, Zwiebeln und Eiern, saftig von innen."
   }
 }

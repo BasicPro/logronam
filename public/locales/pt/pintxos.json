@@ -1,22 +1,18 @@
 {
   "champinon-plancha": {
     "name": "Cogumelo grelhado",
-    "description": "Cogumelos frescos grelhados com alho, salsa e azeite de oliva extra virgem.",
-    "origin": "Rua Laurel"
+    "description": "Cogumelos frescos grelhados com alho, salsa e azeite de oliva extra virgem."
   },
   "foie-manzana": {
     "name": "Foie com maçã caramelizada",
-    "description": "Foie gras de pato com maçã caramelizada e redução de Pedro Ximénez.",
-    "origin": "Rua San Juan"
+    "description": "Foie gras de pato com maçã caramelizada e redução de Pedro Ximénez."
   },
   "pimientos-piquillo": {
     "name": "Pimentões Piquillo recheados",
-    "description": "Pimentões Piquillo recheados com bacalhau desfiado e molho basco.",
-    "origin": "La Rioja"
+    "description": "Pimentões Piquillo recheados com bacalhau desfiado e molho basco."
   },
   "tortilla-patatas": {
     "name": "Tortilha espanhola",
-    "description": "Tortilha espanhola tradicional com batatas, cebola e ovos, suculenta por dentro.",
-    "origin": "Espanha"
+    "description": "Tortilha espanhola tradicional com batatas, cebola e ovos, suculenta por dentro."
   }
 }

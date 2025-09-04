@@ -1,22 +1,18 @@
 {
   "champinon-plancha": {
     "name": "Champignon grillé",
-    "description": "Champignons frais grillés avec ail, persil et huile d'olive extra vierge.",
-    "origin": "Rue Laurel"
+    "description": "Champignons frais grillés avec ail, persil et huile d'olive extra vierge."
   },
   "foie-manzana": {
     "name": "Foie avec pomme caramélisée",
-    "description": "Foie gras de canard avec pomme caramélisée et réduction de Pedro Ximénez.",
-    "origin": "Rue San Juan"
+    "description": "Foie gras de canard avec pomme caramélisée et réduction de Pedro Ximénez."
   },
   "pimientos-piquillo": {
     "name": "Poivrons Piquillo farcis",
-    "description": "Poivrons Piquillo farcis de morue émiettée avec sauce basque.",
-    "origin": "La Rioja"
+    "description": "Poivrons Piquillo farcis de morue émiettée avec sauce basque."
   },
   "tortilla-patatas": {
     "name": "Omelette espagnole",
-    "description": "Omelette espagnole traditionnelle avec pommes de terre, oignon et œufs, juteuse à l'intérieur.",
-    "origin": "Espagne"
+    "description": "Omelette espagnole traditionnelle avec pommes de terre, oignon et œufs, juteuse à l'intérieur."
   }
 }

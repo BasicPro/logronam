@@ -9,8 +9,8 @@ import { PintxoCard } from "../../../components/pintxo/PintxoCard";
 import {
   getPintxos,
   getCategories,
-  getDifficulties,
   getPriceRange,
+  getPintxoVariationsBase,
 } from "../../../lib/pintxos";
 import { Button } from "../../../components/ui/Button";
 import { Input } from "../../../components/ui/Input";
@@ -32,7 +32,6 @@ export default function PintxosPage() {
   const [sortBy, setSortBy] = useState("popularity"); // 'popularity', 'name', 'price', 'bars'
   const [filterByCategory, setFilterByCategory] = useState("");
   const [filterByBar, setFilterByBar] = useState("");
-  const [filterByDifficulty, setFilterByDifficulty] = useState("");
   const [filterByPriceRange, setFilterByPriceRange] = useState("");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [pintxos, setPintxos] = useState<any[]>([]);
@@ -54,47 +53,20 @@ export default function PintxosPage() {
     loadPintxos();
   }, [currentLocale]);
 
-  // Helper function to get localized text
-  const getLocalizedText = (
-    text: string | Record<string, string | string[]>,
-    locale: string
-  ): string | string[] => {
-    if (typeof text === "string") return text;
-    if (typeof text === "object" && text[locale]) return text[locale];
-    return text.es || text.en || Object.values(text)[0] || "";
-  };
-
   const filteredAndSortedPintxos = useMemo(() => {
     const filtered = pintxos.filter((pintxo) => {
       // Search filter
       if (searchTerm) {
-        const localizedName = getLocalizedText(
-          pintxo.name,
-          currentLocale
-        ) as string;
-        const localizedDescription = getLocalizedText(
-          pintxo.description,
-          currentLocale
-        ) as string;
-        const localizedIngredients = getLocalizedText(
-          pintxo.ingredients,
-          currentLocale
-        ) as string[];
-        const localizedTags = getLocalizedText(
-          pintxo.tags,
-          currentLocale
-        ) as string[];
-
         const searchLower = searchTerm.toLowerCase();
         const matchesSearch =
-          localizedName.toLowerCase().includes(searchLower) ||
-          localizedDescription.toLowerCase().includes(searchLower) ||
-          (Array.isArray(localizedIngredients) &&
-            localizedIngredients.some((ingredient) =>
+          pintxo.name.toLowerCase().includes(searchLower) ||
+          pintxo.description.toLowerCase().includes(searchLower) ||
+          (Array.isArray(pintxo.ingredients) &&
+            pintxo.ingredients.some((ingredient) =>
               ingredient.toLowerCase().includes(searchLower)
             )) ||
-          (Array.isArray(localizedTags) &&
-            localizedTags.some((tag) =>
+          (Array.isArray(pintxo.tags) &&
+            pintxo.tags.some((tag) =>
               tag.toLowerCase().includes(searchLower)
             ));
 
@@ -106,16 +78,20 @@ export default function PintxosPage() {
         return false;
 
       // Bar filter
-      if (filterByBar && !pintxo.bars.includes(filterByBar)) return false;
-
-      // Difficulty filter
-      if (filterByDifficulty && pintxo.difficulty !== filterByDifficulty)
-        return false;
+      if (filterByBar) {
+        const variations = getPintxoVariationsBase().filter(v => v.pintxoId === pintxo.id);
+        const hasBar = variations.some(variation => variation.barId === filterByBar);
+        if (!hasBar) return false;
+      }
 
       // Price range filter
       if (filterByPriceRange) {
         const [min, max] = filterByPriceRange.split("-").map(Number);
-        if (pintxo.price < min || pintxo.price > max) return false;
+        const variations = getPintxoVariationsBase().filter(v => v.pintxoId === pintxo.id);
+        const hasPriceInRange = variations.some(variation => 
+          variation.price >= min && variation.price <= max
+        );
+        if (!hasPriceInRange) return false;
       }
 
       return true;
@@ -125,13 +101,18 @@ export default function PintxosPage() {
     filtered.sort((a, b) => {
       switch (sortBy) {
         case "name":
-          const nameA = getLocalizedText(a.name, currentLocale) as string;
-          const nameB = getLocalizedText(b.name, currentLocale) as string;
-          return nameA.localeCompare(nameB);
+          return a.name.localeCompare(b.name);
         case "price":
-          return a.price - b.price;
+          // Sort by average price
+          const variationsA = getPintxoVariationsBase().filter(v => v.pintxoId === a.id);
+          const variationsB = getPintxoVariationsBase().filter(v => v.pintxoId === b.id);
+          const avgPriceA = variationsA.reduce((sum, v) => sum + v.price, 0) / variationsA.length;
+          const avgPriceB = variationsB.reduce((sum, v) => sum + v.price, 0) / variationsB.length;
+          return avgPriceA - avgPriceB;
         case "bars":
-          return b.bars.length - a.bars.length;
+          const barsA = getPintxoVariationsBase().filter(v => v.pintxoId === a.id).length;
+          const barsB = getPintxoVariationsBase().filter(v => v.pintxoId === b.id).length;
+          return barsB - barsA;
         case "popularity":
         default:
           return b.popularity - a.popularity;
@@ -145,7 +126,6 @@ export default function PintxosPage() {
     sortBy,
     filterByCategory,
     filterByBar,
-    filterByDifficulty,
     filterByPriceRange,
     currentLocale,
   ]);
@@ -153,21 +133,18 @@ export default function PintxosPage() {
   // Get unique bars for filter dropdown
   const uniqueBars = useMemo(() => {
     const barIds = new Set<string>();
-    pintxos.forEach((pintxo) =>
-      pintxo.bars.forEach((id: string) => barIds.add(id))
-    );
+    getPintxoVariationsBase().forEach((variation) => barIds.add(variation.barId));
     return Array.from(barIds).map((id) => ({
       id,
       name: `Bar ${id.split("-").pop()}`,
     }));
-  }, [pintxos]);
+  }, []);
 
   const clearFilters = () => {
     setSearchTerm("");
     setSortBy("popularity");
     setFilterByCategory("");
     setFilterByBar("");
-    setFilterByDifficulty("");
     setFilterByPriceRange("");
   };
 
@@ -281,21 +258,6 @@ export default function PintxosPage() {
             </Select>
 
             <Select
-              value={filterByDifficulty}
-              onChange={(e) => setFilterByDifficulty(e.target.value)}
-            >
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder={t("pintxos.difficulty")} />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="">{t("pintxos.allDifficulties")}</SelectItem>
-                <SelectItem value="easy">{t("pintxos.easy")}</SelectItem>
-                <SelectItem value="medium">{t("pintxos.medium")}</SelectItem>
-                <SelectItem value="hard">{t("pintxos.hard")}</SelectItem>
-              </SelectContent>
-            </Select>
-
-            <Select
               value={filterByPriceRange}
               onChange={(e) => setFilterByPriceRange(e.target.value)}
             >
@@ -303,7 +265,7 @@ export default function PintxosPage() {
                 <SelectValue placeholder={t("pintxos.priceRange")} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">{t("pintxos.allPrices")}</SelectItem>
+                <SelectItem value="">{t("pintxos.allPriceRanges")}</SelectItem>
                 <SelectItem value="0-2">€0 - €2</SelectItem>
                 <SelectItem value="2-3">€2 - €3</SelectItem>
                 <SelectItem value="3-4">€3 - €4</SelectItem>

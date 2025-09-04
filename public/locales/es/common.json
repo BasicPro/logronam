@@ -110,18 +110,15 @@
     "sortBy": "Ordenar por",
     "name": "Nombre",
     "price": "Precio",
-    "taste": "Sabor",
     "availableAt": "Disponible en",
     "moreBars": "{{count}} bares más",
     "viewDetails": "Ver detalles",
     "popularity": "Popularidad",
     "category": "Categoría",
-    "difficulty": "Dificultad",
     "priceRange": "Rango de Precio",
     "bar": "Bar",
     "allBars": "Todos los Bares",
     "allCategories": "Todas las Categorías",
-    "allDifficulties": "Todas las Dificultades",
     "allPriceRanges": "Todos los Rangos",
     "traditional": "Tradicional",
     "modern": "Moderno",
@@ -129,15 +126,17 @@
     "vegetarian": "Vegetariano",
     "seafood": "Marisco",
     "meat": "Carne",
-    "easy": "Fácil",
-    "medium": "Medio",
-    "hard": "Difícil",
     "bars": "Bares",
     "backToPintxos": "Volver a Pinchos",
     "ingredients": "Ingredientes",
     "tags": "Etiquetas",
-    "origin": "Origen",
-    "viewBar": "Ver Bar"
+    "viewBar": "Ver Bar",
+    "notFound": {
+      "title": "Pincho no encontrado",
+      "description": "El pincho que buscas no existe o ha sido eliminado."
+    },
+    "noBarsFound": "No se encontraron bares que sirvan este pincho",
+    "currentView": "Vista actual"
   },
   "ingredients": {
     "mushrooms": "champiñones",
@@ -181,12 +180,9 @@
     "phone": "+34 941 123 456",
     "copyright": "© 2024 Logroñam. Todos los derechos reservados."
   },
-  "pintxo": {
-    "taste": "Sabor",
-    "ingredients": "Ingredientes"
-  },
   "common": {
     "loading": "Cargando...",
+    "rating": "Valoración",
     "error": "Error",
     "retry": "Reintentar",
     "search": "Buscar",
@@ -203,13 +199,7 @@
     "readMore": "Leer más",
     "showLess": "Mostrar menos",
     "viewDetails": "Ver detalles",
-    "popularity": "Popularidad",
-    "category": "Categoría",
-    "difficulty": "Dificultad",
-    "origin": "Origen",
-    "ingredients": "Ingredientes",
-    "tags": "Etiquetas",
-    "bars": "bares"
+    "view": "Ver"
   },
   "categories": {
     "bar": "Bar",

@@ -2,7 +2,7 @@ import { Bar } from "../types/bar";
 
 export const bars: Bar[] = [
   {
-    id: "bar-laurel-1",
+    id: "bar-soriano",
     name: "Bar Soriano",
     description:
       "Una de las tabernas más emblemáticas de la calle Laurel, famosa por sus pinchos tradicionales y su ambiente auténtico.",
@@ -24,8 +24,7 @@ export const bars: Bar[] = [
       {
         id: "review-1",
         rating: 5,
-        comment:
-          "El mejor champiñón de Logroño, sin duda. Ambiente auténtico y servicio excelente.",
+        comment: "Reseña del bar Soriano",
         author: "María González",
         date: "2024-01-15",
         verified: true,

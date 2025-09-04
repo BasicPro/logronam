@@ -1,22 +1,18 @@
 {
   "champinon-plancha": {
     "name": "Fungo alla griglia",
-    "description": "Funghi freschi alla griglia con aglio, prezzemolo e olio extravergine di oliva.",
-    "origin": "Via Laurel"
+    "description": "Funghi freschi alla griglia con aglio, prezzemolo e olio extravergine di oliva."
   },
   "foie-manzana": {
     "name": "Foie con mela caramellata",
-    "description": "Foie gras d'anatra con mela caramellata e riduzione di Pedro Ximénez.",
-    "origin": "Via San Juan"
+    "description": "Foie gras d'anatra con mela caramellata e riduzione di Pedro Ximénez."
   },
   "pimientos-piquillo": {
     "name": "Peperoni Piquillo ripieni",
-    "description": "Peperoni Piquillo ripieni di merluzzo sbriciolato con salsa basca.",
-    "origin": "La Rioja"
+    "description": "Peperoni Piquillo ripieni di merluzzo sbriciolato con salsa basca."
   },
   "tortilla-patatas": {
     "name": "Frittata spagnola",
-    "description": "Frittata spagnola tradizionale con patate, cipolla e uova, succosa all'interno.",
-    "origin": "Spagna"
+    "description": "Frittata spagnola tradizionale con patate, cipolla e uova, succosa all'interno."
   }
 }
