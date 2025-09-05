@@ -1,29 +1,35 @@
 {
   "champinon-plancha-soriano": {
-    "review": "The best mushroom in Logroño, without a doubt. Perfectly cooked."
+    "review": "The mushrooms are perfectly cooked with an intense flavor and smooth texture."
   },
   "champinon-plancha-blanco-negro": {
-    "review": "Very good mushrooms, although a bit expensive for the size."
+    "review": "A more gourmet version with elegant presentation and refined flavors."
   },
   "champinon-plancha-herrerias": {
-    "review": "Traditional mushrooms, authentic and delicious."
+    "review": "Traditional and delicious, with the authentic flavor of Riojan cuisine."
   },
   "foie-manzana-taberna": {
-    "review": "Excellent foie gras, very creative. Impeccable presentation."
+    "review": "The contrast between foie and apple is perfect, an exquisite combination."
   },
   "foie-manzana-rincon": {
-    "review": "Very good homemade foie, especially the caramelized apple."
+    "review": "A more modern version with creative presentation and balanced flavors."
   },
   "pimientos-piquillo-soriano": {
-    "review": "Spectacular piquillo peppers, perfectly stuffed."
+    "review": "The piquillo peppers are at their perfect point, with intense and spicy flavor."
   },
-  "pimientos-piquillo-pimientos": {
-    "review": "The best piquillo peppers in Logroño. Excellent garden products."
+  "pimientos-piquillo-blanco-negro": {
+    "review": "A more sophisticated version with elegant presentation and refined flavors."
+  },
+  "pimientos-piquillo-herrerias": {
+    "review": "Traditional and delicious, with the authentic flavor of Riojan cuisine."
+  },
+  "tortilla-patatas-soriano": {
+    "review": "The potato omelet is perfect, with ideal texture and traditional flavor."
   },
   "tortilla-patatas-blanco-negro": {
-    "review": "Modern and creative tortilla, very well presented."
+    "review": "A more gourmet version with quality ingredients and elegant presentation."
   },
-  "tortilla-patatas-tortilla": {
-    "review": "The best Spanish omelette in Logroño. Juicy and tasty."
+  "tortilla-patatas-herrerias": {
+    "review": "Traditional and delicious, with the authentic flavor of Riojan cuisine."
   }
 }

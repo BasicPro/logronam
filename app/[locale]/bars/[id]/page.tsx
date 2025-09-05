@@ -166,7 +166,7 @@ export default function BarDetailPage() {
                   <div className="mt-6">
                     <h3 className="font-semibold text-gray-900 mb-2">{t('bar.features')}</h3>
                     <div className="flex flex-wrap gap-2">
-                      {bar.features.map((feature, index) => (
+                      {bar.features.map((feature: string, index: number) => (
                         <span
                           key={index}
                           className="bg-red-100 text-red-800 text-sm px-3 py-1 rounded-full"

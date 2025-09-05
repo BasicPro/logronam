@@ -48,109 +48,70 @@
         "description": "El corazón de la cultura del pincho en Logroño",
         "count": "25+ bares"
       },
+      "herrerias": {
+        "name": "Calle Herrerías",
+        "description": "Tradición y modernidad en perfecta armonía",
+        "count": "15+ bares"
+      },
+      "sanjuan": {
+        "name": "Calle San Juan",
+        "description": "Sabores auténticos y ambiente familiar",
+        "count": "20+ bares"
+      },
       "casco": {
         "name": "Casco Antiguo",
-        "description": "Historia y tradición en cada esquina",
-        "count": "15+ bares"
+        "description": "El centro histórico con encanto tradicional",
+        "count": "10+ bares"
       },
       "granvia": {
         "name": "Gran Vía",
-        "description": "Modernidad y gastronomía contemporánea",
-        "count": "10+ bares"
+        "description": "La arteria principal con ambiente moderno",
+        "count": "8+ bares"
       }
+    },
+    "cta": {
+      "title": "¿Listo para explorar?",
+      "subtitle": "Descubre los mejores pintxos y bares de Logroño",
+      "button": "Comenzar exploración"
     }
   },
   "pintxos": {
     "title": "Pintxos",
     "subtitle": "Descubre los mejores pinchos de Logroño",
     "searchPlaceholder": "Buscar pintxos...",
+    "noResults": "No se encontraron pintxos",
+    "tryAdjustingFilters": "Intenta ajustar tus filtros de búsqueda",
+    "clearFilters": "Limpiar filtros",
     "sortBy": "Ordenar por",
+    "category": "Categoría",
+    "priceRange": "Rango de precios",
+    "allCategories": "Todas las categorías",
+    "allPriceRanges": "Todos los rangos de precios",
     "popularity": "Popularidad",
     "name": "Nombre",
     "price": "Precio",
+    "rating": "Valoración",
     "bars": "Bares",
-    "category": "Categoría",
-    "allCategories": "Todas las categorías",
-    "traditional": "Tradicional",
-    "modern": "Moderno",
-    "fusion": "Fusión",
-    "vegetarian": "Vegetariano",
-    "seafood": "Marisco",
-    "meat": "Carne",
-    "bar": "Bar",
-    "allBars": "Todos los bares",
-    "priceRange": "Rango de precios",
-    "allPriceRanges": "Todos los rangos",
-    "clearFilters": "Limpiar filtros",
-    "results": "{{count}} pintxos encontrados",
-    "viewDetails": "Ver detalles",
     "availableAt": "Disponible en",
-    "moreBars": "+{{count}} bares más",
-    "noResults": {
-      "title": "No se encontraron pintxos",
-      "description": "Intenta ajustar tus filtros de búsqueda",
-      "clearFilters": "Limpiar filtros"
-    },
-    "notFound": {
-      "title": "Pintxo no encontrado",
-      "description": "El pintxo que buscas no existe o ha sido eliminado"
-    },
-    "backToPintxos": "Volver a pintxos",
-    "otherVariations": "Otras variaciones",
-    "currentView": "Vista actual",
-    "variationReview": "Reseña de la variación",
-    "noBarsFound": "No se encontraron bares para este pintxo",
-    "viewBar": "Ver bar",
-    "ingredients": "Ingredientes",
-    "tags": "Etiquetas",
-    "variationNotFound": {
-      "title": "Variación no encontrada",
-      "description": "La variación de pintxo que buscas no existe"
-    }
+    "moreBars": "y {{count}} más",
+    "viewDetails": "Ver detalles",
+    "information": "Información",
+    "gallery": "Galería"
   },
   "bars": {
     "title": "Bares",
     "subtitle": "Explora todos los bares de Logroño",
-    "category": "Categoría",
-    "all": "Todos",
-    "priceRange": "Rango de precios",
+    "searchPlaceholder": "Buscar bares...",
+    "noResults": "No se encontraron bares",
+    "tryAdjustingFilters": "Intenta ajustar tus filtros de búsqueda",
+    "clearFilters": "Limpiar filtros",
     "sortBy": "Ordenar por",
+    "category": "Categoría",
+    "priceRange": "Rango de precios",
+    "allCategories": "Todas las categorías",
+    "allPriceRanges": "Todos los rangos de precios",
     "rating": "Valoración",
     "name": "Nombre",
-    "view": "Vista",
-    "results": "{{count}} bares encontrados",
-    "noResults": {
-      "title": "No se encontraron bares",
-      "description": "Intenta ajustar tus filtros de búsqueda",
-      "clearFilters": "Limpiar filtros"
-    }
-  },
-  "rankings": {
-    "title": "Rankings",
-    "subtitle": "Los mejores pintxos y bares de Logroño",
-    "content": "Contenido",
-    "category": "Categoría",
-    "all": "Todos",
-    "priceRange": "Rango de precios",
-    "sortBy": "Ordenar por",
-    "rating": "Valoración",
-    "name": "Nombre",
-    "numberOfReviews": "Reseñas",
-    "viewAllRankings": "Ver todos los rankings",
-    "results": "{{count}} resultados encontrados",
-    "noResults": {
-      "title": "No se encontraron resultados",
-      "description": "Intenta ajustar tus filtros de búsqueda",
-      "clearFilters": "Limpiar filtros"
-    },
-    "filters": {
-      "all": "Todos",
-      "pintxos": "Pintxos",
-      "bars": "Bares",
-      "bodegas": "Bodegas"
-    }
-  },
-  "bar": {
     "about": "Acerca de",
     "location": "Ubicación",
     "features": "Características",
@@ -159,37 +120,108 @@
     "share": "Compartir",
     "getDirections": "Cómo llegar",
     "writeReview": "Escribir reseña",
-    "viewDetails": "Ver detalles",
     "backToRankings": "Volver a rankings",
-    "priceRangeLabel": "Rango de precios",
-    "bestPintxo": "Mejor pintxo",
-    "allPintxos": "Todos los pintxos",
-    "featuredPintxos": "Pintxos destacados",
-    "featuredPintxosCount": "pintxos destacados",
     "notFound": {
       "title": "Bar no encontrado",
       "description": "El bar que buscas no existe o ha sido eliminado",
       "backHome": "Volver al inicio"
-    }
+    },
+    "bestPintxo": "Mejor Pintxo",
+    "allPintxos": "Todos los Pintxos",
+    "priceRangeLabel": "Rango de precios",
+    "featuredPintxos": "Pintxos Destacados",
+    "featuredPintxosCount": "{{count}} pintxos destacados",
+    "viewDetails": "Ver detalles"
   },
-  "footer": {
-    "quickLinks": "Enlaces rápidos",
-    "location": "Logroño, La Rioja, España",
-    "email": "info@logronam.com",
-    "phone": "+34 941 123 456",
-    "copyright": "© 2024 Logroñam. Todos los derechos reservados."
+  "rankings": {
+    "title": "Rankings",
+    "subtitle": "Los mejores pintxos y bares de Logroño",
+    "searchPlaceholder": "Buscar en rankings...",
+    "noResults": "No se encontraron resultados",
+    "tryAdjustingFilters": "Intenta ajustar tus filtros de búsqueda",
+    "clearFilters": "Limpiar filtros",
+    "sortBy": "Ordenar por",
+    "category": "Categoría",
+    "priceRange": "Rango de precios",
+    "allCategories": "Todas las categorías",
+    "allPriceRanges": "Todos los rangos de precios",
+    "rating": "Valoración",
+    "popularity": "Popularidad",
+    "name": "Nombre",
+    "viewAllRankings": "Ver todos los rankings"
   },
   "categories": {
     "bar": "Bar",
     "restaurant": "Restaurante",
     "taberna": "Taberna",
-    "bodega": "Bodega"
+    "bodega": "Bodega",
+    "appetizer": "Entrante",
+    "main": "Principal",
+    "dessert": "Postre",
+    "drink": "Bebida",
+    "traditional": "Tradicional",
+    "modern": "Moderno",
+    "fusion": "Fusión",
+    "vegetarian": "Vegetariano",
+    "seafood": "Marisco",
+    "meat": "Carne",
+    "pintxo": "Pintxo"
   },
   "priceRanges": {
     "€": "Económico",
     "€€": "Moderado",
     "€€€": "Caro",
     "€€€€": "Muy caro"
+  },
+  "footer": {
+    "description": "La guía definitiva para explorar la cultura gastronómica de Logroño",
+    "quickLinks": "Enlaces rápidos",
+    "categories": "Categorías",
+    "contact": "Contacto",
+    "location": "Ubicación",
+    "email": "Email",
+    "phone": "Teléfono",
+    "followUs": "Síguenos",
+    "newsletter": {
+      "title": "Newsletter",
+      "subtitle": "Recibe las últimas novedades de Logroñam",
+      "placeholder": "Tu email",
+      "button": "Suscribirse"
+    },
+    "copyright": "© 2024 Logroñam. Todos los derechos reservados.",
+    "privacy": "Política de privacidad",
+    "terms": "Términos de servicio"
+  },
+  "search": {
+    "placeholder": "Buscar...",
+    "noResults": "No se encontraron resultados",
+    "tryAdjustingFilters": "Intenta ajustar tus filtros de búsqueda"
+  },
+  "filter": {
+    "title": "Filtros",
+    "clear": "Limpiar filtros",
+    "apply": "Aplicar filtros"
+  },
+  "sort": {
+    "title": "Ordenar",
+    "by": "Ordenar por",
+    "name": "Nombre",
+    "rating": "Valoración",
+    "price": "Precio",
+    "popularity": "Popularidad"
+  },
+  "view": {
+    "grid": "Vista de cuadrícula",
+    "list": "Vista de lista"
+  },
+  "contentType": {
+    "title": "Tipo de contenido",
+    "bars": "Bares",
+    "pintxos": "Pintxos"
+  },
+  "select": {
+    "placeholder": "Seleccionar opción",
+    "noOptions": "No hay opciones disponibles"
   },
   "common": {
     "view": "Ver",
@@ -208,6 +240,13 @@
     "search": "Buscar",
     "filter": "Filtrar",
     "sort": "Ordenar",
-    "viewDetails": "Ver detalles"
+    "sortBy": "Ordenar por",
+    "viewDetails": "Ver detalles",
+    "clearFilters": "Limpiar filtros",
+    "category": "Categoría",
+    "priceRange": "Rango de precios",
+    "rating": "Valoración",
+    "popularity": "Popularidad",
+    "name": "Nombre"
   }
 }

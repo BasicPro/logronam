@@ -1,29 +1,35 @@
 {
   "champinon-plancha-soriano": {
-    "review": "El mejor champiñón de Logroño, sin duda. Perfectamente cocinado."
+    "review": "Los champiñones están perfectamente cocinados con un sabor intenso y textura suave."
   },
   "champinon-plancha-blanco-negro": {
-    "review": "Muy buenos champiñones, aunque un poco caros para el tamaño."
+    "review": "Una versión más gourmet con una presentación elegante y sabores refinados."
   },
   "champinon-plancha-herrerias": {
-    "review": "Champiñones tradicionales, auténticos y deliciosos."
+    "review": "Tradicional y delicioso, con el sabor auténtico de la cocina riojana."
   },
   "foie-manzana-taberna": {
-    "review": "Excelente foie gras, muy creativo. Presentación impecable."
+    "review": "El contraste entre el foie y la manzana es perfecto, una combinación exquisita."
   },
   "foie-manzana-rincon": {
-    "review": "Foie casero muy bueno, especialmente la manzana caramelizada."
+    "review": "Una versión más moderna con una presentación creativa y sabores equilibrados."
   },
   "pimientos-piquillo-soriano": {
-    "review": "Pimientos del piquillo espectaculares, rellenos perfectos."
+    "review": "Los pimientos del piquillo están en su punto perfecto, con un sabor intenso y picante."
   },
-  "pimientos-piquillo-pimientos": {
-    "review": "Los mejores pimientos del piquillo de Logroño. Productos de la huerta excelentes."
+  "pimientos-piquillo-blanco-negro": {
+    "review": "Una versión más sofisticada con una presentación elegante y sabores refinados."
+  },
+  "pimientos-piquillo-herrerias": {
+    "review": "Tradicional y delicioso, con el sabor auténtico de la cocina riojana."
+  },
+  "tortilla-patatas-soriano": {
+    "review": "La tortilla de patatas está perfecta, con la textura ideal y sabor tradicional."
   },
   "tortilla-patatas-blanco-negro": {
-    "review": "Tortilla moderna y creativa, muy bien presentada."
+    "review": "Una versión más gourmet con ingredientes de calidad y presentación elegante."
   },
-  "tortilla-patatas-tortilla": {
-    "review": "La mejor tortilla de patatas de Logroño. Jugosa y sabrosa."
+  "tortilla-patatas-herrerias": {
+    "review": "Tradicional y deliciosa, con el sabor auténtico de la cocina riojana."
   }
 }

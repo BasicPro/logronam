@@ -13,21 +13,24 @@ const inter = Inter({
   adjustFontFallback: false
 });
 
-export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
-  return generateSEOMetadata('home', params.locale);
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  return generateSEOMetadata('home', locale);
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
   params,
 }: {
   children: React.ReactNode;
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }) {
+  const { locale } = await params;
+  
   return (
-    <html lang={params.locale} className={inter.variable}>
+    <html lang={locale} className={inter.variable}>
       <body className={`${inter.className} antialiased`}>
-        <I18nProvider locale={params.locale}>
+        <I18nProvider locale={locale}>
           {children}
         </I18nProvider>
       </body>
