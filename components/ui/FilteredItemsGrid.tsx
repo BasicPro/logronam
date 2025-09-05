@@ -7,6 +7,8 @@ import { BarCard } from "../bar/BarCard";
 import { PintxoCard } from "../pintxo/PintxoCard";
 import { BarListCard } from "../bar/BarListCard";
 import { PintxoListCard } from "../pintxo/PintxoListCard";
+import { Bar } from "../../types/bar";
+import { Pintxo } from "../../types/pintxo";
 import { RankingItem } from "../../types/rankingItem";
 
 interface FilteredItemsGridProps<T> {
@@ -16,6 +18,27 @@ interface FilteredItemsGridProps<T> {
   noResultsMessage?: string;
   onClearFilters?: () => void;
   className?: string;
+}
+
+// Type guard functions
+function isBar(item: any): item is Bar {
+  return (
+    item && typeof item === "object" && "category" in item && "location" in item
+  );
+}
+
+function isPintxo(item: any): item is Pintxo {
+  return (
+    item &&
+    typeof item === "object" &&
+    "ingredients" in item &&
+    "tags" in item &&
+    !("category" in item)
+  );
+}
+
+function isRankingItem(item: any): item is RankingItem {
+  return item && typeof item === "object" && "__typename" in item;
 }
 
 export function FilteredItemsGrid<T>({
@@ -64,21 +87,44 @@ export function FilteredItemsGrid<T>({
 
   // Auto-detect item type and use appropriate component
   const renderAutoItem = (item: T) => {
-    const itemWithType = item as RankingItem;
+    // Check if it's a RankingItem first
+    if (isRankingItem(item)) {
+      if (item.__typename === "Bar") {
+        return viewMode === "grid" ? (
+          <BarCard key={item.id} bar={item} />
+        ) : (
+          <BarListCard key={item.id} bar={item} />
+        );
+      } else if (item.__typename === "Pintxo") {
+        return viewMode === "grid" ? (
+          <PintxoCard key={item.id} pintxo={item} />
+        ) : (
+          <PintxoListCard key={item.id} pintxo={item} />
+        );
+      }
+    }
 
-    if (itemWithType.__typename === "Bar") {
+    // Check if it's a Bar
+    if (isBar(item)) {
       return viewMode === "grid" ? (
-        <BarCard key={itemWithType.id} bar={itemWithType} />
+        <BarCard key={item.id} bar={item} />
       ) : (
-        <BarListCard key={itemWithType.id} bar={itemWithType} />
-      );
-    } else if (itemWithType.__typename === "Pintxo") {
-      return viewMode === "grid" ? (
-        <PintxoCard key={itemWithType.id} pintxo={itemWithType} />
-      ) : (
-        <PintxoListCard key={itemWithType.id} pintxo={itemWithType} />
+        <BarListCard key={item.id} bar={item} />
       );
     }
+
+    // Check if it's a Pintxo
+    if (isPintxo(item)) {
+      return viewMode === "grid" ? (
+        <PintxoCard key={item.id} pintxo={item} />
+      ) : (
+        <PintxoListCard key={item.id} pintxo={item} />
+      );
+    }
+
+    // Fallback - this shouldn't happen
+    console.warn("Unknown item type:", item);
+    return null;
   };
 
   return (
