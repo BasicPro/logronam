@@ -9,21 +9,43 @@ import { Card, CardContent } from '../../../components/ui/Card';
 import { Rating } from '../../../components/ui/Rating';
 import { Image } from '../../../components/ui/Image';
 import { Button } from '../../../components/ui/Button';
+import { PintxoCard } from '../../../components/pintxo/PintxoCard';
+import { BarCard } from '../../../components/bar/BarCard';
 import { getBars } from '../../../lib/bars';
+import { getPintxos } from '../../../lib/pintxos';
 import { getPriceRangeSymbol } from '../../../lib/utils';
 import { 
   MapPin, 
   Euro,
   SortAsc,
   SortDesc,
-  Minus
+  Minus,
+  Star,
+  ChefHat
 } from 'lucide-react';
 import Link from 'next/link';
 
-type SortOption = 'rating' | 'name';
+type SortOption = 'rating' | 'name' | 'popularity';
 type SortOrder = 'asc' | 'desc';
+type ContentFilter = 'all' | 'pintxos' | 'bars' | 'bodegas';
 type CategoryFilter = 'all' | 'bar' | 'restaurant' | 'taberna' | 'bodega';
 type PriceFilter = 'all' | '€' | '€€' | '€€€' | '€€€€';
+
+interface RankingItem {
+  id: string;
+  type: 'pintxo' | 'bar';
+  rating: number;
+  name: string;
+  description: string;
+  category: string;
+  priceRange?: string;
+  popularity?: number;
+  location?: {
+    neighborhood: string;
+  };
+  images?: string[];
+  features?: string[];
+}
 
 export default function RankingsPage() {
   const { t } = useTranslation('common');
@@ -31,36 +53,85 @@ export default function RankingsPage() {
   const currentLocale = params.locale as string;
   const [sortBy, setSortBy] = useState<SortOption>('rating');
   const [sortOrder, setSortOrder] = useState<SortOrder>('desc');
+  const [contentFilter, setContentFilter] = useState<ContentFilter>('all');
   const [categoryFilter, setCategoryFilter] = useState<CategoryFilter>('all');
   const [priceFilter, setPriceFilter] = useState<PriceFilter>('all');
   const [bars, setBars] = useState<any[]>([]);
+  const [pintxos, setPintxos] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const loadBars = async () => {
+    const loadData = async () => {
       try {
-        const data = await getBars(currentLocale as any);
-        setBars(data);
+        const [barsData, pintxosData] = await Promise.all([
+          getBars(currentLocale as any),
+          getPintxos(currentLocale as any)
+        ]);
+        setBars(barsData);
+        setPintxos(pintxosData);
       } catch (error) {
-        console.error("Failed to load bars:", error);
+        console.error("Failed to load data:", error);
       } finally {
         setLoading(false);
       }
     };
-    loadBars();
+    loadData();
   }, [currentLocale]);
 
-  const filteredAndSortedBars = useMemo(() => {
-    let filtered = bars;
+  const allItems: RankingItem[] = useMemo(() => {
+    const items: RankingItem[] = [];
 
-    // Apply category filter
-    if (categoryFilter !== 'all') {
-      filtered = filtered.filter(bar => bar.category === categoryFilter);
+    // Add bars
+    if (contentFilter === 'all' || contentFilter === 'bars') {
+      bars.forEach(bar => {
+        items.push({
+          id: bar.id,
+          type: 'bar',
+          rating: bar.rating,
+          name: bar.name,
+          description: bar.description,
+          category: bar.category,
+          priceRange: bar.priceRange,
+          location: bar.location,
+          images: bar.images,
+          features: bar.features
+        });
+      });
     }
 
-    // Apply price filter
+    // Add pintxos
+    if (contentFilter === 'all' || contentFilter === 'pintxos') {
+      pintxos.forEach(pintxo => {
+        items.push({
+          id: pintxo.id,
+          type: 'pintxo',
+          rating: pintxo.rating || 0, // Use average rating if available
+          name: pintxo.name,
+          description: pintxo.description,
+          category: pintxo.category,
+          popularity: pintxo.popularity
+        });
+      });
+    }
+
+    return items;
+  }, [bars, pintxos, contentFilter]);
+
+  const filteredAndSortedItems = useMemo(() => {
+    let filtered = allItems;
+
+    // Apply category filter (only for bars)
+    if (categoryFilter !== 'all') {
+      filtered = filtered.filter(item => 
+        item.type === 'bar' ? item.category === categoryFilter : true
+      );
+    }
+
+    // Apply price filter (only for bars)
     if (priceFilter !== 'all') {
-      filtered = filtered.filter(bar => bar.priceRange === priceFilter);
+      filtered = filtered.filter(item => 
+        item.type === 'bar' ? item.priceRange === priceFilter : true
+      );
     }
 
     // Apply sorting
@@ -74,13 +145,19 @@ export default function RankingsPage() {
         case 'name':
           comparison = a.name.localeCompare(b.name);
           break;
+        case 'popularity':
+          // For pintxos, use popularity; for bars, use rating
+          const aValue = a.type === 'pintxo' ? (a.popularity || 0) : a.rating;
+          const bValue = b.type === 'pintxo' ? (b.popularity || 0) : b.rating;
+          comparison = aValue - bValue;
+          break;
       }
 
       return sortOrder === 'asc' ? comparison : -comparison;
     });
 
     return filtered;
-  }, [bars, sortBy, sortOrder, categoryFilter, priceFilter]);
+  }, [allItems, sortBy, sortOrder, categoryFilter, priceFilter]);
 
   const handleSort = (option: SortOption) => {
     if (sortBy === option) {
@@ -134,41 +211,62 @@ export default function RankingsPage() {
         <Card className="mb-8">
           <CardContent className="p-6">
             <div className="flex flex-col lg:flex-row gap-6">
-              {/* Category Filter */}
+              {/* Content Filter */}
               <div className="flex-1">
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {t('rankings.category')}
+                  {t('rankings.content')}
                 </label>
                 <select
-                  value={categoryFilter}
-                  onChange={(e) => setCategoryFilter(e.target.value as CategoryFilter)}
+                  value={contentFilter}
+                  onChange={(e) => setContentFilter(e.target.value as ContentFilter)}
                   className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
                 >
-                  <option value="all">{t('rankings.all')}</option>
-                  <option value="bar">{t('categories.bar')}</option>
-                  <option value="restaurant">{t('categories.restaurant')}</option>
-                  <option value="taberna">{t('categories.taberna')}</option>
-                  <option value="bodega">{t('categories.bodega')}</option>
+                  <option value="all">{t('rankings.filters.all')}</option>
+                  <option value="pintxos">{t('rankings.filters.pintxos')}</option>
+                  <option value="bars">{t('rankings.filters.bars')}</option>
+                  <option value="bodegas">{t('rankings.filters.bodegas')}</option>
                 </select>
               </div>
 
-              {/* Price Filter */}
-              <div className="flex-1">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {t('rankings.priceRange')}
-                </label>
-                <select
-                  value={priceFilter}
-                  onChange={(e) => setPriceFilter(e.target.value as PriceFilter)}
-                  className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
-                >
-                  <option value="all">{t('rankings.all')}</option>
-                  <option value="€">{t('priceRanges.€')} (€)</option>
-                  <option value="€€">{t('priceRanges.€€')} (€€)</option>
-                  <option value="€€€">{t('priceRanges.€€€')} (€€€)</option>
-                  <option value="€€€€">{t('priceRanges.€€€€')} (€€€€)</option>
-                </select>
-              </div>
+              {/* Category Filter (only for bars) */}
+              {(contentFilter === 'all' || contentFilter === 'bars') && (
+                <div className="flex-1">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    {t('rankings.category')}
+                  </label>
+                  <select
+                    value={categoryFilter}
+                    onChange={(e) => setCategoryFilter(e.target.value as CategoryFilter)}
+                    className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
+                  >
+                    <option value="all">{t('rankings.all')}</option>
+                    <option value="bar">{t('categories.bar')}</option>
+                    <option value="restaurant">{t('categories.restaurant')}</option>
+                    <option value="taberna">{t('categories.taberna')}</option>
+                    <option value="bodega">{t('categories.bodega')}</option>
+                  </select>
+                </div>
+              )}
+
+              {/* Price Filter (only for bars) */}
+              {(contentFilter === 'all' || contentFilter === 'bars') && (
+                <div className="flex-1">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    {t('rankings.priceRange')}
+                  </label>
+                  <select
+                    value={priceFilter}
+                    onChange={(e) => setPriceFilter(e.target.value as PriceFilter)}
+                    className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
+                  >
+                    <option value="all">{t('rankings.all')}</option>
+                    <option value="€">{t('priceRanges.€')} (€)</option>
+                    <option value="€€">{t('priceRanges.€€')} (€€)</option>
+                    <option value="€€€">{t('priceRanges.€€€')} (€€€)</option>
+                    <option value="€€€€">{t('priceRanges.€€€€')} (€€€€)</option>
+                  </select>
+                </div>
+              )}
 
               {/* Sort Options */}
               <div className="flex-1">
@@ -185,6 +283,14 @@ export default function RankingsPage() {
                     {t('rankings.rating')} {getSortIcon('rating')}
                   </Button>
                   <Button
+                    variant={sortBy === 'popularity' ? 'primary' : 'outline'}
+                    size="sm"
+                    onClick={() => handleSort('popularity')}
+                    className="flex items-center gap-1"
+                  >
+                    {t('pintxos.popularity')} {getSortIcon('popularity')}
+                  </Button>
+                  <Button
                     variant={sortBy === 'name' ? 'primary' : 'outline'}
                     size="sm"
                     onClick={() => handleSort('name')}
@@ -198,56 +304,79 @@ export default function RankingsPage() {
           </CardContent>
         </Card>
 
+        {/* Results Count */}
+        <div className="mb-6">
+          <p className="text-sm text-gray-600">
+            {t('rankings.results', { count: filteredAndSortedItems.length })}
+          </p>
+        </div>
+
         {/* Rankings List */}
         <div className="space-y-4">
-          {filteredAndSortedBars.map((bar, index) => (
-            <Card key={bar.id} className="overflow-hidden" hover>
+          {filteredAndSortedItems.map((item, index) => (
+            <Card key={`${item.type}-${item.id}`} className="overflow-hidden" hover>
               <div className="flex">
                 {/* Position */}
                 <div className="flex-shrink-0 w-16 bg-red-600 text-white flex items-center justify-center">
                   <span className="text-2xl font-bold">#{index + 1}</span>
                 </div>
 
-                {/* Bar Image */}
+                {/* Item Image */}
                 <div className="flex-shrink-0 w-32 h-32">
                   <Image
-                    src={bar.images[0]} // Use first image
-                    alt={bar.name}
+                    src={item.type === 'bar' ? item.images?.[0] : '/images/pintxos/placeholder.svg'}
+                    alt={item.name}
                     className="w-full h-full object-cover"
                   />
                 </div>
 
-                {/* Bar Info */}
+                {/* Item Info */}
                 <div className="flex-1 p-6">
                   <div className="flex justify-between items-start">
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-2">
-                        <h3 className="text-xl font-bold text-gray-900">{bar.name}</h3>
+                        <h3 className="text-xl font-bold text-gray-900">{item.name}</h3>
                         <span className="bg-red-100 text-red-800 text-sm px-2 py-1 rounded-full capitalize">
-                          {t(`categories.${bar.category}`)}
+                          {t(`categories.${item.category}`)}
+                        </span>
+                        <span className="bg-blue-100 text-blue-800 text-sm px-2 py-1 rounded-full">
+                          {item.type === 'bar' ? t('rankings.filters.bars') : t('rankings.filters.pintxos')}
                         </span>
                       </div>
                       
-                      <p className="text-gray-600 mb-3 line-clamp-2">{bar.description}</p>
+                      <p className="text-gray-600 mb-3 line-clamp-2">{item.description}</p>
                       
                       <div className="flex items-center gap-6 text-sm text-gray-500">
-                        <div className="flex items-center gap-1">
-                          <MapPin className="w-4 h-4" />
-                          <span>{bar.location.neighborhood}</span>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <Euro className="w-4 h-4" />
-                          <span>{getPriceRangeSymbol(bar.priceRange)}</span>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <span>{bar.features.length} {t('bar.features')}</span>
-                        </div>
+                        {item.type === 'bar' && item.location && (
+                          <div className="flex items-center gap-1">
+                            <MapPin className="w-4 h-4" />
+                            <span>{item.location.neighborhood}</span>
+                          </div>
+                        )}
+                        {item.type === 'bar' && item.priceRange && (
+                          <div className="flex items-center gap-1">
+                            <Euro className="w-4 h-4" />
+                            <span>{getPriceRangeSymbol(item.priceRange)}</span>
+                          </div>
+                        )}
+                        {item.type === 'pintxo' && item.popularity && (
+                          <div className="flex items-center gap-1">
+                            <Star className="w-4 h-4" />
+                            <span>{item.popularity}/5 {t('pintxos.popularity')}</span>
+                          </div>
+                        )}
+                        {item.type === 'bar' && item.features && (
+                          <div className="flex items-center gap-1">
+                            <ChefHat className="w-4 h-4" />
+                            <span>{item.features.length} {t('bar.features')}</span>
+                          </div>
+                        )}
                       </div>
                     </div>
 
                     <div className="flex flex-col items-end gap-3">
-                      <Rating rating={bar.rating} size="lg" />
-                      <Link href={`/${currentLocale}/bars/${bar.id}`}>
+                      <Rating rating={item.rating} size="lg" />
+                      <Link href={`/${currentLocale}/${item.type === 'bar' ? 'bars' : 'pintxos'}/${item.id}`}>
                         <Button>{t('common.viewDetails')}</Button>
                       </Link>
                     </div>
@@ -258,7 +387,7 @@ export default function RankingsPage() {
           ))}
         </div>
 
-        {filteredAndSortedBars.length === 0 && (
+        {filteredAndSortedItems.length === 0 && (
           <Card>
             <CardContent className="p-12 text-center">
               <h3 className="text-lg font-semibold text-gray-900 mb-2">
@@ -268,6 +397,7 @@ export default function RankingsPage() {
                 {t('rankings.noResults.description')}
               </p>
               <Button onClick={() => {
+                setContentFilter('all');
                 setCategoryFilter('all');
                 setPriceFilter('all');
                 setSortBy('rating');

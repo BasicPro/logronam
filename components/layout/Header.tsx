@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname, useParams } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
@@ -13,6 +13,11 @@ export const Header: React.FC = () => {
   const params = useParams();
   const currentLocale = params.locale as string;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isHydrated, setIsHydrated] = useState(false);
+
+  useEffect(() => {
+    setIsHydrated(true);
+  }, []);
 
   const navigation = [
     { name: t('navigation.home'), href: `/${currentLocale}` },
@@ -44,6 +49,43 @@ export const Header: React.FC = () => {
     // Navigate to new locale
     window.location.href = newPath;
   };
+
+  // Show loading state during hydration
+  if (!isHydrated) {
+    return (
+      <header className="bg-white shadow-sm border-b">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            <div className="flex-shrink-0">
+              <Link href={`/${currentLocale}`} className="flex items-center">
+                <span className="text-2xl font-bold text-red-600">Logroñam</span>
+              </Link>
+            </div>
+            <div className="hidden md:flex space-x-8">
+              <div className="h-4 w-16 bg-gray-200 rounded animate-pulse"></div>
+              <div className="h-4 w-16 bg-gray-200 rounded animate-pulse"></div>
+              <div className="h-4 w-16 bg-gray-200 rounded animate-pulse"></div>
+              <div className="h-4 w-16 bg-gray-200 rounded animate-pulse"></div>
+            </div>
+            <div className="flex items-center space-x-2">
+              <Globe className="w-4 h-4 text-gray-500" />
+              <select
+                value={currentLocale}
+                onChange={(e) => changeLanguage(e.target.value)}
+                className="border-0 bg-transparent text-sm font-medium text-gray-700 focus:outline-none focus:ring-0"
+              >
+                {languages.map((lang) => (
+                  <option key={lang.code} value={lang.code}>
+                    {lang.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+        </div>
+      </header>
+    );
+  }
 
   return (
     <header className="bg-white shadow-sm border-b">
