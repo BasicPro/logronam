@@ -1,0 +1,44 @@
+{
+  "bar-soriano": {
+    "name": "Bar Soriano",
+    "description": "Una de las tabernas más emblemáticas de la calle Laurel, famosa por sus pinchos tradicionales y su ambiente auténtico.",
+    "review": "Una de las tabernas más emblemáticas de la calle Laurel, famosa por sus pinchos tradicionales y su ambiente auténtico.",
+    "features": ["Terraza", "WiFi", "Accesible", "Grupos"]
+  },
+  "bar-laurel-2": {
+    "name": "Bar Blanco y Negro",
+    "description": "Taberna moderna con una selección cuidadosa de pinchos creativos y vinos de la región.",
+    "review": "Taberna moderna con una selección cuidadosa de pinchos creativos y vinos de la región.",
+    "features": ["Terraza", "WiFi", "Vinos", "Grupos"]
+  },
+  "bar-laurel-3": {
+    "name": "Taberna Herrerías",
+    "description": "Taberna tradicional con más de 50 años de historia, especializada en pinchos clásicos riojanos.",
+    "review": "Taberna tradicional con más de 50 años de historia, especializada en pinchos clásicos riojanos.",
+    "features": ["Tradicional", "Accesible", "Familias"]
+  },
+  "bar-laurel-4": {
+    "name": "Bar La Taberna",
+    "description": "Taberna moderna con una selección de pinchos fusion y vinos internacionales.",
+    "review": "Taberna moderna con una selección de pinchos fusion y vinos internacionales.",
+    "features": ["Moderno", "Vinos", "Grupos"]
+  },
+  "bar-laurel-5": {
+    "name": "Bar El Rincón",
+    "description": "Pequeño bar familiar con pinchos caseros y ambiente acogedor.",
+    "review": "Pequeño bar familiar con pinchos caseros y ambiente acogedor.",
+    "features": ["Familiar", "Casero", "Accesible"]
+  },
+  "bar-laurel-6": {
+    "name": "Bar Los Pimientos",
+    "description": "Especialista en pimientos del piquillo y otros productos de la huerta riojana.",
+    "review": "Especialista en pimientos del piquillo y otros productos de la huerta riojana.",
+    "features": ["Huerta", "Tradicional", "Familiar"]
+  },
+  "bar-laurel-7": {
+    "name": "Bar La Tortilla",
+    "description": "Especialista en tortillas y otros platos tradicionales españoles.",
+    "review": "Especialista en tortillas y otros platos tradicionales españoles.",
+    "features": ["Tradicional", "Tortillas", "Familiar"]
+  }
+}

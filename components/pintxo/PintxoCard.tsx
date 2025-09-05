@@ -8,7 +8,7 @@ import { Card, CardContent, CardFooter } from "../ui/Card";
 import { Button } from "../ui/Button";
 import { Image } from "../ui/Image";
 import { Pintxo, PintxoVariation } from "../../types/pintxo";
-import { getBarsByIds } from "../../data/bars";
+import { getBarsByIds } from "../../lib/bars";
 import { getPintxoVariations } from "../../lib/pintxos";
 import { MapPin, Users, Euro, Star, ChefHat } from "lucide-react";
 
@@ -25,13 +25,22 @@ export const PintxoCard: React.FC<PintxoCardProps> = ({
   const params = useParams();
   const currentLocale = params.locale as string;
   const [variations, setVariations] = useState<PintxoVariation[]>([]);
+  const [bars, setBars] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const loadVariations = async () => {
       try {
-        const data = await getPintxoVariations(pintxo.id, currentLocale as any);
-        setVariations(data);
+        const [variationsData, barsData] = await Promise.all([
+          getPintxoVariations(pintxo.id, currentLocale as any),
+          getBarsByIds([], currentLocale as any) // We'll get the bars after we have variations
+        ]);
+        setVariations(variationsData);
+        
+        // Get unique bar IDs from variations
+        const barIds = [...new Set(variationsData.map(v => v.barId))];
+        const barsForPintxo = await getBarsByIds(barIds, currentLocale as any);
+        setBars(barsForPintxo);
       } catch (error) {
         console.error("Failed to load pintxo variations:", error);
       } finally {
@@ -55,8 +64,6 @@ export const PintxoCard: React.FC<PintxoCardProps> = ({
       </Card>
     );
   }
-
-  const bars = getBarsByIds(variations.map(variation => variation.barId));
 
   // Get the best rated variation for display
   const bestVariant = variations.reduce((best, current) => 
@@ -84,8 +91,8 @@ export const PintxoCard: React.FC<PintxoCardProps> = ({
             <Euro className="w-3 h-3 text-green-600" />
             <span className="text-sm font-semibold text-green-600">
               {minPrice === maxPrice 
-                ? `€${minPrice.toFixed(2)}`
-                : `€${minPrice.toFixed(2)}-${maxPrice.toFixed(2)}`
+                ? `${minPrice.toFixed(2)}€`
+                : `${minPrice.toFixed(2)}€ - ${maxPrice.toFixed(2)}€`
               }
             </span>
           </div>
@@ -94,7 +101,7 @@ export const PintxoCard: React.FC<PintxoCardProps> = ({
             <span className="text-sm font-semibold text-yellow-600">
               {minRating === maxRating 
                 ? `${minRating.toFixed(1)}`
-                : `${minRating.toFixed(1)}-${maxRating.toFixed(1)}`
+                : `${minRating.toFixed(1)} - ${maxRating.toFixed(1)}`
               }
             </span>
           </div>
@@ -157,27 +164,17 @@ export const PintxoCard: React.FC<PintxoCardProps> = ({
                       <div key={variation.id} className="flex items-center gap-3">
                         <div className="w-8 h-8 rounded-full overflow-hidden">
                           <Image
-                            src={bar.images.main}
-                            alt={
-                              typeof bar.name === "string"
-                                ? bar.name
-                                : bar.name[currentLocale] ||
-                                  bar.name.es ||
-                                  "Unknown"
-                            }
+                            src={bar.images[0]}
+                            alt={bar.name}
                             className="w-full h-full object-cover"
                           />
                         </div>
                         <div className="flex-1">
                           <p className="text-sm font-medium text-gray-900">
-                            {typeof bar.name === "string"
-                              ? bar.name
-                              : bar.name[currentLocale] ||
-                                bar.name.es ||
-                                "Unknown"}
+                            {bar.name}
                           </p>
                           <div className="flex items-center gap-2 text-xs text-gray-600">
-                            <span>€{variation.price.toFixed(2)}</span>
+                            <span>{variation.price.toFixed(2)}€</span>
                             <span>•</span>
                             <div className="flex items-center gap-1">
                               <Star className="w-3 h-3 text-yellow-500" />

@@ -13,7 +13,7 @@ import { NotFoundPage } from '../../../../components/ui/NotFoundPage';
 import { PintxoInfo } from '../../../../components/pintxo/PintxoInfo';
 import { VariationCard } from '../../../../components/pintxo/VariationCard';
 import { getPintxoById, getPintxoVariations } from '../../../../lib/pintxos';
-import { getBarsByIds } from '../../../../data/bars';
+import { getBarsByIds } from '../../../../lib/bars';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 export default function PintxoDetailPage() {
@@ -67,8 +67,6 @@ export default function PintxoDetailPage() {
       />
     );
   }
-
-  const servingBars = getBarsByIds(variations.map((variation: any) => variation.barId));
 
   // Calculate price and rating ranges for pintxo variations
   const prices = variations.map((variation: any) => variation.price);

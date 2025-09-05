@@ -6,7 +6,7 @@ import { Button } from '../ui/Button';
 import { Image } from '../ui/Image';
 import { PriceRatingOverlay } from '../ui/PriceRatingOverlay';
 import { Star, ExternalLink } from 'lucide-react';
-import { getBarsByIds } from '../../data/bars';
+import { getBarsByIds } from '../../lib/bars';
 
 interface VariationCardProps {
   variation: {
@@ -40,18 +40,28 @@ export const VariationCard: React.FC<VariationCardProps> = ({
   className = ''
 }) => {
   const { t } = useTranslation('common');
-  const bar = getBarsByIds([variation.barId])[0];
+  const [bar, setBar] = React.useState<any>(null);
+
+  React.useEffect(() => {
+    const loadBar = async () => {
+      try {
+        const bars = await getBarsByIds([variation.barId], currentLocale as any);
+        setBar(bars[0]);
+      } catch (error) {
+        console.error("Failed to load bar:", error);
+      }
+    };
+    loadBar();
+  }, [variation.barId, currentLocale]);
   
   if (!bar) return null;
-
-  const barName = typeof bar.name === "string" ? bar.name : bar.name[currentLocale] || bar.name.es || "Unknown";
 
   return (
     <div className={`flex flex-col border rounded-lg overflow-hidden shadow-sm ${className}`}>
       <div className="relative h-32">
         <Image
           src={variation.image}
-          alt={`${pintxo.name} at ${barName}`}
+          alt={`${pintxo.name} at ${bar.name}`}
           className="w-full h-full object-cover rounded-t-lg"
         />
         
@@ -75,7 +85,7 @@ export const VariationCard: React.FC<VariationCardProps> = ({
         <div className="flex items-center justify-between mb-1">
           <h3 className="text-lg font-semibold text-gray-900">
             <Link href={`/${currentLocale}/bars/${bar.id}`} className="hover:text-red-600 transition-colors">
-              {barName}
+              {bar.name}
             </Link>
           </h3>
           <div className="flex items-center gap-1">

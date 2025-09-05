@@ -1,8 +1,6 @@
 import React from 'react';
 import { cn } from '../../lib/utils';
 
-
-
 const Select = React.forwardRef<HTMLSelectElement, React.SelectHTMLAttributes<HTMLSelectElement>>(
   ({ className, children, ...props }, ref) => {
     return (
@@ -21,9 +19,9 @@ const Select = React.forwardRef<HTMLSelectElement, React.SelectHTMLAttributes<HT
 );
 Select.displayName = 'Select';
 
-// Simple Select components for compatibility
+// Simple Select components for compatibility - these are just wrappers for styling
 export const SelectTrigger = React.forwardRef<HTMLSelectElement, React.SelectHTMLAttributes<HTMLSelectElement>>(
-  ({ className, ...props }, ref) => {
+  ({ className, children, ...props }, ref) => {
     return (
       <select
         className={cn(
@@ -32,7 +30,9 @@ export const SelectTrigger = React.forwardRef<HTMLSelectElement, React.SelectHTM
         )}
         ref={ref}
         {...props}
-      />
+      >
+        {children}
+      </select>
     );
   }
 );

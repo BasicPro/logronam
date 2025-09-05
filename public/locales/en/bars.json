@@ -1,0 +1,44 @@
+{
+  "bar-soriano": {
+    "name": "Bar Soriano",
+    "description": "One of the most emblematic taverns on Laurel Street, famous for its traditional pinchos and authentic atmosphere.",
+    "review": "One of the most emblematic taverns on Laurel Street, famous for its traditional pinchos and authentic atmosphere.",
+    "features": ["Terrace", "WiFi", "Accessible", "Groups"]
+  },
+  "bar-laurel-2": {
+    "name": "Bar Blanco y Negro",
+    "description": "Modern tavern with a careful selection of creative pinchos and regional wines.",
+    "review": "Modern tavern with a careful selection of creative pinchos and regional wines.",
+    "features": ["Terrace", "WiFi", "Wines", "Groups"]
+  },
+  "bar-laurel-3": {
+    "name": "Taberna Herrerías",
+    "description": "Traditional tavern with more than 50 years of history, specialized in classic Riojan pinchos.",
+    "review": "Traditional tavern with more than 50 years of history, specialized in classic Riojan pinchos.",
+    "features": ["Traditional", "Accessible", "Families"]
+  },
+  "bar-laurel-4": {
+    "name": "Bar La Taberna",
+    "description": "Modern tavern with a selection of fusion pinchos and international wines.",
+    "review": "Modern tavern with a selection of fusion pinchos and international wines.",
+    "features": ["Modern", "Wines", "Groups"]
+  },
+  "bar-laurel-5": {
+    "name": "Bar El Rincón",
+    "description": "Small family bar with homemade pinchos and cozy atmosphere.",
+    "review": "Small family bar with homemade pinchos and cozy atmosphere.",
+    "features": ["Family", "Homemade", "Accessible"]
+  },
+  "bar-laurel-6": {
+    "name": "Bar Los Pimientos",
+    "description": "Specialist in piquillo peppers and other products from the Riojan garden.",
+    "review": "Specialist in piquillo peppers and other products from the Riojan garden.",
+    "features": ["Garden", "Traditional", "Family"]
+  },
+  "bar-laurel-7": {
+    "name": "Bar La Tortilla",
+    "description": "Specialist in tortillas and other traditional Spanish dishes.",
+    "review": "Specialist in tortillas and other traditional Spanish dishes.",
+    "features": ["Traditional", "Tortillas", "Family"]
+  }
+}

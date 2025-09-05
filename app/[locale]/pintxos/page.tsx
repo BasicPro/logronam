@@ -14,13 +14,7 @@ import {
 } from "../../../lib/pintxos";
 import { Button } from "../../../components/ui/Button";
 import { Input } from "../../../components/ui/Input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "../../../components/ui/Select";
+import { Select } from "../../../components/ui/Select";
 import { Grid, List, Search, Filter } from "lucide-react";
 
 export default function PintxosPage() {
@@ -181,18 +175,17 @@ export default function PintxosPage() {
             </div>
 
             {/* Sort */}
-            <Select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder={t("pintxos.sortBy")} />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="popularity">
-                  {t("pintxos.popularity")}
-                </SelectItem>
-                <SelectItem value="name">{t("pintxos.name")}</SelectItem>
-                <SelectItem value="price">{t("pintxos.price")}</SelectItem>
-                <SelectItem value="bars">{t("pintxos.bars")}</SelectItem>
-              </SelectContent>
+            <Select 
+              value={sortBy} 
+              onChange={(e) => setSortBy(e.target.value)}
+              className="w-[180px]"
+            >
+              <option value="popularity">
+                {t("pintxos.popularity")}
+              </option>
+              <option value="name">{t("pintxos.name")}</option>
+              <option value="price">{t("pintxos.price")}</option>
+              <option value="bars">{t("pintxos.bars")}</option>
             </Select>
 
             {/* View Mode */}
@@ -221,56 +214,44 @@ export default function PintxosPage() {
             <Select
               value={filterByCategory}
               onChange={(e) => setFilterByCategory(e.target.value)}
+              className="w-[180px]"
             >
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder={t("pintxos.category")} />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="">{t("pintxos.allCategories")}</SelectItem>
-                <SelectItem value="traditional">
-                  {t("pintxos.traditional")}
-                </SelectItem>
-                <SelectItem value="modern">{t("pintxos.modern")}</SelectItem>
-                <SelectItem value="fusion">{t("pintxos.fusion")}</SelectItem>
-                <SelectItem value="vegetarian">
-                  {t("pintxos.vegetarian")}
-                </SelectItem>
-                <SelectItem value="seafood">{t("pintxos.seafood")}</SelectItem>
-                <SelectItem value="meat">{t("pintxos.meat")}</SelectItem>
-              </SelectContent>
+              <option value="">{t("pintxos.allCategories")}</option>
+              <option value="traditional">
+                {t("pintxos.traditional")}
+              </option>
+              <option value="modern">{t("pintxos.modern")}</option>
+              <option value="fusion">{t("pintxos.fusion")}</option>
+              <option value="vegetarian">
+                {t("pintxos.vegetarian")}
+              </option>
+              <option value="seafood">{t("pintxos.seafood")}</option>
+              <option value="meat">{t("pintxos.meat")}</option>
             </Select>
 
             <Select
               value={filterByBar}
               onChange={(e) => setFilterByBar(e.target.value)}
+              className="w-[180px]"
             >
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder={t("pintxos.bar")} />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="">{t("pintxos.allBars")}</SelectItem>
-                {uniqueBars.map((bar) => (
-                  <SelectItem key={bar.id} value={bar.id}>
-                    {bar.name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
+              <option value="">{t("pintxos.allBars")}</option>
+              {uniqueBars.map((bar) => (
+                <option key={bar.id} value={bar.id}>
+                  {bar.name}
+                </option>
+              ))}
             </Select>
 
             <Select
               value={filterByPriceRange}
               onChange={(e) => setFilterByPriceRange(e.target.value)}
+              className="w-[180px]"
             >
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder={t("pintxos.priceRange")} />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="">{t("pintxos.allPriceRanges")}</SelectItem>
-                <SelectItem value="0-2">€0 - €2</SelectItem>
-                <SelectItem value="2-3">€2 - €3</SelectItem>
-                <SelectItem value="3-4">€3 - €4</SelectItem>
-                <SelectItem value="4-5">€4 - €5</SelectItem>
-              </SelectContent>
+              <option value="">{t("pintxos.allPriceRanges")}</option>
+              <option value="0-2">€0 - €2</option>
+              <option value="2-3">€2 - €3</option>
+              <option value="3-4">€3 - €4</option>
+              <option value="4-5">€4 - €5</option>
             </Select>
 
             <Button onClick={clearFilters} variant="outline">

@@ -9,11 +9,10 @@ import { MapPin, Star, Clock, Phone, Globe, ExternalLink, Euro } from 'lucide-re
 interface BarInfoCardProps {
   bar: {
     id: string;
-    name: string | Record<string, string>;
-    images: { main: string };
+    name: string;
+    images: string[];
     rating: number;
     location: { address: string };
-    openingHours: { monday: string };
     contact?: {
       phone?: string;
       website?: string;
@@ -39,7 +38,6 @@ export const BarInfoCard: React.FC<BarInfoCardProps> = ({
 }) => {
   const { t } = useTranslation('common');
   
-  const barName = typeof bar.name === "string" ? bar.name : bar.name[currentLocale] || bar.name.es || "Unknown";
   const finalViewButtonText = viewButtonText || t('pintxos.viewBar');
   const finalViewButtonHref = viewButtonHref || `/${currentLocale}/bars/${bar.id}`;
 
@@ -52,8 +50,8 @@ export const BarInfoCard: React.FC<BarInfoCardProps> = ({
         <div className="space-y-4">
           <div className="relative h-48 rounded-lg overflow-hidden">
             <Image
-              src={bar.images.main}
-              alt={barName}
+              src={bar.images[0]} // Use first image
+              alt={bar.name}
               className="w-full h-full object-cover"
             />
             
@@ -72,7 +70,7 @@ export const BarInfoCard: React.FC<BarInfoCardProps> = ({
             <div className="flex items-center justify-between mb-2">
               <h3 className="text-xl font-semibold text-gray-900">
                 <Link href={finalViewButtonHref} className="hover:text-red-600 transition-colors">
-                  {barName}
+                  {bar.name}
                 </Link>
               </h3>
               <div className="flex items-center gap-1">
@@ -87,10 +85,6 @@ export const BarInfoCard: React.FC<BarInfoCardProps> = ({
               <div className="flex items-center gap-2">
                 <MapPin className="w-4 h-4 text-red-500" />
                 <span>{bar.location.address}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Clock className="w-4 h-4 text-red-500" />
-                <span>{bar.openingHours.monday}</span>
               </div>
               {bar.contact?.phone && (
                 <div className="flex items-center gap-2">

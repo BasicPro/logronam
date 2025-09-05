@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
 import { Header } from '../../../../components/layout/Header';
@@ -10,7 +10,7 @@ import { Rating } from '../../../../components/ui/Rating';
 import { Image } from '../../../../components/ui/Image';
 import { Button } from '../../../../components/ui/Button';
 import { PintxoCard } from '../../../../components/pintxo/PintxoCard';
-import { getBarById } from '../../../../data/bars';
+import { getBarById } from '../../../../lib/bars';
 import { getPriceRangeSymbol } from '../../../../lib/utils';
 import { 
   MapPin, 
@@ -30,7 +30,38 @@ export default function BarDetailPage() {
   const params = useParams();
   const currentLocale = params.locale as string;
   const barId = params.id as string;
-  const bar = getBarById(barId);
+  
+  const [bar, setBar] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadBar = async () => {
+      try {
+        const data = await getBarById(barId, currentLocale as any);
+        setBar(data);
+      } catch (error) {
+        console.error("Failed to load bar details:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadBar();
+  }, [barId, currentLocale]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex flex-col">
+        <Header />
+        <main className="flex-grow flex items-center justify-center py-12">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-600 mx-auto mb-4"></div>
+            <p className="text-lg text-gray-600">Loading bar details...</p>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
 
   if (!bar) {
     return (
@@ -68,15 +99,15 @@ export default function BarDetailPage() {
       <section className="relative">
         <div className="h-96 relative">
           <Image
-            src={bar.images.main}
-            alt={typeof bar.name === 'string' ? bar.name : bar.name.es || bar.name.en}
+            src={bar.images[0]} // Use first image as main
+            alt={bar.name}
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-black/40"></div>
           <div className="absolute bottom-8 left-8 right-8 text-white">
             <div className="flex justify-between items-end">
               <div>
-                <h1 className="text-4xl font-bold mb-2">{typeof bar.name === 'string' ? bar.name : bar.name.es || bar.name.en}</h1>
+                <h1 className="text-4xl font-bold mb-2">{bar.name}</h1>
                 <p className="text-xl text-gray-200 capitalize">{t(`categories.${bar.category}`)}</p>
               </div>
               <div className="flex items-center gap-4">
@@ -106,7 +137,6 @@ export default function BarDetailPage() {
                     <h2 className="text-2xl font-bold text-gray-900 mb-2">{t('bar.about')}</h2>
                     <div className="flex items-center gap-4 mb-4">
                       <Rating rating={bar.rating} size="lg" />
-                      <span className="text-gray-600">({bar.totalReviews} {t('bar.reviews')})</span>
                     </div>
                   </div>
                   <div className="text-right">
@@ -119,7 +149,7 @@ export default function BarDetailPage() {
                 </div>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-700 mb-6">{typeof bar.description === 'string' ? bar.description : bar.description.es || bar.description.en}</p>
+                <p className="text-gray-700 mb-6">{bar.description}</p>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
@@ -129,16 +159,6 @@ export default function BarDetailPage() {
                       <span>{bar.location.address}</span>
                     </div>
                     <p className="text-sm text-gray-500 mt-1">{bar.location.neighborhood}</p>
-                  </div>
-                  
-                  <div>
-                    <h3 className="font-semibold text-gray-2 mb-2">{t('bar.openingHours')}</h3>
-                    <div className="space-y-1 text-sm text-gray-600">
-                      <div className="flex justify-between">
-                        <span>Lunes - Domingo:</span>
-                        <span>{bar.openingHours.monday}</span>
-                      </div>
-                    </div>
                   </div>
                 </div>
 
@@ -157,64 +177,44 @@ export default function BarDetailPage() {
                     </div>
                   </div>
                 )}
+
+                {/* Review */}
+                <div className="mt-6 p-4 bg-gray-50 rounded-lg">
+                  <h3 className="font-semibold text-gray-900 mb-2">Review</h3>
+                  <p className="text-gray-700 italic">"{bar.review}"</p>
+                </div>
               </CardContent>
             </Card>
 
-            {/* Best Pintxo */}
-            <Card>
-              <CardHeader>
-                <h2 className="text-2xl font-bold text-gray-900">{t('bar.bestPintxo')}</h2>
-              </CardHeader>
-              <CardContent>
-                <PintxoCard pintxo={bar.bestPintxo} />
-              </CardContent>
-            </Card>
-
-            {/* All Pintxos */}
-            {bar.pintxos.length > 1 && (
+            {/* Featured Pintxos */}
+            {bar.featuredPintxos.length > 0 && (
               <Card>
                 <CardHeader>
-                  <h2 className="text-2xl font-bold text-gray-900">{t('bar.allPintxos')}</h2>
+                  <h2 className="text-2xl font-bold text-gray-900">{t('bar.bestPintxo')}</h2>
                 </CardHeader>
                 <CardContent>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {bar.pintxos.map((pintxo) => (
-                      <PintxoCard key={pintxo.id} pintxo={pintxo} />
-                    ))}
+                  <div className="text-center py-8">
+                    <p className="text-gray-600">Featured pintxos will be displayed here</p>
+                    <p className="text-sm text-gray-500 mt-2">Variation IDs: {bar.featuredPintxos.join(', ')}</p>
                   </div>
                 </CardContent>
               </Card>
             )}
 
-            {/* Reviews */}
-            <Card>
-              <CardHeader>
-                <h2 className="text-2xl font-bold text-gray-900">{t('bar.reviews')}</h2>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-6">
-                  {bar.reviews.map((review) => (
-                    <div key={review.id} className="border-b border-gray-200 pb-6 last:border-b-0">
-                      <div className="flex justify-between items-start mb-2">
-                        <div>
-                          <h4 className="font-semibold text-gray-900">{review.author}</h4>
-                          <div className="flex items-center gap-2">
-                            <Rating rating={review.rating} showNumber={false} size="sm" />
-                            <span className="text-sm text-gray-500">{review.date}</span>
-                          </div>
-                        </div>
-                        {review.verified && (
-                          <span className="bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full">
-                            {t('bar.verified')}
-                          </span>
-                        )}
-                      </div>
-                      <p className="text-gray-700">{review.comment}</p>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+            {/* All Pintxos */}
+            {bar.pintxos.length > 0 && (
+              <Card>
+                <CardHeader>
+                  <h2 className="text-2xl font-bold text-gray-900">{t('bar.allPintxos')}</h2>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-center py-8">
+                    <p className="text-gray-600">All pintxos will be displayed here</p>
+                    <p className="text-sm text-gray-500 mt-2">Pintxo IDs: {bar.pintxos.join(', ')}</p>
+                  </div>
+                </CardContent>
+              </Card>
+            )}
           </div>
 
           {/* Sidebar */}
@@ -226,7 +226,7 @@ export default function BarDetailPage() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {bar.contact.phone && (
+                  {bar.contact?.phone && (
                     <div className="flex items-center gap-3">
                       <Phone className="w-4 h-4 text-gray-500" />
                       <a href={`tel:${bar.contact.phone}`} className="text-gray-700 hover:text-red-600">
@@ -235,7 +235,7 @@ export default function BarDetailPage() {
                     </div>
                   )}
                   
-                  {bar.contact.website && (
+                  {bar.contact?.website && (
                     <div className="flex items-center gap-3">
                       <Globe className="w-4 h-4 text-gray-500" />
                       <a 
@@ -244,12 +244,12 @@ export default function BarDetailPage() {
                         rel="noopener noreferrer"
                         className="text-gray-700 hover:text-red-600"
                       >
-                        Sitio web
+                        Website
                       </a>
                     </div>
                   )}
                   
-                  {bar.contact.instagram && (
+                  {bar.contact?.instagram && (
                     <div className="flex items-center gap-3">
                       <Instagram className="w-4 h-4 text-gray-500" />
                       <a 

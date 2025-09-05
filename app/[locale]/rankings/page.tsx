@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
 import { Header } from '../../../components/layout/Header';
@@ -9,11 +9,10 @@ import { Card, CardContent } from '../../../components/ui/Card';
 import { Rating } from '../../../components/ui/Rating';
 import { Image } from '../../../components/ui/Image';
 import { Button } from '../../../components/ui/Button';
-import { bars } from '../../../data/bars';
+import { getBars } from '../../../lib/bars';
 import { getPriceRangeSymbol } from '../../../lib/utils';
 import { 
   MapPin, 
-  Clock, 
   Euro,
   SortAsc,
   SortDesc,
@@ -21,7 +20,7 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 
-type SortOption = 'rating' | 'reviews' | 'name';
+type SortOption = 'rating' | 'name';
 type SortOrder = 'asc' | 'desc';
 type CategoryFilter = 'all' | 'bar' | 'restaurant' | 'taberna' | 'bodega';
 type PriceFilter = 'all' | '€' | '€€' | '€€€' | '€€€€';
@@ -34,6 +33,22 @@ export default function RankingsPage() {
   const [sortOrder, setSortOrder] = useState<SortOrder>('desc');
   const [categoryFilter, setCategoryFilter] = useState<CategoryFilter>('all');
   const [priceFilter, setPriceFilter] = useState<PriceFilter>('all');
+  const [bars, setBars] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadBars = async () => {
+      try {
+        const data = await getBars(currentLocale as any);
+        setBars(data);
+      } catch (error) {
+        console.error("Failed to load bars:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadBars();
+  }, [currentLocale]);
 
   const filteredAndSortedBars = useMemo(() => {
     let filtered = bars;
@@ -56,11 +71,8 @@ export default function RankingsPage() {
         case 'rating':
           comparison = a.rating - b.rating;
           break;
-        case 'reviews':
-          comparison = a.totalReviews - b.totalReviews;
-          break;
         case 'name':
-          comparison = (typeof a.name === 'string' ? a.name : a.name.es || a.name.en).localeCompare(typeof b.name === 'string' ? b.name : b.name.es || b.name.en);
+          comparison = a.name.localeCompare(b.name);
           break;
       }
 
@@ -68,7 +80,7 @@ export default function RankingsPage() {
     });
 
     return filtered;
-  }, [sortBy, sortOrder, categoryFilter, priceFilter]);
+  }, [bars, sortBy, sortOrder, categoryFilter, priceFilter]);
 
   const handleSort = (option: SortOption) => {
     if (sortBy === option) {
@@ -83,6 +95,21 @@ export default function RankingsPage() {
     if (sortBy !== option) return <Minus className="w-4 h-4" />;
     return sortOrder === 'asc' ? <SortAsc className="w-4 h-4" /> : <SortDesc className="w-4 h-4" />;
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <Header />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-600 mx-auto mb-4"></div>
+            <p className="text-lg text-gray-600">Loading rankings...</p>
+          </div>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -158,14 +185,6 @@ export default function RankingsPage() {
                     {t('rankings.rating')} {getSortIcon('rating')}
                   </Button>
                   <Button
-                    variant={sortBy === 'reviews' ? 'primary' : 'outline'}
-                    size="sm"
-                    onClick={() => handleSort('reviews')}
-                    className="flex items-center gap-1"
-                  >
-                    {t('rankings.numberOfReviews')} {getSortIcon('reviews')}
-                  </Button>
-                  <Button
                     variant={sortBy === 'name' ? 'primary' : 'outline'}
                     size="sm"
                     onClick={() => handleSort('name')}
@@ -192,8 +211,8 @@ export default function RankingsPage() {
                 {/* Bar Image */}
                 <div className="flex-shrink-0 w-32 h-32">
                   <Image
-                    src={bar.images.main}
-                    alt={typeof bar.name === 'string' ? bar.name : bar.name.es || bar.name.en}
+                    src={bar.images[0]} // Use first image
+                    alt={bar.name}
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -203,13 +222,13 @@ export default function RankingsPage() {
                   <div className="flex justify-between items-start">
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-2">
-                        <h3 className="text-xl font-bold text-gray-900">{typeof bar.name === 'string' ? bar.name : bar.name.es || bar.name.en}</h3>
+                        <h3 className="text-xl font-bold text-gray-900">{bar.name}</h3>
                         <span className="bg-red-100 text-red-800 text-sm px-2 py-1 rounded-full capitalize">
                           {t(`categories.${bar.category}`)}
                         </span>
                       </div>
                       
-                      <p className="text-gray-600 mb-3 line-clamp-2">{typeof bar.description === 'string' ? bar.description : bar.description.es || bar.description.en}</p>
+                      <p className="text-gray-600 mb-3 line-clamp-2">{bar.description}</p>
                       
                       <div className="flex items-center gap-6 text-sm text-gray-500">
                         <div className="flex items-center gap-1">
@@ -217,12 +236,11 @@ export default function RankingsPage() {
                           <span>{bar.location.neighborhood}</span>
                         </div>
                         <div className="flex items-center gap-1">
-                          <Clock className="w-4 h-4" />
-                          <span>{bar.totalReviews} {t('bar.reviews')}</span>
-                        </div>
-                        <div className="flex items-center gap-1">
                           <Euro className="w-4 h-4" />
                           <span>{getPriceRangeSymbol(bar.priceRange)}</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <span>{bar.features.length} {t('bar.features')}</span>
                         </div>
                       </div>
                     </div>
