@@ -71,13 +71,13 @@ export default function BarDetailPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="text-center">
             <h1 className="text-2xl font-bold text-gray-900 mb-4">
-              {t("bar.notFound.title")}
+              {t("bars.notFound.title")}
             </h1>
             <p className="text-gray-600 mb-8">
-              {t("bar.notFound.description")}
+              {t("bars.notFound.description")}
             </p>
             <Link href={`/${currentLocale}`}>
-              <Button>{t("bar.notFound.backHome")}</Button>
+              <Button>{t("bars.notFound.backHome")}</Button>
             </Link>
           </div>
         </div>
@@ -95,7 +95,7 @@ export default function BarDetailPage() {
         <Link href={`/${currentLocale}/rankings`}>
           <Button variant="ghost" className="flex items-center gap-2">
             <ArrowLeft className="w-4 h-4" />
-            {t("bar.backToRankings")}
+            {t("bars.backToRankings")}
           </Button>
         </Link>
       </div>
@@ -123,11 +123,11 @@ export default function BarDetailPage() {
                   className="text-white border-white hover:bg-white/20"
                 >
                   <Share2 className="w-4 h-4 mr-2" />
-                  {t("bar.share")}
+                  {t("bars.share")}
                 </Button>
                 <Button className="bg-white text-gray-900 hover:bg-gray-100">
                   <Navigation className="w-4 h-4 mr-2" />
-                  {t("bar.getDirections")}
+                  {t("bars.getDirections")}
                 </Button>
               </div>
             </div>
@@ -145,7 +145,7 @@ export default function BarDetailPage() {
                 <div className="flex justify-between items-start">
                   <div>
                     <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                      {t("bar.about")}
+                      {t("bars.about")}
                     </h2>
                     <div className="flex items-center gap-4 mb-4">
                       <Rating rating={bar.rating} size="lg" />
@@ -157,7 +157,7 @@ export default function BarDetailPage() {
                       <span>{getPriceRangeSymbol(bar.priceRange)}</span>
                     </div>
                     <p className="text-sm text-gray-600">
-                      {t("bar.priceRangeLabel")}
+                      {t("bars.priceRangeLabel")}
                     </p>
                   </div>
                 </div>
@@ -168,7 +168,7 @@ export default function BarDetailPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-2">
-                      {t("bar.location")}
+                      {t("bars.location")}
                     </h3>
                     <div className="flex items-center gap-2 text-gray-600">
                       <MapPin className="w-4 h-4" />
@@ -193,7 +193,7 @@ export default function BarDetailPage() {
               <Card>
                 <CardHeader>
                   <h2 className="text-2xl font-bold text-gray-900">
-                    {t("bar.bestPintxo")}
+                    {t("bars.bestPintxo")}
                   </h2>
                 </CardHeader>
                 <CardContent>
@@ -214,7 +214,7 @@ export default function BarDetailPage() {
               <Card>
                 <CardHeader>
                   <h2 className="text-2xl font-bold text-gray-900">
-                    {t("bar.allPintxos")}
+                    {t("bars.allPintxos")}
                   </h2>
                 </CardHeader>
                 <CardContent>
@@ -237,7 +237,7 @@ export default function BarDetailPage() {
             <Card>
               <CardHeader>
                 <h3 className="text-lg font-semibold text-gray-900">
-                  {t("bar.contact")}
+                  {t("bars.contact")}
                 </h3>
               </CardHeader>
               <CardContent>
@@ -292,22 +292,22 @@ export default function BarDetailPage() {
             <Card>
               <CardHeader>
                 <h3 className="text-lg font-semibold text-gray-900">
-                  {t("bar.actions")}
+                  {t("bars.actions")}
                 </h3>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
                   <Button className="w-full">
                     <Star className="w-4 h-4 mr-2" />
-                    {t("bar.writeReview")}
+                    {t("bars.writeReview")}
                   </Button>
                   <Button variant="outline" className="w-full">
                     <Share2 className="w-4 h-4 mr-2" />
-                    {t("bar.share")}
+                    {t("bars.share")}
                   </Button>
                   <Button variant="outline" className="w-full">
                     <Navigation className="w-4 h-4 mr-2" />
-                    {t("bar.getDirections")}
+                    {t("bars.getDirections")}
                   </Button>
                 </div>
               </CardContent>

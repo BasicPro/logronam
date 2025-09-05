@@ -65,10 +65,10 @@ export const BarCard: React.FC<BarCardProps> = ({
             {bar.featuredPintxos.length > 0 && (
               <div className="border-t pt-4">
                 <h4 className="text-sm font-medium text-gray-900 mb-2">
-                  {t("bar.featuredPintxos")}
+                  {t("bars.featuredPintxos")}
                 </h4>
                 <p className="text-xs text-gray-600">
-                  {bar.featuredPintxos.length} {t("bar.featuredPintxosCount")}
+                  {bar.featuredPintxos.length} {t("bars.featuredPintxosCount")}
                 </p>
               </div>
             )}
@@ -77,7 +77,7 @@ export const BarCard: React.FC<BarCardProps> = ({
               href={`/${currentLocale}/bars/${bar.id}`}
               className="w-full mt-4"
             >
-              <Button className="w-full">{t("bar.viewDetails")}</Button>
+              <Button className="w-full">{t("bars.viewDetails")}</Button>
             </Link>
           </div>
         </CardContent>
