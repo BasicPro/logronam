@@ -1,29 +1,31 @@
 "use client";
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
-import { useTranslation } from 'react-i18next';
-import { Header } from '../../../../components/layout/Header';
-import { Footer } from '../../../../components/layout/Footer';
-import { Card, CardContent, CardHeader } from '../../../../components/ui/Card';
-import { Image } from '../../../../components/ui/Image';
-import { Breadcrumb } from '../../../../components/ui/Breadcrumb';
-import { PriceRatingOverlay } from '../../../../components/ui/PriceRatingOverlay';
-import { LoadingSpinner } from '../../../../components/ui/LoadingSpinner';
-import { NotFoundPage } from '../../../../components/ui/NotFoundPage';
-import { PintxoInfo } from '../../../../components/pintxo/PintxoInfo';
-import { VariationCard } from '../../../../components/pintxo/VariationCard';
-import { getPintxoById, getPintxoVariations } from '../../../../lib/pintxos';
-import { getBarsByIds } from '../../../../lib/bars';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import React, { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
+import { useTranslation } from "react-i18next";
+import { Header } from "../../../../components/layout/Header";
+import { Footer } from "../../../../components/layout/Footer";
+import { Card, CardContent, CardHeader } from "../../../../components/ui/Card";
+import { Image } from "../../../../components/ui/Image";
+import { Breadcrumb } from "../../../../components/ui/Breadcrumb";
+import { PriceRatingOverlay } from "../../../../components/ui/PriceRatingOverlay";
+import { LoadingSpinner } from "../../../../components/ui/LoadingSpinner";
+import { NotFoundPage } from "../../../../components/ui/NotFoundPage";
+import { PintxoInfo } from "../../../../components/pintxo/PintxoInfo";
+import { VariationCard } from "../../../../components/pintxo/VariationCard";
+import { getPintxoById, getPintxoVariations } from "../../../../lib/pintxos";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { PintxoVariation } from "../../../../types/pintxo";
+import { Pintxo } from "../../../../types/pintxo";
+import { Locale } from "../../../../types/common";
 
 export default function PintxoDetailPage() {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation("common");
   const params = useParams();
-  const currentLocale = params.locale as string;
+  const currentLocale = params.locale as Locale;
   const pintxoId = params.id as string;
 
-  const [pintxo, setPintxo] = useState<any>(null);
-  const [variations, setVariations] = useState<any[]>([]);
+  const [pintxo, setPintxo] = useState<Pintxo | undefined>();
+  const [variations, setVariations] = useState<PintxoVariation[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -31,8 +33,8 @@ export default function PintxoDetailPage() {
     const loadData = async () => {
       try {
         const [fetchedPintxo, fetchedVariations] = await Promise.all([
-          getPintxoById(pintxoId, currentLocale as any),
-          getPintxoVariations(pintxoId, currentLocale as any)
+          getPintxoById(pintxoId, currentLocale),
+          getPintxoVariations(pintxoId, currentLocale),
         ]);
         setPintxo(fetchedPintxo);
         setVariations(fetchedVariations);
@@ -60,17 +62,17 @@ export default function PintxoDetailPage() {
   if (!pintxo || variations.length === 0) {
     return (
       <NotFoundPage
-        title={t('pintxos.notFound.title')}
-        description={t('pintxos.notFound.description')}
-        backButtonText={t('pintxos.backToPintxos')}
+        title={t("pintxos.notFound.title")}
+        description={t("pintxos.notFound.description")}
+        backButtonText={t("pintxos.backToPintxos")}
         backButtonHref={`/${currentLocale}/pintxos`}
       />
     );
   }
 
   // Calculate price and rating ranges for pintxo variations
-  const prices = variations.map((variation: any) => variation.price);
-  const ratings = variations.map((variation: any) => variation.rating);
+  const prices = variations.map((variation) => variation.price);
+  const ratings = variations.map((variation) => variation.rating);
   const minPrice = Math.min(...prices);
   const maxPrice = Math.max(...prices);
   const minRating = Math.min(...ratings);
@@ -82,23 +84,21 @@ export default function PintxoDetailPage() {
   };
 
   const prevImage = () => {
-    setCurrentImageIndex((prev) => (prev - 1 + variations.length) % variations.length);
-  };
-
-  const goToImage = (index: number) => {
-    setCurrentImageIndex(index);
+    setCurrentImageIndex(
+      (prev) => (prev - 1 + variations.length) % variations.length
+    );
   };
 
   const breadcrumbItems = [
-    { label: t('navigation.home'), href: `/${currentLocale}` },
-    { label: t('navigation.pintxos'), href: `/${currentLocale}/pintxos` },
-    { label: pintxo.name }
+    { label: t("navigation.home"), href: `/${currentLocale}` },
+    { label: t("navigation.pintxos"), href: `/${currentLocale}/pintxos` },
+    { label: pintxo.name },
   ];
 
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
-      
+
       {/* Breadcrumb */}
       <div className="bg-white border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
@@ -112,12 +112,12 @@ export default function PintxoDetailPage() {
             <Card className="overflow-hidden">
               <CardHeader className="p-0">
                 <div className="relative h-96 group">
-                  <Image 
-                    src={variations[currentImageIndex].image} 
-                    alt={pintxo.name} 
-                    className="w-full h-full object-cover transition-opacity duration-300" 
+                  <Image
+                    src={variations[currentImageIndex].image}
+                    alt={pintxo.name}
+                    className="w-full h-full object-cover transition-opacity duration-300"
                   />
-                  
+
                   {/* Navigation arrows */}
                   {variations.length > 1 && (
                     <>
@@ -136,21 +136,6 @@ export default function PintxoDetailPage() {
                     </>
                   )}
 
-                  {/* Image indicators */}
-                  {variations.length > 1 && (
-                    <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-                      {variations.map((_: any, index: number) => (
-                        <button
-                          key={index}
-                          onClick={() => goToImage(index)}
-                          className={`w-2 h-2 rounded-full transition-colors duration-200 ${
-                            index === currentImageIndex ? 'bg-white' : 'bg-white/50'
-                          }`}
-                        />
-                      ))}
-                    </div>
-                  )}
-
                   {/* Price and rating overlays */}
                   <PriceRatingOverlay
                     price={{ min: minPrice, max: maxPrice }}
@@ -161,8 +146,8 @@ export default function PintxoDetailPage() {
                 </div>
               </CardHeader>
               <CardContent className="p-6">
-                <PintxoInfo 
-                  pintxo={pintxo} 
+                <PintxoInfo
+                  pintxo={pintxo}
                   variationsCount={variations.length}
                 />
               </CardContent>
@@ -172,22 +157,23 @@ export default function PintxoDetailPage() {
           <div className="lg:col-span-1">
             <Card>
               <CardHeader>
-                <h2 className="text-2xl font-bold text-gray-900">{t('pintxos.availableAt')}</h2>
+                <h2 className="text-2xl font-bold text-gray-900">
+                  {t("pintxos.availableAt")}
+                </h2>
               </CardHeader>
               <CardContent className="space-y-6">
                 {variations.length > 0 ? (
-                  variations.map((variation: any, index: number) => (
+                  variations.map((variation, index: number) => (
                     <VariationCard
                       key={variation.id}
                       variation={variation}
                       pintxo={{ id: pintxo.id, name: pintxo.name }}
                       currentLocale={currentLocale}
                       isCurrentView={index === currentImageIndex}
-                      onViewClick={() => goToImage(index)}
                     />
                   ))
                 ) : (
-                  <p className="text-gray-600">{t('pintxos.noBarsFound')}</p>
+                  <p className="text-gray-600">{t("pintxos.noBarsFound")}</p>
                 )}
               </CardContent>
             </Card>

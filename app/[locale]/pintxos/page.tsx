@@ -4,7 +4,7 @@ import { Footer } from "../../../components/layout/Footer";
 import { PintxosClientPage } from "../../../components/pintxo/PintxosClientPage";
 import { generateMetadata as generateSEOMetadata } from "../../../lib/seo";
 import { getPintxos } from "../../../lib/pintxos";
-
+import { Locale } from "../../../types/common";
 interface PintxosPageProps {
   params: Promise<{
     locale: string;
@@ -20,7 +20,7 @@ export async function generateMetadata({
 
 export default async function PintxosPage({ params }: PintxosPageProps) {
   const { locale } = await params;
-  const localeTyped = locale as "es" | "en" | "fr" | "ca" | "pt" | "de" | "it";
+  const localeTyped = locale as Locale;
 
   // Fetch pintxos data on the server
   const pintxos = await getPintxos(localeTyped);
@@ -42,7 +42,7 @@ export default async function PintxosPage({ params }: PintxosPageProps) {
       {/* Search and Filter Section */}
       <section className="py-8 bg-white border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <PintxosClientPage initialPintxos={pintxos} locale={localeTyped} />
+          <PintxosClientPage initialPintxos={pintxos} />
         </div>
       </section>
 

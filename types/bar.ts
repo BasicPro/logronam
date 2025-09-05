@@ -12,13 +12,14 @@ export interface Contact {
 
 export interface BarBase {
   id: string;
+  category: "bar" | "restaurant" | "taberna" | "bodega";
   location: Location;
-  images: string[];
+  contact: Contact;
   rating: number;
-  featuredPintxos: string[]; // Array of pintxo variation IDs
+  featuredPintxos: string[];
+  images: string[];
   pintxos: string[]; // Array of pintxo IDs
   priceRange: "€" | "€€" | "€€€" | "€€€€";
-  category: "bar" | "restaurant" | "taberna" | "bodega";
   createdAt: string;
   updatedAt: string;
 }
@@ -27,11 +28,10 @@ export interface BarI18n {
   name: string;
   description: string;
   review: string;
-  features: string[];
 }
 
 export interface Bar extends BarBase, BarI18n {}
 
 export interface BarLocaleMap {
-  [barId: string]: BarI18n;
+  [key: string]: BarI18n;
 }

@@ -7,9 +7,10 @@ import { useParams } from "next/navigation";
 import { Image } from "../ui/Image";
 import { getPriceRangeSymbol } from "../../lib/utils";
 import { MapPin, Euro, Star } from "lucide-react";
+import { Bar } from "../../types/bar";
 
 interface BarListCardProps {
-  bar: any;
+  bar: Bar;
 }
 
 export const BarListCard: React.FC<BarListCardProps> = ({ bar }) => {

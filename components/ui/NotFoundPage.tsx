@@ -1,9 +1,8 @@
-import React from 'react';
-import Link from 'next/link';
-import { useTranslation } from 'react-i18next';
-import { Button } from './Button';
-import { Header } from '../layout/Header';
-import { Footer } from '../layout/Footer';
+import React from "react";
+import Link from "next/link";
+import { Button } from "./Button";
+import { Header } from "../layout/Header";
+import { Footer } from "../layout/Footer";
 
 interface NotFoundPageProps {
   title: string;
@@ -18,7 +17,7 @@ export const NotFoundPage: React.FC<NotFoundPageProps> = ({
   description,
   backButtonText,
   backButtonHref,
-  className = ''
+  className = "",
 }) => {
   return (
     <div className={`min-h-screen bg-gray-50 flex flex-col ${className}`}>

@@ -3,6 +3,11 @@ import { BarBase } from "../types/bar";
 export const barsBase: BarBase[] = [
   {
     id: "bar-soriano",
+    contact: {
+      phone: "941 23 45 67",
+      website: "https://www.bar-soriano.com",
+      instagram: "https://www.instagram.com/bar-soriano",
+    },
     location: {
       address: "Calle Laurel, 2, 26001 Logroño",
       coordinates: { lat: 42.4656, lng: -2.4456 },
@@ -23,6 +28,11 @@ export const barsBase: BarBase[] = [
   },
   {
     id: "bar-laurel-2",
+    contact: {
+      phone: "941 23 45 67",
+      website: "https://www.bar-laurel-2.com",
+      instagram: "https://www.instagram.com/bar-laurel-2",
+    },
     location: {
       address: "Calle Laurel, 15, 26001 Logroño",
       coordinates: { lat: 42.4658, lng: -2.4454 },
@@ -42,6 +52,11 @@ export const barsBase: BarBase[] = [
   },
   {
     id: "bar-laurel-3",
+    contact: {
+      phone: "941 23 45 67",
+      website: "https://www.bar-laurel-3.com",
+      instagram: "https://www.instagram.com/bar-laurel-3",
+    },
     location: {
       address: "Calle Herrerías, 8, 26001 Logroño",
       coordinates: { lat: 42.4654, lng: -2.4458 },
@@ -64,6 +79,11 @@ export const barsBase: BarBase[] = [
   },
   {
     id: "bar-laurel-4",
+    contact: {
+      phone: "941 23 45 67",
+      website: "https://www.bar-laurel-4.com",
+      instagram: "https://www.instagram.com/bar-laurel-4",
+    },
     location: {
       address: "Calle San Juan, 12, 26001 Logroño",
       coordinates: { lat: 42.466, lng: -2.445 },
@@ -80,6 +100,11 @@ export const barsBase: BarBase[] = [
   },
   {
     id: "bar-laurel-5",
+    contact: {
+      phone: "941 23 45 67",
+      website: "https://www.bar-laurel-5.com",
+      instagram: "https://www.instagram.com/bar-laurel-5",
+    },
     location: {
       address: "Calle San Juan, 8, 26001 Logroño",
       coordinates: { lat: 42.4658, lng: -2.4452 },
@@ -96,6 +121,11 @@ export const barsBase: BarBase[] = [
   },
   {
     id: "bar-laurel-6",
+    contact: {
+      phone: "941 23 45 67",
+      website: "https://www.bar-laurel-6.com",
+      instagram: "https://www.instagram.com/bar-laurel-6",
+    },
     location: {
       address: "Calle Herrerías, 15, 26001 Logroño",
       coordinates: { lat: 42.4652, lng: -2.446 },
@@ -112,6 +142,11 @@ export const barsBase: BarBase[] = [
   },
   {
     id: "bar-laurel-7",
+    contact: {
+      phone: "941 23 45 67",
+      website: "https://www.bar-laurel-7.com",
+      instagram: "https://www.instagram.com/bar-laurel-7",
+    },
     location: {
       address: "Calle Laurel, 25, 26001 Logroño",
       coordinates: { lat: 42.4662, lng: -2.4448 },

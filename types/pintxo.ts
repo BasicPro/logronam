@@ -1,5 +1,3 @@
-export type Locale = "es" | "en" | "fr" | "ca" | "pt" | "de" | "it";
-
 export interface PintxoVariationI18n {
   review: string;
 }
@@ -13,14 +11,24 @@ export interface PintxoVariationBase {
   image: string;
 }
 
-export interface PintxoVariation extends PintxoVariationBase, PintxoVariationI18n {}
+export interface PintxoVariation
+  extends PintxoVariationBase,
+    PintxoVariationI18n {}
+
+export interface PintxoVariationLocaleMap {
+  [key: string]: PintxoVariationI18n;
+}
 
 export interface PintxoBase {
   id: string;
-  category: 'traditional' | 'modern' | 'fusion' | 'vegetarian' | 'seafood' | 'meat';
-  popularity: number;
-  ingredients: string[]; // These are ingredient IDs
-  tags: string[]; // These are tag IDs
+  ingredients: string[];
+  tags: string[];
+  rating: number;
+}
+
+export interface PintxoCommon {
+  ingredients: Record<string, string>;
+  tags: Record<string, string>;
 }
 
 export interface PintxoI18n {
@@ -28,12 +36,12 @@ export interface PintxoI18n {
   description: string;
 }
 
-export interface Pintxo extends PintxoBase, PintxoI18n {}
-
-export interface PintxoLocaleMap {
-  [pintxoId: string]: PintxoI18n;
+export interface Pintxo extends PintxoBase, PintxoI18n {
+  priceRange: { min: number; max: number } | null;
+  ratingRange: { min: number; max: number } | null;
+  image: string | null;
 }
 
-export interface PintxoVariationLocaleMap {
-  [variationId: string]: PintxoVariationI18n;
+export interface PintxoLocaleMap {
+  [key: string]: PintxoI18n;
 }

@@ -1,50 +1,67 @@
 "use client";
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
-import { useTranslation } from 'react-i18next';
-import { Header } from '../../../../../components/layout/Header';
-import { Footer } from '../../../../../components/layout/Footer';
-import { Card, CardContent, CardHeader } from '../../../../../components/ui/Card';
-import { Image } from '../../../../../components/ui/Image';
-import { Breadcrumb } from '../../../../../components/ui/Breadcrumb';
-import { PriceRatingOverlay } from '../../../../../components/ui/PriceRatingOverlay';
-import { LoadingSpinner } from '../../../../../components/ui/LoadingSpinner';
-import { NotFoundPage } from '../../../../../components/ui/NotFoundPage';
-import { PintxoInfo } from '../../../../../components/pintxo/PintxoInfo';
-import { BarInfoCard } from '../../../../../components/bar/BarInfoCard';
-import { VariationList } from '../../../../../components/pintxo/VariationList';
-import { getPintxoById, getPintxoVariationById, getPintxoVariations } from '../../../../../lib/pintxos';
-import { getBarsByIds } from '../../../../../lib/bars';
+import React, { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
+import { useTranslation } from "react-i18next";
+import { Header } from "../../../../../components/layout/Header";
+import { Footer } from "../../../../../components/layout/Footer";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+} from "../../../../../components/ui/Card";
+import { Image } from "../../../../../components/ui/Image";
+import { Breadcrumb } from "../../../../../components/ui/Breadcrumb";
+import { PriceRatingOverlay } from "../../../../../components/ui/PriceRatingOverlay";
+import { LoadingSpinner } from "../../../../../components/ui/LoadingSpinner";
+import { NotFoundPage } from "../../../../../components/ui/NotFoundPage";
+import { PintxoInfo } from "../../../../../components/pintxo/PintxoInfo";
+import { BarInfoCard } from "../../../../../components/bar/BarInfoCard";
+import { VariationList } from "../../../../../components/pintxo/VariationList";
+import {
+  getPintxoById,
+  getPintxoVariationById,
+  getPintxoVariations,
+} from "../../../../../lib/pintxos";
+import { getBarsByIds } from "../../../../../lib/bars";
+import { Pintxo, PintxoVariation } from "../../../../../types/pintxo";
+import { Locale } from "../../../../../types/common";
+import { Bar } from "../../../../../types/bar";
 
 export default function PintxoVariationDetailPage() {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation("common");
   const params = useParams();
-  const currentLocale = params.locale as string;
+  const currentLocale = params.locale as Locale;
   const pintxoId = params.id as string;
   const variationId = params.variationId as string;
 
-  const [pintxo, setPintxo] = useState<any>(null);
-  const [variation, setVariation] = useState<any>(null);
-  const [otherVariations, setOtherVariations] = useState<any[]>([]);
-  const [bar, setBar] = useState<any>(null);
+  const [pintxo, setPintxo] = useState<Pintxo | undefined>();
+  const [variation, setVariation] = useState<PintxoVariation | undefined>();
+  const [otherVariations, setOtherVariations] = useState<PintxoVariation[]>([]);
+  const [bar, setBar] = useState<Bar | undefined>();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const loadData = async () => {
       try {
-        const [fetchedPintxo, fetchedVariation, fetchedOtherVariations] = await Promise.all([
-          getPintxoById(pintxoId, currentLocale as any),
-          getPintxoVariationById(variationId, currentLocale as any),
-          getPintxoVariations(pintxoId, currentLocale as any)
-        ]);
-        
+        const [fetchedPintxo, fetchedVariation, fetchedOtherVariations] =
+          await Promise.all([
+            getPintxoById(pintxoId, currentLocale),
+            getPintxoVariationById(variationId, currentLocale),
+            getPintxoVariations(pintxoId, currentLocale),
+          ]);
+
         setPintxo(fetchedPintxo);
         setVariation(fetchedVariation);
-        setOtherVariations(fetchedOtherVariations.filter(v => v.id !== variationId));
-        
+        setOtherVariations(
+          fetchedOtherVariations.filter((v) => v.id !== variationId)
+        );
+
         // Load bar data
         if (fetchedVariation) {
-          const bars = await getBarsByIds([fetchedVariation.barId], currentLocale as any);
+          const bars = await getBarsByIds(
+            [fetchedVariation.barId],
+            currentLocale
+          );
           setBar(bars[0]);
         }
       } catch (error) {
@@ -71,25 +88,25 @@ export default function PintxoVariationDetailPage() {
   if (!pintxo || !variation || !bar) {
     return (
       <NotFoundPage
-        title={t('pintxos.variationNotFound.title')}
-        description={t('pintxos.variationNotFound.description')}
-        backButtonText={t('pintxos.backToPintxos')}
+        title={t("pintxos.variationNotFound.title")}
+        description={t("pintxos.variationNotFound.description")}
+        backButtonText={t("pintxos.backToPintxos")}
         backButtonHref={`/${currentLocale}/pintxos`}
       />
     );
   }
 
   const breadcrumbItems = [
-    { label: t('navigation.home'), href: `/${currentLocale}` },
-    { label: t('navigation.pintxos'), href: `/${currentLocale}/pintxos` },
+    { label: t("navigation.home"), href: `/${currentLocale}` },
+    { label: t("navigation.pintxos"), href: `/${currentLocale}/pintxos` },
     { label: pintxo.name, href: `/${currentLocale}/pintxos/${pintxo.id}` },
-    { label: bar.name }
+    { label: bar.name },
   ];
 
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
-      
+
       {/* Breadcrumb */}
       <div className="bg-white border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
@@ -103,12 +120,12 @@ export default function PintxoVariationDetailPage() {
             <Card className="overflow-hidden">
               <CardHeader className="p-0">
                 <div className="relative h-96">
-                  <Image 
-                    src={variation.image} 
-                    alt={`${pintxo.name} at ${bar.name}`} 
-                    className="w-full h-full object-cover" 
+                  <Image
+                    src={variation.image}
+                    alt={`${pintxo.name} at ${bar.name}`}
+                    className="w-full h-full object-cover"
                   />
-                  
+
                   {/* Price and rating overlays */}
                   <PriceRatingOverlay
                     price={variation.price}
@@ -119,15 +136,17 @@ export default function PintxoVariationDetailPage() {
                 </div>
               </CardHeader>
               <CardContent className="p-6">
-                <PintxoInfo 
-                  pintxo={pintxo} 
+                <PintxoInfo
+                  pintxo={pintxo}
                   variationsCount={otherVariations.length + 1}
                 />
-                
+
                 {/* Variation-specific review */}
                 <div className="mt-6 p-4 bg-gray-50 rounded-lg">
-                  <h3 className="font-semibold text-gray-900 mb-2">{t('pintxos.variationReview')}</h3>
-                  <p className="text-gray-700 italic">"{variation.review}"</p>
+                  <h3 className="font-semibold text-gray-900 mb-2">
+                    {t("pintxos.variationReview")}
+                  </h3>
+                  <p className="text-gray-700 italic">{variation.review}</p>
                 </div>
               </CardContent>
             </Card>
@@ -135,7 +154,7 @@ export default function PintxoVariationDetailPage() {
 
           <div className="lg:col-span-1 space-y-6">
             {/* Bar Info */}
-            <BarInfoCard 
+            <BarInfoCard
               bar={bar}
               currentLocale={currentLocale}
               pintxoPrice={variation.price}
@@ -147,7 +166,6 @@ export default function PintxoVariationDetailPage() {
                 variations={otherVariations}
                 pintxo={pintxo}
                 currentLocale={currentLocale}
-                currentVariationId={variationId}
               />
             )}
           </div>

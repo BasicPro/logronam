@@ -2,34 +2,36 @@
 
 import React from "react";
 import Link from "next/link";
-import { useTranslation } from "react-i18next";
 import { useParams } from "next/navigation";
 import { Image } from "../ui/Image";
-import { ChefHat, Euro, Star } from "lucide-react";
-
+import { Euro, Star } from "lucide-react";
+import { Pintxo } from "../../types/pintxo";
 interface PintxoListCardProps {
-  pintxo: any;
+  pintxo: Pintxo;
 }
 
 export const PintxoListCard: React.FC<PintxoListCardProps> = ({ pintxo }) => {
-  const { t } = useTranslation("common");
   const params = useParams();
   const currentLocale = params.locale as string;
 
   const formatPriceRange = () => {
-    if (!pintxo.priceRange) return 'N/A';
+    if (!pintxo.priceRange) return "N/A";
     if (pintxo.priceRange.min === pintxo.priceRange.max) {
       return `${pintxo.priceRange.min.toFixed(2)}€`;
     }
-    return `${pintxo.priceRange.min.toFixed(2)}€ - ${pintxo.priceRange.max.toFixed(2)}€`;
+    return `${pintxo.priceRange.min.toFixed(
+      2
+    )}€ - ${pintxo.priceRange.max.toFixed(2)}€`;
   };
 
   const formatRatingRange = () => {
-    if (!pintxo.ratingRange) return 'N/A';
+    if (!pintxo.ratingRange) return "N/A";
     if (pintxo.ratingRange.min === pintxo.ratingRange.max) {
       return pintxo.ratingRange.min.toFixed(1);
     }
-    return `${pintxo.ratingRange.min.toFixed(1)} - ${pintxo.ratingRange.max.toFixed(1)}`;
+    return `${pintxo.ratingRange.min.toFixed(
+      1
+    )} - ${pintxo.ratingRange.max.toFixed(1)}`;
   };
 
   return (
@@ -38,7 +40,7 @@ export const PintxoListCard: React.FC<PintxoListCardProps> = ({ pintxo }) => {
         {/* Pintxo Image */}
         <div className="w-16 h-16 flex-shrink-0">
           <Image
-            src={pintxo.image || '/images/placeholder-pintxo.jpg'}
+            src={pintxo.image || "/images/placeholder-pintxo.jpg"}
             alt={pintxo.name}
             className="w-full h-full object-cover rounded-lg group-hover:scale-105 transition-transform duration-200"
           />
@@ -72,18 +74,12 @@ export const PintxoListCard: React.FC<PintxoListCardProps> = ({ pintxo }) => {
 
           <div className="flex items-center gap-4 text-sm text-gray-500">
             <div className="flex items-center gap-1">
-              <ChefHat className="w-4 h-4 text-gray-400" />
-              <span className="px-2 py-1 bg-red-50 text-red-600 text-xs rounded-full capitalize">
-                {t(`categories.${pintxo.category}`)}
-              </span>
-            </div>
-            <div className="flex items-center gap-1">
               <div className="flex items-center gap-0.5">
                 {[...Array(5)].map((_, i) => (
                   <Star
                     key={i}
                     className={`w-3 h-3 ${
-                      i < (pintxo.popularity || 0)
+                      i < (pintxo.rating || 0)
                         ? "text-yellow-400 fill-current"
                         : "text-gray-300"
                     }`}
@@ -91,7 +87,7 @@ export const PintxoListCard: React.FC<PintxoListCardProps> = ({ pintxo }) => {
                 ))}
               </div>
               <span className="text-xs text-gray-500 ml-1">
-                {pintxo.popularity || 0}/5
+                {pintxo.rating || 0}/5
               </span>
             </div>
           </div>

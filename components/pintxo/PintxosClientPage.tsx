@@ -1,63 +1,62 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { SearchAndFilterPage } from "../ui/SearchAndFilterPage";
+import { Pintxo } from "../../types/pintxo";
 
 interface PintxosClientPageProps {
-  initialPintxos: any[];
-  locale: string;
+  initialPintxos: Pintxo[];
 }
 
-export const PintxosClientPage: React.FC<PintxosClientPageProps> = ({ 
-  initialPintxos, 
-  locale 
+export const PintxosClientPage: React.FC<PintxosClientPageProps> = ({
+  initialPintxos,
 }) => {
   const { t } = useTranslation("common");
 
   // Filter options for pintxos
   const filterOptions = [
     {
-      key: 'category',
-      label: t('common.category'),
-      type: 'select' as const,
+      key: "category",
+      label: t("common.category"),
+      type: "select" as const,
       options: [
-        { value: 'traditional', label: t('categories.traditional') },
-        { value: 'modern', label: t('categories.modern') },
-        { value: 'fusion', label: t('categories.fusion') },
-        { value: 'vegetarian', label: t('categories.vegetarian') },
-        { value: 'seafood', label: t('categories.seafood') },
-        { value: 'meat', label: t('categories.meat') },
-      ]
+        { value: "traditional", label: t("categories.traditional") },
+        { value: "modern", label: t("categories.modern") },
+        { value: "fusion", label: t("categories.fusion") },
+        { value: "vegetarian", label: t("categories.vegetarian") },
+        { value: "seafood", label: t("categories.seafood") },
+        { value: "meat", label: t("categories.meat") },
+      ],
     },
     {
-      key: 'priceRange',
-      label: t('common.priceRange'),
-      type: 'select' as const,
+      key: "priceRange",
+      label: t("common.priceRange"),
+      type: "select" as const,
       options: [
-        { value: '€', label: `€ - ${t('priceRanges.€')}` },
-        { value: '€€', label: `€€ - ${t('priceRanges.€€')}` },
-        { value: '€€€', label: `€€€ - ${t('priceRanges.€€€')}` },
-        { value: '€€€€', label: `€€€€ - ${t('priceRanges.€€€€')}` },
-      ]
-    }
+        { value: "€", label: `€ - ${t("priceRanges.€")}` },
+        { value: "€€", label: `€€ - ${t("priceRanges.€€")}` },
+        { value: "€€€", label: `€€€ - ${t("priceRanges.€€€")}` },
+        { value: "€€€€", label: `€€€€ - ${t("priceRanges.€€€€")}` },
+      ],
+    },
   ];
 
   // Sort options for pintxos
   const sortOptions = [
-    { value: 'popularity', label: t('common.popularity') },
-    { value: 'name', label: t('common.name') },
-    { value: 'rating', label: t('common.rating') },
+    { value: "popularity", label: t("common.popularity") },
+    { value: "name", label: t("common.name") },
+    { value: "rating", label: t("common.rating") },
   ];
 
   return (
     <SearchAndFilterPage
       items={initialPintxos}
-      searchFields={['name', 'description']}
+      searchFields={["name", "description"]}
       filterOptions={filterOptions}
       sortOptions={sortOptions}
       defaultSort="popularity"
-      viewModes={['grid', 'list']}
+      viewModes={["grid", "list"]}
       defaultViewMode="grid"
       searchPlaceholder={t("pintxos.searchPlaceholder")}
       noResultsMessage={t("pintxos.noResults")}

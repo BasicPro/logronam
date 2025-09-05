@@ -1,15 +1,16 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
 import { useParams } from "next/navigation";
 import { MapPin, Mail, Phone, Instagram } from "lucide-react";
+import { Locale } from "../../types/common";
 
 export const Footer: React.FC = () => {
   const { t } = useTranslation("common");
   const params = useParams();
-  const currentLocale = params.locale as string;
+  const currentLocale = params.locale as Locale;
 
   return (
     <footer className="bg-gray-900 text-white">

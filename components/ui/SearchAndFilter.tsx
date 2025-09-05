@@ -7,42 +7,42 @@ import { Button } from "./Button";
 import { Input } from "./Input";
 import { Select } from "./Select";
 import { Grid, List, Search, Filter, X } from "lucide-react";
-
+import { Bar } from "../../types/bar";
+import { Pintxo } from "../../types/pintxo";
 export interface FilterOption {
   key: string;
   label: string;
-  type: 'select' | 'range' | 'text';
+  type: "select" | "range" | "text";
   options?: { value: string; label: string }[];
   placeholder?: string;
 }
 
-export interface SearchAndFilterProps<T> {
+export interface SearchAndFilterProps<T extends Bar | Pintxo> {
   items: T[];
   searchFields: (keyof T)[];
   filterOptions: FilterOption[];
   sortOptions: { value: string; label: string }[];
   defaultSort: string;
-  viewModes?: ('grid' | 'list')[];
-  defaultViewMode?: 'grid' | 'list';
+  viewModes?: ("grid" | "list")[];
+  defaultViewMode?: "grid" | "list";
   onFilteredItems: (items: T[]) => void;
-  onViewModeChange?: (mode: 'grid' | 'list') => void;
+  onViewModeChange?: (mode: "grid" | "list") => void;
   searchPlaceholder?: string;
   noResultsMessage?: string;
   className?: string;
 }
 
-export function SearchAndFilter<T>({
+export function SearchAndFilter<T extends Bar | Pintxo>({
   items,
   searchFields,
   filterOptions,
   sortOptions,
   defaultSort,
-  viewModes = ['grid', 'list'],
-  defaultViewMode = 'grid',
+  viewModes = ["grid", "list"],
+  defaultViewMode = "grid",
   onFilteredItems,
   onViewModeChange,
   searchPlaceholder = "Search...",
-  noResultsMessage = "No results found",
   className = "",
 }: SearchAndFilterProps<T>) {
   const { t } = useTranslation("common");
@@ -52,14 +52,14 @@ export function SearchAndFilter<T>({
   // State
   const [searchTerm, setSearchTerm] = useState("");
   const [sortBy, setSortBy] = useState(defaultSort);
-  const [viewMode, setViewMode] = useState<'grid' | 'list'>(defaultViewMode);
+  const [viewMode, setViewMode] = useState<"grid" | "list">(defaultViewMode);
   const [showFilters, setShowFilters] = useState(false);
   const [filters, setFilters] = useState<Record<string, string>>({});
 
   // Update URL when filters change
   const updateURL = (newParams: Record<string, string>) => {
     const params = new URLSearchParams(searchParams.toString());
-    
+
     Object.entries(newParams).forEach(([key, value]) => {
       if (value) {
         params.set(key, value);
@@ -67,7 +67,7 @@ export function SearchAndFilter<T>({
         params.delete(key);
       }
     });
-    
+
     const currentPath = window.location.pathname;
     router.push(`${currentPath}?${params.toString()}`);
   };
@@ -92,7 +92,7 @@ export function SearchAndFilter<T>({
   };
 
   // Handle view mode change
-  const handleViewModeChange = (mode: 'grid' | 'list') => {
+  const handleViewModeChange = (mode: "grid" | "list") => {
     setViewMode(mode);
     updateURL({ view: mode });
     onViewModeChange?.(mode);
@@ -114,9 +114,9 @@ export function SearchAndFilter<T>({
     // Apply search filter
     if (searchTerm) {
       filtered = filtered.filter((item) =>
-        searchFields.some(field => {
+        searchFields.some((field) => {
           const value = item[field];
-          if (typeof value === 'string') {
+          if (typeof value === "string") {
             return value.toLowerCase().includes(searchTerm.toLowerCase());
           }
           return false;
@@ -128,12 +128,12 @@ export function SearchAndFilter<T>({
     Object.entries(filters).forEach(([key, value]) => {
       if (value) {
         filtered = filtered.filter((item) => {
-          const itemValue = (item as any)[key];
-          if (typeof itemValue === 'string') {
+          const itemValue = (item as T)[key as keyof T];
+          if (typeof itemValue === "string") {
             return itemValue === value;
           }
-          if (typeof itemValue === 'number') {
-            const [min, max] = value.split('-').map(Number);
+          if (typeof itemValue === "number") {
+            const [min, max] = value.split("-").map(Number);
             return itemValue >= min && itemValue <= max;
           }
           return false;
@@ -144,14 +144,12 @@ export function SearchAndFilter<T>({
     // Apply sorting
     filtered.sort((a, b) => {
       switch (sortBy) {
-        case 'name':
-          return (a as any).name.localeCompare((b as any).name);
-        case 'rating':
-          return (b as any).rating - (a as any).rating;
-        case 'popularity':
-          return ((b as any).popularity || 0) - ((a as any).popularity || 0);
-        case 'price':
-          return ((a as any).price || 0) - ((b as any).price || 0);
+        case "name":
+          return a.name.localeCompare(b.name);
+        case "rating":
+          return b.rating - a.rating;
+        case "popularity":
+          return (b.rating || 0) - (a.rating || 0);
         default:
           return 0;
       }
@@ -218,19 +216,23 @@ export function SearchAndFilter<T>({
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   {filter.label}
                 </label>
-                {filter.type === 'select' && filter.options ? (
+                {filter.type === "select" && filter.options ? (
                   <Select
                     value={filters[filter.key] || ""}
-                    onValueChange={(value) => handleFilterChange(filter.key, value)}
+                    onValueChange={(value) =>
+                      handleFilterChange(filter.key, value)
+                    }
                     options={[
                       { value: "", label: `All ${filter.label.toLowerCase()}` },
-                      ...filter.options
+                      ...filter.options,
                     ]}
                   />
-                ) : filter.type === 'range' ? (
+                ) : filter.type === "range" ? (
                   <Select
                     value={filters[filter.key] || ""}
-                    onValueChange={(value) => handleFilterChange(filter.key, value)}
+                    onValueChange={(value) =>
+                      handleFilterChange(filter.key, value)
+                    }
                     options={[
                       { value: "", label: `All ${filter.label.toLowerCase()}` },
                       { value: "0-5", label: "0€ - 5€" },
@@ -242,9 +244,14 @@ export function SearchAndFilter<T>({
                 ) : (
                   <Input
                     type="text"
-                    placeholder={filter.placeholder || `Filter by ${filter.label.toLowerCase()}`}
+                    placeholder={
+                      filter.placeholder ||
+                      `Filter by ${filter.label.toLowerCase()}`
+                    }
                     value={filters[filter.key] || ""}
-                    onChange={(e) => handleFilterChange(filter.key, e.target.value)}
+                    onChange={(e) =>
+                      handleFilterChange(filter.key, e.target.value)
+                    }
                   />
                 )}
               </div>
@@ -253,20 +260,20 @@ export function SearchAndFilter<T>({
             {/* View Mode Toggle */}
             {viewModes.length > 1 && (
               <div className="flex items-end gap-2">
-                {viewModes.includes('grid') && (
+                {viewModes.includes("grid") && (
                   <Button
                     variant="outline"
-                    onClick={() => handleViewModeChange('grid')}
-                    className={viewMode === 'grid' ? 'bg-gray-200' : ''}
+                    onClick={() => handleViewModeChange("grid")}
+                    className={viewMode === "grid" ? "bg-gray-200" : ""}
                   >
                     <Grid className="w-4 h-4" />
                   </Button>
                 )}
-                {viewModes.includes('list') && (
+                {viewModes.includes("list") && (
                   <Button
                     variant="outline"
-                    onClick={() => handleViewModeChange('list')}
-                    className={viewMode === 'list' ? 'bg-gray-200' : ''}
+                    onClick={() => handleViewModeChange("list")}
+                    className={viewMode === "list" ? "bg-gray-200" : ""}
                   >
                     <List className="w-4 h-4" />
                   </Button>
@@ -286,7 +293,8 @@ export function SearchAndFilter<T>({
 
       {/* Results Count */}
       <div className="text-sm text-gray-600">
-        {filteredAndSortedItems.length} {filteredAndSortedItems.length === 1 ? 'result' : 'results'} found
+        {filteredAndSortedItems.length}{" "}
+        {filteredAndSortedItems.length === 1 ? "result" : "results"} found
       </div>
     </div>
   );

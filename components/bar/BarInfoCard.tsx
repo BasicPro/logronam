@@ -1,10 +1,10 @@
-import React from 'react';
-import Link from 'next/link';
-import { useTranslation } from 'react-i18next';
-import { Card, CardContent, CardHeader } from '../ui/Card';
-import { Button } from '../ui/Button';
-import { Image } from '../ui/Image';
-import { MapPin, Star, Clock, Phone, Globe, ExternalLink, Euro } from 'lucide-react';
+import React from "react";
+import Link from "next/link";
+import { useTranslation } from "react-i18next";
+import { Card, CardContent, CardHeader } from "../ui/Card";
+import { Button } from "../ui/Button";
+import { Image } from "../ui/Image";
+import { MapPin, Star, Phone, Globe, ExternalLink, Euro } from "lucide-react";
 
 interface BarInfoCardProps {
   bar: {
@@ -33,18 +33,21 @@ export const BarInfoCard: React.FC<BarInfoCardProps> = ({
   showViewButton = true,
   viewButtonText,
   viewButtonHref,
-  className = '',
-  pintxoPrice
+  className = "",
+  pintxoPrice,
 }) => {
-  const { t } = useTranslation('common');
-  
-  const finalViewButtonText = viewButtonText || t('pintxos.viewBar');
-  const finalViewButtonHref = viewButtonHref || `/${currentLocale}/bars/${bar.id}`;
+  const { t } = useTranslation("common");
+
+  const finalViewButtonText = viewButtonText || t("pintxos.viewBar");
+  const finalViewButtonHref =
+    viewButtonHref || `/${currentLocale}/bars/${bar.id}`;
 
   return (
     <Card className={className}>
       <CardHeader>
-        <h2 className="text-2xl font-bold text-gray-900">{t('pintxos.availableAt')}</h2>
+        <h2 className="text-2xl font-bold text-gray-900">
+          {t("pintxos.availableAt")}
+        </h2>
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
@@ -54,7 +57,7 @@ export const BarInfoCard: React.FC<BarInfoCardProps> = ({
               alt={bar.name}
               className="w-full h-full object-cover"
             />
-            
+
             {/* Pintxo price overlay - top left */}
             {pintxoPrice && (
               <div className="absolute top-2 left-2 bg-white/90 backdrop-blur-sm rounded-full px-2 py-1 flex items-center gap-1">
@@ -65,11 +68,14 @@ export const BarInfoCard: React.FC<BarInfoCardProps> = ({
               </div>
             )}
           </div>
-          
+
           <div>
             <div className="flex items-center justify-between mb-2">
               <h3 className="text-xl font-semibold text-gray-900">
-                <Link href={finalViewButtonHref} className="hover:text-red-600 transition-colors">
+                <Link
+                  href={finalViewButtonHref}
+                  className="hover:text-red-600 transition-colors"
+                >
                   {bar.name}
                 </Link>
               </h3>
@@ -80,7 +86,7 @@ export const BarInfoCard: React.FC<BarInfoCardProps> = ({
                 </span>
               </div>
             </div>
-            
+
             <div className="space-y-2 text-sm text-gray-600">
               <div className="flex items-center gap-2">
                 <MapPin className="w-4 h-4 text-red-500" />
@@ -95,13 +101,18 @@ export const BarInfoCard: React.FC<BarInfoCardProps> = ({
               {bar.contact?.website && (
                 <div className="flex items-center gap-2">
                   <Globe className="w-4 h-4 text-red-500" />
-                  <a href={bar.contact.website} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                  <a
+                    href={bar.contact.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-600 hover:underline"
+                  >
                     Website
                   </a>
                 </div>
               )}
             </div>
-            
+
             {showViewButton && (
               <div className="mt-4 flex gap-2">
                 <Link href={finalViewButtonHref} className="flex-1">

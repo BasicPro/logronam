@@ -3,6 +3,8 @@
 import React, { useState } from "react";
 import { SearchAndFilter, FilterOption } from "./SearchAndFilter";
 import { FilteredItemsGrid } from "./FilteredItemsGrid";
+import { Bar } from "../../types/bar";
+import { Pintxo } from "../../types/pintxo";
 
 interface SearchAndFilterPageProps<T> {
   items: T[];
@@ -10,35 +12,35 @@ interface SearchAndFilterPageProps<T> {
   filterOptions: FilterOption[];
   sortOptions: { value: string; label: string }[];
   defaultSort: string;
-  viewModes?: ('grid' | 'list')[];
-  defaultViewMode?: 'grid' | 'list';
+  viewModes?: ("grid" | "list")[];
+  defaultViewMode?: "grid" | "list";
   renderItem?: (item: T) => React.ReactNode;
   searchPlaceholder?: string;
   noResultsMessage?: string;
   className?: string;
 }
 
-export function SearchAndFilterPage<T>({
+export function SearchAndFilterPage<T extends Bar | Pintxo>({
   items,
   searchFields,
   filterOptions,
   sortOptions,
   defaultSort,
-  viewModes = ['grid', 'list'],
-  defaultViewMode = 'grid',
+  viewModes = ["grid", "list"],
+  defaultViewMode = "grid",
   renderItem,
   searchPlaceholder = "Search...",
   noResultsMessage = "No results found",
   className = "",
 }: SearchAndFilterPageProps<T>) {
   const [filteredItems, setFilteredItems] = useState<T[]>(items);
-  const [viewMode, setViewMode] = useState<'grid' | 'list'>(defaultViewMode);
+  const [viewMode, setViewMode] = useState<"grid" | "list">(defaultViewMode);
 
   const handleFilteredItems = (items: T[]) => {
     setFilteredItems(items);
   };
 
-  const handleViewModeChange = (mode: 'grid' | 'list') => {
+  const handleViewModeChange = (mode: "grid" | "list") => {
     setViewMode(mode);
   };
 

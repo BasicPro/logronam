@@ -1,6 +1,5 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { cn } from '../../lib/utils';
+import React from "react";
+import { cn } from "../../lib/utils";
 
 interface SelectOption {
   value: string;
@@ -24,8 +23,6 @@ export const Select: React.FC<SelectProps> = ({
   className,
   disabled = false,
 }) => {
-  const { t } = useTranslation("common");
-  
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     onValueChange(e.target.value);
   };
@@ -36,7 +33,7 @@ export const Select: React.FC<SelectProps> = ({
       onChange={handleChange}
       disabled={disabled}
       className={cn(
-        'flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm ring-offset-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
+        "flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm ring-offset-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
         className
       )}
     >

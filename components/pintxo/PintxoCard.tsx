@@ -10,7 +10,9 @@ import { Image } from "../ui/Image";
 import { Pintxo, PintxoVariation } from "../../types/pintxo";
 import { getBarsByIds } from "../../lib/bars";
 import { getPintxoVariations } from "../../lib/pintxos";
-import { MapPin, Users, Euro, Star, ChefHat } from "lucide-react";
+import { Users, Euro, Star } from "lucide-react";
+import { Locale } from "../../types/common";
+import { Bar } from "../../types/bar";
 
 interface PintxoCardProps {
   pintxo: Pintxo;
@@ -23,23 +25,24 @@ export const PintxoCard: React.FC<PintxoCardProps> = ({
 }) => {
   const { t } = useTranslation("common");
   const params = useParams();
-  const currentLocale = params.locale as string;
+  const currentLocale = params.locale as Locale;
   const [variations, setVariations] = useState<PintxoVariation[]>([]);
-  const [bars, setBars] = useState<any[]>([]);
+  const [bars, setBars] = useState<Bar[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const loadVariations = async () => {
       try {
-        const [variationsData, barsData] = await Promise.all([
-          getPintxoVariations(pintxo.id, currentLocale as any),
-          getBarsByIds([], currentLocale as any) // We'll get the bars after we have variations
-        ]);
+        const variationsData = await getPintxoVariations(
+          pintxo.id,
+          currentLocale
+        );
+
         setVariations(variationsData);
-        
+
         // Get unique bar IDs from variations
-        const barIds = [...new Set(variationsData.map(v => v.barId))];
-        const barsForPintxo = await getBarsByIds(barIds, currentLocale as any);
+        const barIds = [...new Set(variationsData.map((v) => v.barId))];
+        const barsForPintxo = await getBarsByIds(barIds, currentLocale);
         setBars(barsForPintxo);
       } catch (error) {
         console.error("Failed to load pintxo variations:", error);
@@ -66,13 +69,13 @@ export const PintxoCard: React.FC<PintxoCardProps> = ({
   }
 
   // Get the best rated variation for display
-  const bestVariant = variations.reduce((best, current) => 
+  const bestVariant = variations.reduce((best, current) =>
     current.rating > best.rating ? current : best
   );
 
   // Calculate price and rating ranges
-  const prices = variations.map(variation => variation.price);
-  const ratings = variations.map(variation => variation.rating);
+  const prices = variations.map((variation) => variation.price);
+  const ratings = variations.map((variation) => variation.rating);
   const minPrice = Math.min(...prices);
   const maxPrice = Math.max(...prices);
   const minRating = Math.min(...ratings);
@@ -90,19 +93,17 @@ export const PintxoCard: React.FC<PintxoCardProps> = ({
           <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm rounded-full px-2 py-1 flex items-center gap-1">
             <Euro className="w-3 h-3 text-green-600" />
             <span className="text-sm font-semibold text-green-600">
-              {minPrice === maxPrice 
+              {minPrice === maxPrice
                 ? `${minPrice.toFixed(2)}€`
-                : `${minPrice.toFixed(2)}€ - ${maxPrice.toFixed(2)}€`
-              }
+                : `${minPrice.toFixed(2)}€ - ${maxPrice.toFixed(2)}€`}
             </span>
           </div>
           <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm rounded-full px-2 py-1 flex items-center gap-1">
             <Star className="w-3 h-3 text-yellow-500" />
             <span className="text-sm font-semibold text-yellow-600">
-              {minRating === maxRating 
+              {minRating === maxRating
                 ? `${minRating.toFixed(1)}`
-                : `${minRating.toFixed(1)} - ${maxRating.toFixed(1)}`
-              }
+                : `${minRating.toFixed(1)} - ${maxRating.toFixed(1)}`}
             </span>
           </div>
         </div>
@@ -117,7 +118,7 @@ export const PintxoCard: React.FC<PintxoCardProps> = ({
                 <Star
                   key={i}
                   className={`w-4 h-4 ${
-                    i < pintxo.popularity
+                    i < pintxo.rating
                       ? "text-yellow-400 fill-current"
                       : "text-gray-300"
                   }`}
@@ -131,11 +132,6 @@ export const PintxoCard: React.FC<PintxoCardProps> = ({
           </p>
 
           <div className="space-y-3">
-            <div className="flex items-center gap-2 text-sm text-gray-600">
-              <ChefHat className="w-4 h-4 text-red-500" />
-              <span className="capitalize">{pintxo.category}</span>
-            </div>
-
             {pintxo.tags && Array.isArray(pintxo.tags) && (
               <div className="flex flex-wrap gap-1">
                 {pintxo.tags.slice(0, 3).map((tag, index) => (
@@ -157,11 +153,14 @@ export const PintxoCard: React.FC<PintxoCardProps> = ({
                 </div>
                 <div className="space-y-2">
                   {variations.slice(0, 2).map((variation) => {
-                    const bar = bars.find(b => b.id === variation.barId);
+                    const bar = bars.find((b) => b.id === variation.barId);
                     if (!bar) return null;
-                    
+
                     return (
-                      <div key={variation.id} className="flex items-center gap-3">
+                      <div
+                        key={variation.id}
+                        className="flex items-center gap-3"
+                      >
                         <div className="w-8 h-8 rounded-full overflow-hidden">
                           <Image
                             src={bar.images[0]}
