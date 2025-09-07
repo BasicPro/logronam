@@ -38,19 +38,11 @@ export const pintxoVariationsBase: PintxoVariationBase[] = [
 
   // Tortilla de patatas variations
   {
-    id: "tortilla-patatas-blanco-negro",
+    id: "sebas-tortilla-patatas",
     pintxoId: "tortilla-patatas",
-    barId: "bar-laurel-2",
-    price: 3.5,
-    rating: 4.6,
-    image: "/images/pintxos/tortilla-blanco-negro.jpg",
-  },
-  {
-    id: "tortilla-patatas-tortilla",
-    pintxoId: "tortilla-patatas",
-    barId: "bar-laurel-7",
-    price: 3.2,
-    rating: 4.2,
-    image: "/images/pintxos/tortilla-tortilla.jpg",
+    barId: "bar-sebas",
+    price: 1.6,
+    rating: 4.5,
+    image: "/images/pintxos/sebas-tortilla-patatas.jpg",
   },
 ];

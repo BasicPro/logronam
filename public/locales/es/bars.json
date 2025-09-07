@@ -16,5 +16,11 @@
     "description": "Una taberna con mucho ambiente donde solo hacen su pintxo de champiñón a la plancha.",
     "review": "Tradicional, bueno, bonito y barato.",
     "features": ["Terraza", "Accesible", "Grupos"]
+  },
+  "bar-sebas": {
+    "name": "Bar Sebas",
+    "description": "Un bar con un ambiente muy acogedor y pintxos tradicionales.",
+    "review": "Sencilo, buena atención y economico",
+    "features": ["Terraza", "Accesible", "Grupos"]
   }
 }

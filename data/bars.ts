@@ -55,4 +55,22 @@ export const barsBase: BarBase[] = [
     createdAt: "2025-09-05",
     updatedAt: "2025-09-05",
   },
+  {
+    id: "bar-sebas",
+    contact: {
+      phone: "629630433",
+    },
+    location: {
+      address: "Calle Laurel, 11, 26001 Logroño",
+      neighborhood: "Calle Laurel",
+    },
+    images: ["/images/bars/bar-sebas.jpg"],
+    rating: 4.3,
+    featuredPintxos: ["sebas-tortilla-patatas"],
+    pintxos: ["tortilla-patatas"],
+    priceRange: "€",
+    category: "bar",
+    createdAt: "2025-09-05",
+    updatedAt: "2025-09-05",
+  },
 ];
