@@ -8,27 +8,21 @@ export const pintxosBase: PintxoBase[] = [
     tags: ["vegetarian", "traditional", "popular"],
   },
   {
-    id: "foie-manzana",
-    rating: 4,
-    ingredients: [
-      "foie-gras",
-      "apple",
-      "sugar",
-      "pedro-ximenez-wine",
-      "butter",
-    ],
-    tags: ["gourmet", "modern", "sweet"],
-  },
-  {
-    id: "pimientos-piquillo",
-    rating: 4,
-    ingredients: ["piquillo-peppers", "cod", "onion", "garlic", "paprika"],
-    tags: ["traditional", "fish", "spicy"],
-  },
-  {
     id: "tortilla-patatas",
     rating: 5,
     ingredients: ["eggs", "potatoes", "onion", "olive-oil", "salt"],
     tags: ["traditional", "popular", "vegetarian"],
+  },
+  {
+    id: "bocatita-travieso",
+    rating: 4.7,
+    ingredients: ["pork-belly", "onion", "garlic", "paprika", "salt"],
+    tags: ["traditional", "popular", "meat", "spicy"],
+  },
+  {
+    id: "taco-de-costilla",
+    rating: 4.8,
+    ingredients: ["pork-ribs", "onion", "garlic", "paprika", "salt"],
+    tags: ["traditional", "popular", "meat", "spicy"],
   },
 ];

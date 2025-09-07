@@ -68,7 +68,9 @@ export const BarCard: React.FC<BarCardProps> = ({
                   {t("bars.featuredPintxos")}
                 </h4>
                 <p className="text-xs text-gray-600">
-                  {bar.featuredPintxos.length} {t("bars.featuredPintxosCount")}
+                  {t("bars.featuredPintxosCount", {
+                    count: bar.featuredPintxos.length,
+                  })}
                 </p>
               </div>
             )}

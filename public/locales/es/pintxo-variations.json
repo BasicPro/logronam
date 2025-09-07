@@ -8,21 +8,6 @@
   "champinon-plancha-herrerias": {
     "review": "Tradicional y delicioso, con el sabor auténtico de la cocina riojana."
   },
-  "foie-manzana-taberna": {
-    "review": "El contraste entre el foie y la manzana es perfecto, una combinación exquisita."
-  },
-  "foie-manzana-rincon": {
-    "review": "Una versión más moderna con una presentación creativa y sabores equilibrados."
-  },
-  "pimientos-piquillo-soriano": {
-    "review": "Los pimientos del piquillo están en su punto perfecto, con un sabor intenso y picante."
-  },
-  "pimientos-piquillo-blanco-negro": {
-    "review": "Una versión más sofisticada con una presentación elegante y sabores refinados."
-  },
-  "pimientos-piquillo-herrerias": {
-    "review": "Tradicional y delicioso, con el sabor auténtico de la cocina riojana."
-  },
   "tortilla-patatas-soriano": {
     "review": "La tortilla de patatas está perfecta, con la textura ideal y sabor tradicional."
   },
@@ -31,5 +16,14 @@
   },
   "tortilla-patatas-herrerias": {
     "review": "Tradicional y deliciosa, con el sabor auténtico de la cocina riojana."
+  },
+  "la-traviesa-bocatita-travieso": {
+    "review": "Un bocado muy interesante con un toque travieso. Para los que les gusta un poco el picante, es muy sabroso."
+  },
+  "la-traviesa-taco-de-costilla": {
+    "review": "Me ha sorprendido, una combinación de sabores inesperada."
+  },
+  "champinon-plancha-angel": {
+    "review": "Un clásico que no te puedes perder. Muy sabroso, con una salsa con un toque de ajo y perejil. No es facil de comer, ¡cuidado con quemarse!"
   }
 }

@@ -151,7 +151,11 @@
     "priceRangeLabel": "Rango de precios",
     "featuredPintxos": "Pintxos Destacados",
     "featuredPintxosCount": "{{count}} pintxos destacados",
-    "viewDetails": "Ver detalles"
+    "viewDetails": "Ver detalles",
+    "searchPlaceholder": "Buscar bares...",
+    "noResults": "No se encontraron bares",
+    "tryAdjustingFilters": "Intenta ajustar tus filtros de búsqueda",
+    "clearFilters": "Limpiar filtros"
   },
   "rankings": {
     "title": "Rankings",

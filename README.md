@@ -24,33 +24,38 @@ A comprehensive gastronomic website for reviewing and ranking the best bars and 
 
 ### Prerequisites
 
-- Node.js 18+ 
+- Node.js 18+
 - npm or yarn
 
 ### Installation
 
 1. Clone the repository:
+
 ```bash
 git clone <repository-url>
 cd logronam
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
 
 3. Set up environment variables:
+
 ```bash
 cp .env.local.example .env.local
 ```
 
 Edit `.env.local` and add your Google Analytics ID:
+
 ```
 NEXT_PUBLIC_GA_ID=your_google_analytics_id
 ```
 
 4. Run the development server:
+
 ```bash
 npm run dev
 ```
@@ -84,17 +89,16 @@ logronam/
 To add new bars, edit the `data/bars.ts` file:
 
 ```typescript
-import { Bar } from '../types/bar';
+import { Bar } from "../types/bar";
 
 export const bars: Bar[] = [
   {
-    id: 'unique-bar-id',
-    name: 'Bar Name',
-    description: 'Bar description...',
+    id: "unique-bar-id",
+    name: "Bar Name",
+    description: "Bar description...",
     location: {
-      address: 'Full address',
-      coordinates: { lat: 42.4656, lng: -2.4456 },
-      neighborhood: 'Neighborhood name'
+      address: "Full address",
+      neighborhood: "Neighborhood name",
     },
     // ... other properties
   },
@@ -105,9 +109,11 @@ export const bars: Bar[] = [
 ## Customization
 
 ### Styling
+
 The project uses Tailwind CSS for styling. Custom styles can be added to `app/globals.css`.
 
 ### Translations
+
 Translation files are located in `public/locales/[language]/common.json`. To add a new language:
 
 1. Create a new directory in `public/locales/`
@@ -115,6 +121,7 @@ Translation files are located in `public/locales/[language]/common.json`. To add
 3. Create translation files following the existing structure
 
 ### Analytics
+
 Google Analytics is configured in `app/layout.tsx`. Replace `GA_MEASUREMENT_ID` with your actual Google Analytics ID.
 
 ## Deployment
@@ -129,6 +136,7 @@ Google Analytics is configured in `app/layout.tsx`. Replace `GA_MEASUREMENT_ID` 
 ### Other Platforms
 
 The project can be deployed to any platform that supports Next.js:
+
 - Netlify
 - AWS Amplify
 - Railway
