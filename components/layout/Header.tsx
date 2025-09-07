@@ -1,91 +1,50 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { usePathname, useParams } from 'next/navigation';
-import { useTranslation } from 'react-i18next';
-import { Button } from '../ui/Button';
-import { Globe } from 'lucide-react';
+import React, { useState } from "react";
+import Link from "next/link";
+import { usePathname, useParams } from "next/navigation";
+import { useTranslation } from "react-i18next";
+import { Button } from "../ui/Button";
+import { Image } from "../ui/Image";
+import { Globe } from "lucide-react";
 
 export const Header: React.FC = () => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation("common");
   const pathname = usePathname();
   const params = useParams();
   const currentLocale = params.locale as string;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isHydrated, setIsHydrated] = useState(false);
-
-  useEffect(() => {
-    setIsHydrated(true);
-  }, []);
 
   const navigation = [
-    { name: t('navigation.home'), href: `/${currentLocale}` },
-    { name: t('navigation.rankings'), href: `/${currentLocale}/rankings` },
-    { name: t('navigation.pintxos'), href: `/${currentLocale}/pintxos` },
-    { name: t('navigation.bars'), href: `/${currentLocale}/bars` },
-    { name: t('navigation.about'), href: `/${currentLocale}/about` },
-    { name: t('navigation.contact'), href: `/${currentLocale}/contact` },
+    { name: t("navigation.home"), href: `/${currentLocale}` },
+    { name: t("navigation.rankings"), href: `/${currentLocale}/rankings` },
+    { name: t("navigation.pintxos"), href: `/${currentLocale}/pintxos` },
+    { name: t("navigation.bars"), href: `/${currentLocale}/bars` },
+    { name: t("navigation.about"), href: `/${currentLocale}/about` },
+    { name: t("navigation.contact"), href: `/${currentLocale}/contact` },
   ];
 
   const languages = [
-    { code: 'es', name: 'ES' },
-    { code: 'en', name: 'EN' },
-    { code: 'fr', name: 'FR' },
-    { code: 'ca', name: 'CA' },
-    { code: 'pt', name: 'PT' },
-    { code: 'de', name: 'DE' },
-    { code: 'it', name: 'IT' },
+    { code: "es", name: "ES" },
+    { code: "en", name: "EN" },
+    { code: "fr", name: "FR" },
+    { code: "ca", name: "CA" },
+    { code: "pt", name: "PT" },
+    { code: "de", name: "DE" },
+    { code: "it", name: "IT" },
   ];
 
   const changeLanguage = (locale: string) => {
     // Get the current path without the locale
-    const pathWithoutLocale = pathname.replace(`/${currentLocale}`, '') || '/';
+    const pathWithoutLocale = pathname.replace(`/${currentLocale}`, "") || "/";
     const newPath = `/${locale}${pathWithoutLocale}`;
-    
+
     // Set cookie for future requests
     document.cookie = `NEXT_LOCALE=${locale}; path=/; max-age=31536000`;
-    
+
     // Navigate to new locale
     window.location.href = newPath;
   };
-
-  // Show loading state during hydration
-  if (!isHydrated) {
-    return (
-      <header className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex-shrink-0">
-              <Link href={`/${currentLocale}`} className="flex items-center">
-                <span className="text-2xl font-bold text-red-600">Logroñam</span>
-              </Link>
-            </div>
-            <div className="hidden md:flex space-x-8">
-              <div className="h-4 w-16 bg-gray-200 rounded animate-pulse"></div>
-              <div className="h-4 w-16 bg-gray-200 rounded animate-pulse"></div>
-              <div className="h-4 w-16 bg-gray-200 rounded animate-pulse"></div>
-              <div className="h-4 w-16 bg-gray-200 rounded animate-pulse"></div>
-            </div>
-            <div className="flex items-center space-x-2">
-              <Globe className="w-4 h-4 text-gray-500" />
-              <select
-                value={currentLocale}
-                onChange={(e) => changeLanguage(e.target.value)}
-                className="border-0 bg-transparent text-sm font-medium text-gray-700 focus:outline-none focus:ring-0"
-              >
-                {languages.map((lang) => (
-                  <option key={lang.code} value={lang.code}>
-                    {lang.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-        </div>
-      </header>
-    );
-  }
 
   return (
     <header className="bg-white shadow-sm border-b">
@@ -94,7 +53,11 @@ export const Header: React.FC = () => {
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link href={`/${currentLocale}`} className="flex items-center">
-              <span className="text-2xl font-bold text-red-600">{t('home.title')}</span>
+              <Image
+                src="/images/logo_logronam.png"
+                alt="Logroñam"
+                className="h-12 w-auto"
+              />
             </Link>
           </div>
 
@@ -106,8 +69,8 @@ export const Header: React.FC = () => {
                 href={item.href}
                 className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                   pathname === item.href
-                    ? 'text-red-600 bg-red-50'
-                    : 'text-gray-700 hover:text-red-600 hover:bg-gray-50'
+                    ? "text-red-600 bg-red-50"
+                    : "text-gray-700 hover:text-red-600 hover:bg-gray-50"
                 }`}
               >
                 {item.name}
@@ -133,13 +96,23 @@ export const Header: React.FC = () => {
 
           {/* Mobile menu button */}
           <div className="md:hidden">
-            <Button 
-              variant="ghost" 
+            <Button
+              variant="ghost"
               size="sm"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
               </svg>
             </Button>
           </div>
@@ -155,8 +128,8 @@ export const Header: React.FC = () => {
                   href={item.href}
                   className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
                     pathname === item.href
-                      ? 'text-red-600 bg-red-50'
-                      : 'text-gray-700 hover:text-red-600 hover:bg-gray-50'
+                      ? "text-red-600 bg-red-50"
+                      : "text-gray-700 hover:text-red-600 hover:bg-gray-50"
                   }`}
                   onClick={() => setIsMenuOpen(false)}
                 >
