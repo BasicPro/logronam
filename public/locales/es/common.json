@@ -272,5 +272,22 @@
     "popularity": "Popularidad",
     "name": "Nombre",
     "ourReview": "Nuestra Reseña"
+  },
+  "ingredients": {
+    "mushrooms": "Champiñones",
+    "garlic": "Ajo",
+    "parsley": "Perejil",
+    "olive-oil": "Aceite de oliva",
+    "salt": "Sal",
+    "pork-belly": "Pechuga de cerdo",
+    "onion": "Cebolla",
+    "paprika": "Pimentón",
+    "pork-ribs": "Costilla de cerdo",
+    "egg": "Huevo",
+    "potatoe": "Patata",
+    "cod": "Cod",
+    "duck-foie-gras": "Foie de pato",
+    "caramelized-apple": "Manzana caramelizada",
+    "piquillo-pepper": "Pimiento piquillo"
   }
 }

@@ -30,6 +30,7 @@ export interface SearchAndFilterProps<T extends Bar | Pintxo> {
   searchPlaceholder?: string;
   noResultsMessage?: string;
   className?: string;
+  customFilterFunction?: (item: T, key: string, value: string) => boolean;
 }
 
 export function SearchAndFilter<T extends Bar | Pintxo>({
@@ -44,6 +45,7 @@ export function SearchAndFilter<T extends Bar | Pintxo>({
   onViewModeChange,
   searchPlaceholder = "Search...",
   className = "",
+  customFilterFunction,
 }: SearchAndFilterProps<T>) {
   const { t } = useTranslation("common");
   const router = useRouter();
@@ -128,14 +130,47 @@ export function SearchAndFilter<T extends Bar | Pintxo>({
     Object.entries(filters).forEach(([key, value]) => {
       if (value) {
         filtered = filtered.filter((item) => {
+          // Use custom filter function if provided
+          if (customFilterFunction) {
+            return customFilterFunction(item, key, value);
+          }
+
           const itemValue = (item as T)[key as keyof T];
+
+          // Handle string values
           if (typeof itemValue === "string") {
             return itemValue === value;
           }
+
+          // Handle array values (like tags)
+          if (Array.isArray(itemValue)) {
+            return itemValue.includes(value);
+          }
+
+          // Handle number values (for price ranges)
           if (typeof itemValue === "number") {
             const [min, max] = value.split("-").map(Number);
             return itemValue >= min && itemValue <= max;
           }
+
+          // Handle object values (for priceRange objects)
+          if (typeof itemValue === "object" && itemValue !== null) {
+            // For priceRange objects, check if the value matches the price range
+            if (
+              key === "priceRange" &&
+              "min" in itemValue &&
+              "max" in itemValue
+            ) {
+              const [filterMin, filterMax] = value.split("-").map(Number);
+              const itemMin = (itemValue as any).min;
+              const itemMax = (itemValue as any).max;
+
+              // Check if the pintxo's price range overlaps with the filter range
+              // A pintxo matches if its price range intersects with the filter range
+              return itemMin <= filterMax && itemMax >= filterMin;
+            }
+          }
+
           return false;
         });
       }
@@ -235,10 +270,10 @@ export function SearchAndFilter<T extends Bar | Pintxo>({
                     }
                     options={[
                       { value: "", label: `All ${filter.label.toLowerCase()}` },
-                      { value: "0-5", label: "0€ - 5€" },
-                      { value: "5-10", label: "5€ - 10€" },
-                      { value: "10-15", label: "10€ - 15€" },
-                      { value: "15-20", label: "15€ - 20€" },
+                      { value: "0-2", label: "0€ - 2€" },
+                      { value: "2-3", label: "2€ - 3€" },
+                      { value: "3-4", label: "3€ - 4€" },
+                      { value: "5-999", label: "5€+" },
                     ]}
                   />
                 ) : (

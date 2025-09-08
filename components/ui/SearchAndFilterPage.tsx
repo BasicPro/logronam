@@ -18,6 +18,7 @@ interface SearchAndFilterPageProps<T> {
   searchPlaceholder?: string;
   noResultsMessage?: string;
   className?: string;
+  customFilterFunction?: (item: T, key: string, value: string) => boolean;
 }
 
 export function SearchAndFilterPage<T extends Bar | Pintxo>({
@@ -32,6 +33,7 @@ export function SearchAndFilterPage<T extends Bar | Pintxo>({
   searchPlaceholder = "Search...",
   noResultsMessage = "No results found",
   className = "",
+  customFilterFunction,
 }: SearchAndFilterPageProps<T>) {
   const [filteredItems, setFilteredItems] = useState<T[]>(items);
   const [viewMode, setViewMode] = useState<"grid" | "list">(defaultViewMode);
@@ -63,6 +65,7 @@ export function SearchAndFilterPage<T extends Bar | Pintxo>({
         onViewModeChange={handleViewModeChange}
         searchPlaceholder={searchPlaceholder}
         noResultsMessage={noResultsMessage}
+        customFilterFunction={customFilterFunction}
       />
 
       {/* Filtered Items Grid */}
