@@ -6,25 +6,102 @@ import { useTranslation } from "react-i18next";
 import { Header } from "../../../../components/layout/Header";
 import { Footer } from "../../../../components/layout/Footer";
 import { Card, CardContent, CardHeader } from "../../../../components/ui/Card";
-import { Rating } from "../../../../components/ui/Rating";
 import { Image } from "../../../../components/ui/Image";
 import { Button } from "../../../../components/ui/Button";
+import { Breadcrumb } from "../../../../components/ui/Breadcrumb";
 import { getBarById } from "../../../../lib/bars";
+import {
+  getPintxosByBar,
+  getPintxoVariationById,
+  getPintxoVariations,
+} from "../../../../lib/pintxos";
 import { getPriceRangeSymbol } from "../../../../lib/utils";
+import { VariationCard } from "../../../../components/pintxo/VariationCard";
 import {
   MapPin,
   Phone,
   Globe,
   Instagram,
   Star,
-  Euro,
+  Banknote,
   ArrowLeft,
   Share2,
   Navigation,
+  Users,
 } from "lucide-react";
 import Link from "next/link";
 import { Bar } from "../../../../types/bar";
 import { Locale } from "../../../../types/common";
+import { Pintxo, PintxoVariation } from "../../../../types/pintxo";
+
+// Custom component for bar page pintxo list that links to variations
+const BarPintxoListCard: React.FC<{
+  pintxo: Pintxo;
+  variation: PintxoVariation;
+  currentLocale: Locale;
+}> = ({ pintxo, variation, currentLocale }) => {
+  return (
+    <Link href={`/${currentLocale}/pintxos/${pintxo.id}/${variation.id}`}>
+      <div className="flex items-center gap-4 p-4 bg-white rounded-lg border hover:shadow-md transition-all duration-200 cursor-pointer group">
+        {/* Pintxo Image */}
+        <div className="w-16 h-16 flex-shrink-0">
+          <Image
+            src={variation.image || "/images/placeholder-pintxo.jpg"}
+            alt={pintxo.name}
+            className="w-full h-full object-cover rounded-lg group-hover:scale-105 transition-transform duration-200"
+          />
+        </div>
+
+        {/* Pintxo Info */}
+        <div className="flex-1 min-w-0">
+          <div className="flex items-start justify-between mb-2">
+            <h3 className="text-lg font-semibold text-gray-900 truncate group-hover:text-red-600 transition-colors">
+              {pintxo.name}
+            </h3>
+            <div className="flex items-center gap-3 ml-4 flex-shrink-0">
+              <div className="flex items-center gap-1">
+                <Star className="w-4 h-4 text-yellow-500" />
+                <span className="text-sm font-medium text-gray-900">
+                  {variation.rating.toFixed(1)}
+                </span>
+              </div>
+              <div className="flex items-center gap-1 text-green-600">
+                <Banknote className="w-4 h-4" />
+                <span className="text-sm font-medium">
+                  {variation.price.toFixed(2)}€
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <p className="text-sm text-gray-600 line-clamp-2 mb-3">
+            {pintxo.description}
+          </p>
+
+          <div className="flex items-center gap-4 text-sm text-gray-500">
+            <div className="flex items-center gap-1">
+              <div className="flex items-center gap-0.5">
+                {[...Array(5)].map((_, i) => (
+                  <Star
+                    key={i}
+                    className={`w-3 h-3 ${
+                      i < Math.floor(variation.rating)
+                        ? "text-yellow-400 fill-current"
+                        : "text-gray-300"
+                    }`}
+                  />
+                ))}
+              </div>
+              <span className="text-xs text-gray-500 ml-1">
+                {variation.rating.toFixed(1)}/5
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Link>
+  );
+};
 
 export default function BarDetailPage() {
   const { t } = useTranslation("common");
@@ -33,20 +110,61 @@ export default function BarDetailPage() {
   const barId = params.id as string;
 
   const [bar, setBar] = useState<Bar | undefined>(undefined);
+  const [featuredVariations, setFeaturedVariations] = useState<
+    PintxoVariation[]
+  >([]);
+  const [allPintxos, setAllPintxos] = useState<Pintxo[]>([]);
+  const [allVariations, setAllVariations] = useState<PintxoVariation[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const loadBar = async () => {
+    const loadBarData = async () => {
       try {
-        const data = await getBarById(barId, currentLocale);
-        setBar(data);
+        // Load bar data
+        const barData = await getBarById(barId, currentLocale);
+        setBar(barData);
+
+        if (barData) {
+          // Load featured pintxo variations
+          const featuredVariationsData = await Promise.all(
+            barData.featuredPintxos.map(async (variationId) => {
+              const variation = await getPintxoVariationById(
+                variationId,
+                currentLocale
+              );
+              return variation;
+            })
+          );
+          setFeaturedVariations(
+            featuredVariationsData.filter(Boolean) as PintxoVariation[]
+          );
+
+          // Load all pintxos for this bar
+          const pintxosData = await getPintxosByBar(barId, currentLocale);
+          setAllPintxos(pintxosData);
+
+          // Load all variations for this bar
+          const allVariationsData = await Promise.all(
+            barData.pintxos.map(async (pintxoId) => {
+              // Find the variation for this pintxo at this bar
+              const pintxoVariations = await getPintxoVariations(
+                pintxoId,
+                currentLocale
+              );
+              return pintxoVariations.find((v) => v.barId === barId);
+            })
+          );
+          setAllVariations(
+            allVariationsData.filter(Boolean) as PintxoVariation[]
+          );
+        }
       } catch (error) {
         console.error("Failed to load bar details:", error);
       } finally {
         setLoading(false);
       }
     };
-    loadBar();
+    loadBarData();
   }, [barId, currentLocale]);
 
   if (loading) {
@@ -86,18 +204,21 @@ export default function BarDetailPage() {
     );
   }
 
+  const breadcrumbItems = [
+    { label: t("navigation.home"), href: `/${currentLocale}` },
+    { label: t("navigation.bars"), href: `/${currentLocale}/bars` },
+    { label: bar.name },
+  ];
+
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
 
-      {/* Back Button */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-        <Link href={`/${currentLocale}/rankings`}>
-          <Button variant="ghost" className="flex items-center gap-2">
-            <ArrowLeft className="w-4 h-4" />
-            {t("bars.backToRankings")}
-          </Button>
-        </Link>
+      {/* Breadcrumb */}
+      <div className="bg-white border-b">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <Breadcrumb items={breadcrumbItems} />
+        </div>
       </div>
 
       {/* Hero Section */}
@@ -121,11 +242,31 @@ export default function BarDetailPage() {
                 <Button
                   variant="ghost"
                   className="text-white border-white hover:bg-white/20"
+                  onClick={() => {
+                    if (navigator.share) {
+                      navigator.share({
+                        title: bar.name,
+                        text: bar.description,
+                        url: window.location.href,
+                      });
+                    } else {
+                      // Fallback: copy to clipboard
+                      navigator.clipboard.writeText(window.location.href);
+                      // You could add a toast notification here
+                    }
+                  }}
                 >
                   <Share2 className="w-4 h-4 mr-2" />
                   {t("bars.share")}
                 </Button>
-                <Button className="bg-white text-gray-900 hover:bg-gray-100">
+                <Button
+                  className="bg-white text-gray-900 hover:bg-gray-100"
+                  onClick={() => {
+                    const address = encodeURIComponent(bar.location.address);
+                    const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${address}`;
+                    window.open(mapsUrl, "_blank");
+                  }}
+                >
                   <Navigation className="w-4 h-4 mr-2" />
                   {t("bars.getDirections")}
                 </Button>
@@ -135,184 +276,277 @@ export default function BarDetailPage() {
         </div>
       </section>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Main Content */}
-          <div className="lg:col-span-2 space-y-8">
-            {/* Bar Info */}
-            <Card>
-              <CardHeader>
-                <div className="flex justify-between items-start">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="space-y-8">
+          {/* Bar Info */}
+          <Card>
+            <CardHeader>
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <div>
+                  <h2 className="text-2xl font-bold text-gray-900 mb-2">
+                    {t("bars.about")}
+                  </h2>
+                  <p className="text-gray-600 text-lg leading-relaxed">
+                    {bar.description}
+                  </p>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent>
+              {/* Quick Stats */}
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                <div className="text-center p-4 bg-gray-50 rounded-lg">
+                  <MapPin className="w-6 h-6 text-red-500 mx-auto mb-2" />
+                  <div className="text-lg font-bold text-gray-900 mb-1">
+                    {bar.location.neighborhood}
+                  </div>
+                  <div className="text-xs text-gray-600">
+                    {t("bars.location")}
+                  </div>
+                </div>
+
+                <div className="text-center p-4 bg-gray-50 rounded-lg">
+                  <Banknote className="w-6 h-6 text-green-500 mx-auto mb-2" />
+                  <div className="text-lg font-bold text-green-600 mb-1">
+                    {getPriceRangeSymbol(bar.priceRange)}
+                  </div>
+                  <div className="text-xs text-gray-600">
+                    {t("bars.priceRangeLabel")}
+                  </div>
+                </div>
+
+                <div className="text-center p-4 bg-gray-50 rounded-lg">
+                  <Star className="w-6 h-6 text-yellow-500 mx-auto mb-2" />
+                  <div className="text-lg font-bold text-gray-900 mb-1">
+                    {bar.rating.toFixed(1)}
+                  </div>
+                  <div className="text-xs text-gray-600">
+                    {t("common.rating")}
+                  </div>
+                </div>
+
+                <div className="text-center p-4 bg-gray-50 rounded-lg">
+                  <Users className="w-6 h-6 text-blue-500 mx-auto mb-2" />
+                  <div className="text-lg font-bold text-blue-600 mb-1">
+                    {allPintxos.length}
+                  </div>
+                  <div className="text-xs text-gray-600">
+                    {t("pintxos.title")}
+                  </div>
+                </div>
+              </div>
+
+              {/* Location and Contact Information */}
+              <div className="mb-6 p-6 bg-gray-50 rounded-lg">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {/* Location Details */}
                   <div>
-                    <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                      {t("bars.about")}
-                    </h2>
-                    <div className="flex items-center gap-4 mb-4">
-                      <Rating rating={bar.rating} size="lg" />
+                    <h3 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                      <MapPin className="w-5 h-5 text-red-500" />
+                      {t("bars.location")}
+                    </h3>
+                    <div className="space-y-2">
+                      <p className="text-gray-700">{bar.location.address}</p>
+                      <p className="text-sm text-gray-500">
+                        {bar.location.neighborhood}
+                      </p>
                     </div>
                   </div>
-                  <div className="text-right">
-                    <div className="flex items-center gap-1 text-2xl font-bold text-red-600">
-                      <Euro className="w-6 h-6" />
-                      <span>{getPriceRangeSymbol(bar.priceRange)}</span>
+
+                  {/* Contact Information */}
+                  {(bar.contact?.phone ||
+                    bar.contact?.website ||
+                    bar.contact?.instagram) && (
+                    <div>
+                      <h3 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                        <Phone className="w-5 h-5 text-gray-500" />
+                        {t("bars.contact")}
+                      </h3>
+                      <div className="space-y-2">
+                        {bar.contact?.phone && (
+                          <div className="flex items-center gap-3">
+                            <Phone className="w-4 h-4 text-gray-500" />
+                            <a
+                              href={`tel:${bar.contact.phone}`}
+                              className="text-gray-700 hover:text-red-600 transition-colors"
+                            >
+                              {bar.contact.phone}
+                            </a>
+                          </div>
+                        )}
+
+                        {bar.contact?.website && (
+                          <div className="flex items-center gap-3">
+                            <Globe className="w-4 h-4 text-gray-500" />
+                            <a
+                              href={bar.contact.website}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-gray-700 hover:text-red-600 transition-colors"
+                            >
+                              Website
+                            </a>
+                          </div>
+                        )}
+
+                        {bar.contact?.instagram && (
+                          <div className="flex items-center gap-3">
+                            <Instagram className="w-4 h-4 text-gray-500" />
+                            <a
+                              href={`https://instagram.com/${bar.contact.instagram.replace(
+                                "@",
+                                ""
+                              )}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-gray-700 hover:text-red-600 transition-colors"
+                            >
+                              {bar.contact.instagram}
+                            </a>
+                          </div>
+                        )}
+                      </div>
                     </div>
-                    <p className="text-sm text-gray-600">
-                      {t("bars.priceRangeLabel")}
-                    </p>
+                  )}
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4 mb-6">
+                <Button
+                  variant="outline"
+                  className="flex-1"
+                  onClick={() => {
+                    if (navigator.share) {
+                      navigator.share({
+                        title: bar.name,
+                        text: bar.description,
+                        url: window.location.href,
+                      });
+                    } else {
+                      // Fallback: copy to clipboard
+                      navigator.clipboard.writeText(window.location.href);
+                      // You could add a toast notification here
+                    }
+                  }}
+                >
+                  <Share2 className="w-4 h-4 mr-2" />
+                  {t("bars.share")}
+                </Button>
+                <Button
+                  variant="outline"
+                  className="flex-1"
+                  onClick={() => {
+                    const address = encodeURIComponent(bar.location.address);
+                    const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${address}`;
+                    window.open(mapsUrl, "_blank");
+                  }}
+                >
+                  <Navigation className="w-4 h-4 mr-2" />
+                  {t("bars.getDirections")}
+                </Button>
+              </div>
+
+              {/* Review */}
+              {bar.review && (
+                <div className="p-6 bg-gradient-to-r from-red-50 to-orange-50 rounded-lg border border-red-100">
+                  <h3 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                    <Star className="w-5 h-5 text-yellow-500" />
+                    {t("common.ourReview")}
+                  </h3>
+                  <p className="text-gray-700 italic leading-relaxed">
+                    {bar.review}
+                  </p>
+                </div>
+              )}
+            </CardContent>
+          </Card>
+
+          {/* Featured Pintxos */}
+          {featuredVariations.length > 0 && (
+            <Card>
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <h2 className="text-2xl font-bold text-gray-900">
+                    {t("bars.featuredPintxos")}
+                  </h2>
+                  <div className="flex items-center gap-2 text-sm text-gray-600">
+                    <Star className="w-4 h-4 text-yellow-500" />
+                    <span>
+                      {t("bars.featuredPintxosCount", {
+                        count: featuredVariations.length,
+                      })}
+                    </span>
                   </div>
                 </div>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-700 mb-6">{bar.description}</p>
-
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <h3 className="font-semibold text-gray-900 mb-2">
-                      {t("bars.location")}
-                    </h3>
-                    <div className="flex items-center gap-2 text-gray-600">
-                      <MapPin className="w-4 h-4" />
-                      <span>{bar.location.address}</span>
-                    </div>
-                    <p className="text-sm text-gray-500 mt-1">
-                      {bar.location.neighborhood}
-                    </p>
-                  </div>
-                </div>
+                  {featuredVariations.map((variation) => {
+                    // Find the pintxo for this variation
+                    const pintxo = allPintxos.find(
+                      (p) => p.id === variation.pintxoId
+                    );
+                    if (!pintxo) return null;
 
-                {/* Review */}
-                <div className="mt-6 p-4 bg-gray-50 rounded-lg">
-                  <h3 className="font-semibold text-gray-900 mb-2">Review</h3>
-                  <p className="text-gray-700 italic">{bar.review}</p>
+                    return (
+                      <VariationCard
+                        key={variation.id}
+                        variation={variation}
+                        pintxo={pintxo}
+                        currentLocale={currentLocale}
+                        showViewButton={true}
+                        showBarButton={false}
+                        isCurrentView={true}
+                        className="border-2 border-red-100 bg-red-50/30"
+                      />
+                    );
+                  })}
                 </div>
               </CardContent>
             </Card>
+          )}
 
-            {/* Featured Pintxos */}
-            {bar.featuredPintxos.length > 0 && (
-              <Card>
-                <CardHeader>
-                  <h2 className="text-2xl font-bold text-gray-900">
-                    {t("bars.bestPintxo")}
-                  </h2>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-center py-8">
-                    <p className="text-gray-600">
-                      Featured pintxos will be displayed here
-                    </p>
-                    <p className="text-sm text-gray-500 mt-2">
-                      Variation IDs: {bar.featuredPintxos.join(", ")}
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
-            )}
-
-            {/* All Pintxos */}
-            {bar.pintxos.length > 0 && (
-              <Card>
-                <CardHeader>
+          {/* All Pintxos */}
+          {allVariations.length > 0 && (
+            <Card>
+              <CardHeader>
+                <div className="flex items-center justify-between">
                   <h2 className="text-2xl font-bold text-gray-900">
                     {t("bars.allPintxos")}
                   </h2>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-center py-8">
-                    <p className="text-gray-600">
-                      All pintxos will be displayed here
-                    </p>
-                    <p className="text-sm text-gray-500 mt-2">
-                      Pintxo IDs: {bar.pintxos.join(", ")}
-                    </p>
+                  <div className="flex items-center gap-2 text-sm text-gray-600">
+                    <Users className="w-4 h-4 text-blue-500" />
+                    <span>
+                      {allVariations.length}{" "}
+                      {allVariations.length === 1
+                        ? t("pintxos.title").slice(0, -1)
+                        : t("pintxos.title")}
+                    </span>
                   </div>
-                </CardContent>
-              </Card>
-            )}
-          </div>
-
-          {/* Sidebar */}
-          <div className="space-y-6">
-            {/* Contact Info */}
-            <Card>
-              <CardHeader>
-                <h3 className="text-lg font-semibold text-gray-900">
-                  {t("bars.contact")}
-                </h3>
+                </div>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {bar.contact?.phone && (
-                    <div className="flex items-center gap-3">
-                      <Phone className="w-4 h-4 text-gray-500" />
-                      <a
-                        href={`tel:${bar.contact.phone}`}
-                        className="text-gray-700 hover:text-red-600"
-                      >
-                        {bar.contact.phone}
-                      </a>
-                    </div>
-                  )}
+                  {allVariations.map((variation) => {
+                    const pintxo = allPintxos.find(
+                      (p) => p.id === variation.pintxoId
+                    );
+                    if (!pintxo) return null;
 
-                  {bar.contact?.website && (
-                    <div className="flex items-center gap-3">
-                      <Globe className="w-4 h-4 text-gray-500" />
-                      <a
-                        href={bar.contact.website}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-gray-700 hover:text-red-600"
-                      >
-                        Website
-                      </a>
-                    </div>
-                  )}
-
-                  {bar.contact?.instagram && (
-                    <div className="flex items-center gap-3">
-                      <Instagram className="w-4 h-4 text-gray-500" />
-                      <a
-                        href={`https://instagram.com/${bar.contact.instagram.replace(
-                          "@",
-                          ""
-                        )}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-gray-700 hover:text-red-600"
-                      >
-                        {bar.contact.instagram}
-                      </a>
-                    </div>
-                  )}
+                    return (
+                      <BarPintxoListCard
+                        key={variation.id}
+                        pintxo={pintxo}
+                        variation={variation}
+                        currentLocale={currentLocale}
+                      />
+                    );
+                  })}
                 </div>
               </CardContent>
             </Card>
-
-            {/* Quick Actions */}
-            <Card>
-              <CardHeader>
-                <h3 className="text-lg font-semibold text-gray-900">
-                  {t("bars.actions")}
-                </h3>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  <Button className="w-full">
-                    <Star className="w-4 h-4 mr-2" />
-                    {t("bars.writeReview")}
-                  </Button>
-                  <Button variant="outline" className="w-full">
-                    <Share2 className="w-4 h-4 mr-2" />
-                    {t("bars.share")}
-                  </Button>
-                  <Button variant="outline" className="w-full">
-                    <Navigation className="w-4 h-4 mr-2" />
-                    {t("bars.getDirections")}
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+          )}
         </div>
       </div>
 

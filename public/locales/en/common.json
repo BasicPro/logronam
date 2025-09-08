@@ -247,6 +247,7 @@
     "priceRange": "Price range",
     "rating": "Rating",
     "popularity": "Popularity",
-    "name": "Name"
+    "name": "Name",
+    "ourReview": "Our Review"
   }
 }
