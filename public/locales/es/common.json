@@ -271,6 +271,7 @@
     "priceRange": "Rango de precios",
     "rating": "Valoración",
     "popularity": "Popularidad",
-    "name": "Nombre"
+    "name": "Nombre",
+    "ourReview": "Nuestra Reseña"
   }
 }
