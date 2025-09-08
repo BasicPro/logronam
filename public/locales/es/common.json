@@ -178,18 +178,15 @@
     "bar": "Bar",
     "restaurant": "Restaurante",
     "taberna": "Taberna",
-    "bodega": "Bodega",
-    "appetizer": "Entrante",
-    "main": "Principal",
-    "dessert": "Postre",
-    "drink": "Bebida",
+    "bodega": "Bodega"
+  },
+  "tags": {
     "traditional": "Tradicional",
     "modern": "Moderno",
     "fusion": "Fusión",
     "vegetarian": "Vegetariano",
     "seafood": "Marisco",
-    "meat": "Carne",
-    "pintxo": "Pintxo"
+    "meat": "Carne"
   },
   "priceRanges": {
     "€": "Económico",

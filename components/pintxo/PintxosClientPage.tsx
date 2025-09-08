@@ -21,12 +21,12 @@ export const PintxosClientPage: React.FC<PintxosClientPageProps> = ({
       label: t("common.category"),
       type: "select" as const,
       options: [
-        { value: "traditional", label: t("categories.traditional") },
-        { value: "modern", label: t("categories.modern") },
-        { value: "fusion", label: t("categories.fusion") },
-        { value: "vegetarian", label: t("categories.vegetarian") },
-        { value: "seafood", label: t("categories.seafood") },
-        { value: "meat", label: t("categories.meat") },
+        { value: "traditional", label: t("tags.traditional") },
+        { value: "modern", label: t("tags.modern") },
+        { value: "fusion", label: t("tags.fusion") },
+        { value: "vegetarian", label: t("tags.vegetarian") },
+        { value: "seafood", label: t("tags.seafood") },
+        { value: "meat", label: t("tags.meat") },
       ],
     },
     {
