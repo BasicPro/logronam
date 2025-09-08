@@ -48,29 +48,50 @@
         "description": "El cor de la cultura del pincho a Logroño",
         "count": "25+ bars"
       },
+      "herrerias": {
+        "name": "Carrer Herrerías",
+        "description": "Tradició i modernitat en perfecta harmonia",
+        "count": "15+ bars"
+      },
+      "sanjuan": {
+        "name": "Carrer San Juan",
+        "description": "Sabors autèntics i ambient familiar",
+        "count": "20+ bars"
+      },
       "casco": {
         "name": "Casc Antic",
-        "description": "Història i tradició a cada cantonada",
-        "count": "15+ bars"
+        "description": "El centre històric amb encant tradicional",
+        "count": "10+ bars"
       },
       "granvia": {
         "name": "Gran Vía",
-        "description": "Modernitat i gastronomia contemporània",
-        "count": "10+ bars"
+        "description": "L'artèria principal amb ambient modern",
+        "count": "8+ bars"
       }
+    },
+    "cta": {
+      "title": "Llest per explorar?",
+      "subtitle": "Descobreix els millors pintxos i bars de Logroño",
+      "button": "Començar exploració"
     }
   },
   "pintxos": {
     "title": "Pintxos",
     "subtitle": "Descobreix els millors pinchos de Logroño",
     "searchPlaceholder": "Cercar pintxos...",
+    "noResults": "No s'han trobat pintxos",
+    "tryAdjustingFilters": "Prova d'ajustar els teus filtres de cerca",
+    "clearFilters": "Netejar filtres",
     "sortBy": "Ordenar per",
+    "category": "Categoria",
+    "priceRange": "Rang de preus",
+    "allCategories": "Totes les categories",
+    "allPriceRanges": "Tots els rangs de preus",
     "popularity": "Popularitat",
     "name": "Nom",
     "price": "Preu",
+    "rating": "Valoració",
     "bars": "Bars",
-    "category": "Categoria",
-    "allCategories": "Totes les categories",
     "traditional": "Tradicional",
     "modern": "Modern",
     "fusion": "Fusió",
@@ -79,18 +100,10 @@
     "meat": "Carn",
     "bar": "Bar",
     "allBars": "Tots els bars",
-    "priceRange": "Rang de preus",
-    "allPriceRanges": "Tots els rangs",
-    "clearFilters": "Netejar filtres",
     "results": "{{count}} pintxos trobats",
     "viewDetails": "Veure detalls",
     "availableAt": "Disponible a",
     "moreBars": "+{{count}} bars més",
-    "noResults": {
-      "title": "No s'han trobat pintxos",
-      "description": "Prova d'ajustar els teus filtres de cerca",
-      "clearFilters": "Netejar filtres"
-    },
     "notFound": {
       "title": "Pintxo no trobat",
       "description": "El pintxo que busques no existeix o ha estat eliminat"
@@ -111,46 +124,14 @@
   "bars": {
     "title": "Bars",
     "subtitle": "Explora tots els bars de Logroño",
-    "category": "Categoria",
     "all": "Tots",
-    "priceRange": "Rang de preus",
     "sortBy": "Ordenar per",
+    "category": "Categoria",
+    "priceRange": "Rang de preus",
+    "allCategories": "Totes les categories",
+    "allPriceRanges": "Tots els rangs de preus",
     "rating": "Valoració",
     "name": "Nom",
-    "view": "Vista",
-    "results": "{{count}} bars trobats",
-    "noResults": {
-      "title": "No s'han trobat bars",
-      "description": "Prova d'ajustar els teus filtres de cerca",
-      "clearFilters": "Netejar filtres"
-    }
-  },
-  "rankings": {
-    "title": "Rànquings",
-    "subtitle": "Els millors pintxos i bars de Logroño",
-    "content": "Contingut",
-    "category": "Categoria",
-    "all": "Tots",
-    "priceRange": "Rang de preus",
-    "sortBy": "Ordenar per",
-    "rating": "Valoració",
-    "name": "Nom",
-    "numberOfReviews": "Ressenyes",
-    "viewAllRankings": "Veure tots els rànquings",
-    "results": "{{count}} resultats trobats",
-    "noResults": {
-      "title": "No s'han trobat resultats",
-      "description": "Prova d'ajustar els teus filtres de cerca",
-      "clearFilters": "Netejar filtres"
-    },
-    "filters": {
-      "all": "Tots",
-      "pintxos": "Pintxos",
-      "bars": "Bars",
-      "bodegas": "Bodegas"
-    }
-  },
-  "bar": {
     "about": "Sobre",
     "location": "Ubicació",
     "features": "Característiques",
@@ -159,25 +140,39 @@
     "share": "Compartir",
     "getDirections": "Com arribar",
     "writeReview": "Escriure ressenya",
-    "viewDetails": "Veure detalls",
     "backToRankings": "Tornar a rànquings",
-    "priceRangeLabel": "Rang de preus",
-    "bestPintxo": "Millor pintxo",
-    "allPintxos": "Tots els pintxos",
-    "featuredPintxos": "Pintxos destacats",
-    "featuredPintxosCount": "pintxos destacats",
     "notFound": {
       "title": "Bar no trobat",
       "description": "El bar que busques no existeix o ha estat eliminat",
       "backHome": "Tornar a l'inici"
-    }
+    },
+    "bestPintxo": "Millor Pintxo",
+    "allPintxos": "Tots els Pintxos",
+    "priceRangeLabel": "Rang de preus",
+    "featuredPintxos": "Pintxos destacats",
+    "featuredPintxosCount": "{{count}} pintxos destacats",
+    "viewDetails": "Veure detalls",
+    "searchPlaceholder": "Cercar bars...",
+    "noResults": "No s'han trobat bars",
+    "tryAdjustingFilters": "Prova d'ajustar els teus filtres de cerca",
+    "clearFilters": "Netejar filtres"
   },
-  "footer": {
-    "quickLinks": "Enllaços ràpids",
-    "location": "Logroño, La Rioja, Espanya",
-    "email": "info@logronam.com",
-    "phone": "+34 941 123 456",
-    "copyright": "© 2024 Logroñam. Tots els drets reservats."
+  "rankings": {
+    "title": "Rànquings",
+    "subtitle": "Els millors pintxos i bars de Logroño",
+    "searchPlaceholder": "Cercar en rànquings...",
+    "noResults": "No s'han trobat resultats",
+    "tryAdjustingFilters": "Prova d'ajustar els teus filtres de cerca",
+    "clearFilters": "Netejar filtres",
+    "sortBy": "Ordenar per",
+    "category": "Categoria",
+    "priceRange": "Rang de preus",
+    "allCategories": "Totes les categories",
+    "allPriceRanges": "Tots els rangs de preus",
+    "rating": "Valoració",
+    "popularity": "Popularitat",
+    "name": "Nom",
+    "viewAllRankings": "Veure tots els rànquings"
   },
   "categories": {
     "bar": "Bar",
@@ -185,11 +180,69 @@
     "taberna": "Taverne",
     "bodega": "Bodega"
   },
+  "tags": {
+    "traditional": "Tradicional",
+    "modern": "Modern",
+    "fusion": "Fusió",
+    "vegetarian": "Vegetarià",
+    "seafood": "Marisc",
+    "meat": "Carn"
+  },
   "priceRanges": {
     "€": "Econòmic",
     "€€": "Moderat",
     "€€€": "Caro",
     "€€€€": "Molt caro"
+  },
+  "footer": {
+    "description": "La guia definitiva per explorar la cultura gastronòmica de Logroño",
+    "quickLinks": "Enllaços ràpids",
+    "categories": "Categories",
+    "contact": "Contacte",
+    "location": "Ubicació",
+    "email": "Email",
+    "phone": "Telèfon",
+    "followUs": "Segueix-nos",
+    "newsletter": {
+      "title": "Newsletter",
+      "subtitle": "Rep les últimes novetats de Logroñam",
+      "placeholder": "El teu email",
+      "button": "Subscriure's"
+    },
+    "copyright": "© 2024 Logroñam. Tots els drets reservats.",
+    "privacy": "Política de privacitat",
+    "terms": "Termes de servei"
+  },
+  "search": {
+    "placeholder": "Cercar...",
+    "noResults": "No s'han trobat resultats",
+    "tryAdjustingFilters": "Prova d'ajustar els teus filtres de cerca"
+  },
+  "filter": {
+    "title": "Filtres",
+    "clear": "Netejar filtres",
+    "apply": "Aplicar filtres"
+  },
+  "sort": {
+    "title": "Ordenar",
+    "by": "Ordenar per",
+    "name": "Nom",
+    "rating": "Valoració",
+    "price": "Preu",
+    "popularity": "Popularitat"
+  },
+  "view": {
+    "grid": "Vista de quadrícula",
+    "list": "Vista de llista"
+  },
+  "contentType": {
+    "title": "Tipus de contingut",
+    "bars": "Bars",
+    "pintxos": "Pintxos"
+  },
+  "select": {
+    "placeholder": "Seleccionar opció",
+    "noOptions": "No hi ha opcions disponibles"
   },
   "common": {
     "view": "Veure",
@@ -208,6 +261,14 @@
     "search": "Cercar",
     "filter": "Filtrar",
     "sort": "Ordenar",
-    "viewDetails": "Veure detalls"
+    "sortBy": "Ordenar per",
+    "viewDetails": "Veure detalls",
+    "clearFilters": "Netejar filtres",
+    "category": "Categoria",
+    "priceRange": "Rang de preus",
+    "rating": "Valoració",
+    "popularity": "Popularitat",
+    "name": "Nom",
+    "ourReview": "La nostra ressenya"
   }
 }

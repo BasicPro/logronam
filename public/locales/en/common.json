@@ -154,18 +154,15 @@
     "bar": "Bar",
     "restaurant": "Restaurant",
     "taberna": "Tavern",
-    "bodega": "Winery",
-    "appetizer": "Appetizer",
-    "main": "Main",
-    "dessert": "Dessert",
-    "drink": "Drink",
+    "bodega": "Winery"
+  },
+  "tags": {
     "traditional": "Traditional",
     "modern": "Modern",
     "fusion": "Fusion",
     "vegetarian": "Vegetarian",
     "seafood": "Seafood",
-    "meat": "Meat",
-    "pintxo": "Pintxo"
+    "meat": "Meat"
   },
   "priceRanges": {
     "€": "Budget",

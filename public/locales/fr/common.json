@@ -48,29 +48,50 @@
         "description": "Le cœur de la culture du pincho à Logroño",
         "count": "25+ bars"
       },
+      "herrerias": {
+        "name": "Rue Herrerías",
+        "description": "Tradition et modernité en parfaite harmonie",
+        "count": "15+ bars"
+      },
+      "sanjuan": {
+        "name": "Rue San Juan",
+        "description": "Saveurs authentiques et atmosphère familiale",
+        "count": "20+ bars"
+      },
       "casco": {
         "name": "Vieille ville",
-        "description": "Histoire et tradition à chaque coin de rue",
-        "count": "15+ bars"
+        "description": "Le centre historique avec charme traditionnel",
+        "count": "10+ bars"
       },
       "granvia": {
         "name": "Gran Vía",
-        "description": "Modernité et gastronomie contemporaine",
-        "count": "10+ bars"
+        "description": "L'artère principale avec atmosphère moderne",
+        "count": "8+ bars"
       }
+    },
+    "cta": {
+      "title": "Prêt à explorer ?",
+      "subtitle": "Découvrez les meilleurs pintxos et bars de Logroño",
+      "button": "Commencer l'exploration"
     }
   },
   "pintxos": {
     "title": "Pintxos",
     "subtitle": "Découvrez les meilleurs pinchos de Logroño",
     "searchPlaceholder": "Rechercher des pintxos...",
+    "noResults": "Aucun pintxo trouvé",
+    "tryAdjustingFilters": "Essayez d'ajuster vos filtres de recherche",
+    "clearFilters": "Effacer les filtres",
     "sortBy": "Trier par",
+    "category": "Catégorie",
+    "priceRange": "Gamme de prix",
+    "allCategories": "Toutes les catégories",
+    "allPriceRanges": "Toutes les gammes de prix",
     "popularity": "Popularité",
     "name": "Nom",
     "price": "Prix",
+    "rating": "Note",
     "bars": "Bars",
-    "category": "Catégorie",
-    "allCategories": "Toutes les catégories",
     "traditional": "Traditionnel",
     "modern": "Moderne",
     "fusion": "Fusion",
@@ -79,18 +100,10 @@
     "meat": "Viande",
     "bar": "Bar",
     "allBars": "Tous les bars",
-    "priceRange": "Gamme de prix",
-    "allPriceRanges": "Toutes les gammes",
-    "clearFilters": "Effacer les filtres",
     "results": "{{count}} pintxos trouvés",
     "viewDetails": "Voir les détails",
     "availableAt": "Disponible à",
     "moreBars": "+{{count}} bars de plus",
-    "noResults": {
-      "title": "Aucun pintxo trouvé",
-      "description": "Essayez d'ajuster vos filtres de recherche",
-      "clearFilters": "Effacer les filtres"
-    },
     "notFound": {
       "title": "Pintxo non trouvé",
       "description": "Le pintxo que vous recherchez n'existe pas ou a été supprimé"
@@ -111,46 +124,14 @@
   "bars": {
     "title": "Bars",
     "subtitle": "Explorez tous les bars de Logroño",
-    "category": "Catégorie",
     "all": "Tous",
-    "priceRange": "Gamme de prix",
     "sortBy": "Trier par",
+    "category": "Catégorie",
+    "priceRange": "Gamme de prix",
+    "allCategories": "Toutes les catégories",
+    "allPriceRanges": "Toutes les gammes de prix",
     "rating": "Note",
     "name": "Nom",
-    "view": "Vue",
-    "results": "{{count}} bars trouvés",
-    "noResults": {
-      "title": "Aucun bar trouvé",
-      "description": "Essayez d'ajuster vos filtres de recherche",
-      "clearFilters": "Effacer les filtres"
-    }
-  },
-  "rankings": {
-    "title": "Classements",
-    "subtitle": "Les meilleurs pintxos et bars de Logroño",
-    "content": "Contenu",
-    "category": "Catégorie",
-    "all": "Tous",
-    "priceRange": "Gamme de prix",
-    "sortBy": "Trier par",
-    "rating": "Note",
-    "name": "Nom",
-    "numberOfReviews": "Avis",
-    "viewAllRankings": "Voir tous les classements",
-    "results": "{{count}} résultats trouvés",
-    "noResults": {
-      "title": "Aucun résultat trouvé",
-      "description": "Essayez d'ajuster vos filtres de recherche",
-      "clearFilters": "Effacer les filtres"
-    },
-    "filters": {
-      "all": "Tous",
-      "pintxos": "Pintxos",
-      "bars": "Bars",
-      "bodegas": "Bodegas"
-    }
-  },
-  "bar": {
     "about": "À propos",
     "location": "Emplacement",
     "features": "Caractéristiques",
@@ -159,25 +140,39 @@
     "share": "Partager",
     "getDirections": "Obtenir les directions",
     "writeReview": "Écrire un avis",
-    "viewDetails": "Voir les détails",
     "backToRankings": "Retour aux classements",
-    "priceRangeLabel": "Gamme de prix",
-    "bestPintxo": "Meilleur pintxo",
-    "allPintxos": "Tous les pintxos",
-    "featuredPintxos": "Pintxos en vedette",
-    "featuredPintxosCount": "pintxos en vedette",
     "notFound": {
       "title": "Bar non trouvé",
       "description": "Le bar que vous recherchez n'existe pas ou a été supprimé",
       "backHome": "Retour à l'accueil"
-    }
+    },
+    "bestPintxo": "Meilleur Pintxo",
+    "allPintxos": "Tous les Pintxos",
+    "priceRangeLabel": "Gamme de prix",
+    "featuredPintxos": "Pintxos en vedette",
+    "featuredPintxosCount": "{{count}} pintxos en vedette",
+    "viewDetails": "Voir les détails",
+    "searchPlaceholder": "Rechercher des bars...",
+    "noResults": "Aucun bar trouvé",
+    "tryAdjustingFilters": "Essayez d'ajuster vos filtres de recherche",
+    "clearFilters": "Effacer les filtres"
   },
-  "footer": {
-    "quickLinks": "Liens rapides",
-    "location": "Logroño, La Rioja, Espagne",
-    "email": "info@logronam.com",
-    "phone": "+34 941 123 456",
-    "copyright": "© 2024 Logroñam. Tous droits réservés."
+  "rankings": {
+    "title": "Classements",
+    "subtitle": "Les meilleurs pintxos et bars de Logroño",
+    "searchPlaceholder": "Rechercher dans les classements...",
+    "noResults": "Aucun résultat trouvé",
+    "tryAdjustingFilters": "Essayez d'ajuster vos filtres de recherche",
+    "clearFilters": "Effacer les filtres",
+    "sortBy": "Trier par",
+    "category": "Catégorie",
+    "priceRange": "Gamme de prix",
+    "allCategories": "Toutes les catégories",
+    "allPriceRanges": "Toutes les gammes de prix",
+    "rating": "Note",
+    "popularity": "Popularité",
+    "name": "Nom",
+    "viewAllRankings": "Voir tous les classements"
   },
   "categories": {
     "bar": "Bar",
@@ -185,11 +180,69 @@
     "taberna": "Taverne",
     "bodega": "Cave"
   },
+  "tags": {
+    "traditional": "Traditionnel",
+    "modern": "Moderne",
+    "fusion": "Fusion",
+    "vegetarian": "Végétarien",
+    "seafood": "Fruits de mer",
+    "meat": "Viande"
+  },
   "priceRanges": {
     "€": "Économique",
     "€€": "Modéré",
     "€€€": "Cher",
     "€€€€": "Très cher"
+  },
+  "footer": {
+    "description": "Le guide définitif pour explorer la culture gastronomique de Logroño",
+    "quickLinks": "Liens rapides",
+    "categories": "Catégories",
+    "contact": "Contact",
+    "location": "Emplacement",
+    "email": "Email",
+    "phone": "Téléphone",
+    "followUs": "Suivez-nous",
+    "newsletter": {
+      "title": "Newsletter",
+      "subtitle": "Recevez les dernières nouvelles de Logroñam",
+      "placeholder": "Votre email",
+      "button": "S'abonner"
+    },
+    "copyright": "© 2024 Logroñam. Tous droits réservés.",
+    "privacy": "Politique de confidentialité",
+    "terms": "Conditions d'utilisation"
+  },
+  "search": {
+    "placeholder": "Rechercher...",
+    "noResults": "Aucun résultat trouvé",
+    "tryAdjustingFilters": "Essayez d'ajuster vos filtres de recherche"
+  },
+  "filter": {
+    "title": "Filtres",
+    "clear": "Effacer les filtres",
+    "apply": "Appliquer les filtres"
+  },
+  "sort": {
+    "title": "Trier",
+    "by": "Trier par",
+    "name": "Nom",
+    "rating": "Note",
+    "price": "Prix",
+    "popularity": "Popularité"
+  },
+  "view": {
+    "grid": "Vue en grille",
+    "list": "Vue en liste"
+  },
+  "contentType": {
+    "title": "Type de contenu",
+    "bars": "Bars",
+    "pintxos": "Pintxos"
+  },
+  "select": {
+    "placeholder": "Sélectionner une option",
+    "noOptions": "Aucune option disponible"
   },
   "common": {
     "view": "Voir",
@@ -208,6 +261,14 @@
     "search": "Rechercher",
     "filter": "Filtrer",
     "sort": "Trier",
-    "viewDetails": "Voir les détails"
+    "sortBy": "Trier par",
+    "viewDetails": "Voir les détails",
+    "clearFilters": "Effacer les filtres",
+    "category": "Catégorie",
+    "priceRange": "Gamme de prix",
+    "rating": "Note",
+    "popularity": "Popularité",
+    "name": "Nom",
+    "ourReview": "Notre Avis"
   }
 }

@@ -1,201 +1,274 @@
 {
+  "seo": {
+    "home": {
+      "title": "Logroñam - Os melhores pintxos e bares de Logroño",
+      "description": "Descubra os melhores pintxos e bares de Logroño. O guia definitivo para explorar a cultura gastronómica da capital da Rioja.",
+      "keywords": "pintxos, bares, Logroño, gastronomia, pinchos, tapas, La Rioja, turismo gastronómico"
+    },
+    "pintxos": {
+      "title": "Pintxos de Logroño - Os melhores pinchos da cidade",
+      "description": "Explore a melhor seleção de pintxos de Logroño. Descubra sabores autênticos e tradições culinárias únicas.",
+      "keywords": "pintxos, pinchos, Logroño, gastronomia, tapas, tradição culinária"
+    },
+    "bars": {
+      "title": "Bares de Logroño - Guia completo de bares e tabernas",
+      "description": "Encontre os melhores bares e tabernas de Logroño. Desde tabernas clássicas até bares modernos com os melhores pintxos.",
+      "keywords": "bares, tabernas, Logroño, gastronomia, pinchos, ambiente, La Rioja"
+    },
+    "rankings": {
+      "title": "Rankings de Logroño - Os melhores pintxos e bares",
+      "description": "Descubra os rankings dos melhores pintxos e bares de Logroño. Baseado em avaliações reais de utilizadores.",
+      "keywords": "rankings, melhores, pintxos, bares, Logroño, avaliações, top"
+    }
+  },
   "navigation": {
-    "home": "Accueil",
-    "rankings": "Classements",
-    "bars": "Bars",
-    "about": "À propos",
-    "contact": "Contact",
-    "pintxos": "Pintxos"
+    "home": "Início",
+    "pintxos": "Pintxos",
+    "bars": "Bares",
+    "rankings": "Rankings",
+    "about": "Sobre",
+    "contact": "Contacto"
   },
   "home": {
     "title": "Logroñam",
-    "subtitle": "Découvrez les meilleurs bars et pintxos de Logroño",
-    "description": "Votre guide définitif pour explorer la gastronomie riojane. Découvrez les meilleurs bars, tavernes et restaurants de Logroño avec nos avis détaillés et classements mis à jour.",
-    "featuredBars": "Bars en vedette",
-    "topRated": "Mieux notés",
-    "newDiscoveries": "Nouvelles découvertes",
-    "viewAll": "Voir tout",
-    "exploreNow": "Explorer maintenant",
+    "subtitle": "Descubra os melhores pintxos e bares de Logroño",
+    "description": "O guia definitivo para explorar a cultura gastronómica de Logroño. Encontre os melhores pintxos, bares e experiências culinárias da capital da Rioja.",
+    "featuredBars": "Bares em destaque",
+    "topRated": "Os melhor avaliados pelos nossos utilizadores",
     "stats": {
-      "bars": "Bars et restaurants",
-      "reviews": "Avis vérifiés",
-      "pintxos": "Pintxos uniques"
+      "bars": "Bares",
+      "reviews": "Avaliações",
+      "pintxos": "Pintxos"
     },
     "neighborhoods": {
-      "title": "Explorer par Quartiers",
-      "subtitle": "Découvrez la diversité gastronomique de Logroño",
+      "title": "Bairros de Logroño",
+      "subtitle": "Explore os diferentes bairros e as suas especialidades",
       "laurel": {
-        "name": "Rue Laurel",
-        "description": "La rue la plus célèbre de Logroño, pleine de tavernes traditionnelles",
-        "count": "25+ bars"
+        "name": "Calle Laurel",
+        "description": "O coração da cultura do pincho em Logroño",
+        "count": "25+ bares"
+      },
+      "herrerias": {
+        "name": "Calle Herrerías",
+        "description": "Tradição e modernidade em perfeita harmonia",
+        "count": "15+ bares"
+      },
+      "sanjuan": {
+        "name": "Calle San Juan",
+        "description": "Sabores autênticos e ambiente familiar",
+        "count": "20+ bares"
       },
       "casco": {
-        "name": "Vieille Ville",
-        "description": "Le cœur historique de la ville avec des bars centenaires",
-        "count": "15+ bars"
+        "name": "Centro histórico",
+        "description": "O centro histórico com charme tradicional",
+        "count": "10+ bares"
       },
       "granvia": {
         "name": "Gran Vía",
-        "description": "Bars modernes et restaurants de haute cuisine",
-        "count": "10+ bars"
+        "description": "A artéria principal com ambiente moderno",
+        "count": "8+ bares"
       }
-    }
-  },
-  "bar": {
-    "rating": "Note",
-    "reviews": "avis",
-    "priceRange": "Gamme de prix",
-    "location": "Emplacement",
-    "openingHours": "Heures d'ouverture",
-    "contact": "Contact",
-    "features": "Caractéristiques",
-    "bestPintxo": "Meilleur pintxo",
-    "viewDetails": "Voir les détails",
-    "categories": {
-      "bar": "Bar",
-      "restaurant": "Restaurant",
-      "taberna": "Taverne",
-      "bodega": "Cave"
-    }
-  },
-  "rankings": {
-    "title": "Classements des Bars",
-    "subtitle": "Les meilleurs bars de Logroño selon nos utilisateurs",
-    "sortBy": "Trier par",
-    "rating": "Note",
-    "reviews": "Avis",
-    "name": "Nom",
-    "priceRange": "Gamme de prix",
-    "category": "Catégorie",
-    "neighborhood": "Quartier",
-    "allCategories": "Toutes les catégories",
-    "allNeighborhoods": "Tous les quartiers",
-    "allPriceRanges": "Toutes les gammes de prix",
-    "results": "{{count}} bars trouvés",
-    "noResults": {
-      "title": "Aucun bar trouvé",
-      "description": "Essayez d'ajuster les filtres pour trouver plus de résultats.",
-      "clearFilters": "Effacer les filtres"
+    },
+    "cta": {
+      "title": "Pronto para explorar?",
+      "subtitle": "Descubra os melhores pintxos e bares de Logroño",
+      "button": "Começar exploração"
     }
   },
   "pintxos": {
-    "title": "Tous les Pintxos",
-    "subtitle": "Découvrez l'incroyable variété de pintxos de Logroño",
-    "searchPlaceholder": "Rechercher pintxos, ingrédients, tags...",
-    "filters": "Filtres",
-    "clearFilters": "Effacer les filtres",
-    "results": "{{count}} pintxos trouvés",
-    "noResults": {
-      "title": "Aucun pintxo trouvé",
-      "description": "Essayez d'ajuster les filtres pour trouver plus de résultats.",
-      "clearFilters": "Effacer les filtres"
-    },
-    "sortBy": "Trier par",
-    "name": "Nom",
-    "price": "Prix",
-    "availableAt": "Disponible chez",
-    "moreBars": "{{count}} bars de plus",
-    "viewDetails": "Voir les détails",
-    "popularity": "Popularité",
-    "category": "Catégorie",
-    "priceRange": "Gamme de Prix",
+    "title": "Pintxos",
+    "subtitle": "Descubra os melhores pinchos de Logroño",
+    "searchPlaceholder": "Procurar pintxos...",
+    "noResults": "Nenhum pintxo encontrado",
+    "tryAdjustingFilters": "Tente ajustar os seus filtros de pesquisa",
+    "clearFilters": "Limpar filtros",
+    "sortBy": "Ordenar por",
+    "category": "Categoria",
+    "priceRange": "Gama de preços",
+    "allCategories": "Todas as categorias",
+    "allPriceRanges": "Todas as gamas de preços",
+    "popularity": "Popularidade",
+    "name": "Nome",
+    "price": "Preço",
+    "rating": "Avaliação",
+    "bars": "Bares",
+    "traditional": "Tradicional",
+    "modern": "Moderno",
+    "fusion": "Fusão",
+    "vegetarian": "Vegetariano",
+    "seafood": "Marisco",
+    "meat": "Carne",
     "bar": "Bar",
-    "allBars": "Tous les Bars",
-    "allCategories": "Toutes les Catégories",
-    "allPriceRanges": "Toutes les Gammes",
-    "traditional": "Traditionnel",
-    "modern": "Moderne",
-    "fusion": "Fusion",
-    "vegetarian": "Végétarien",
-    "seafood": "Fruits de mer",
-    "meat": "Viande",
-    "bars": "Bars",
-    "backToPintxos": "Retour aux Pintxos",
-    "ingredients": "Ingrédients",
-    "tags": "Étiquettes",
-    "viewBar": "Voir le Bar",
+    "allBars": "Todos os bares",
+    "results": "{{count}} pintxos encontrados",
+    "viewDetails": "Ver detalhes",
+    "availableAt": "Disponível em",
+    "moreBars": "+{{count}} bares mais",
     "notFound": {
-      "title": "Pintxo non trouvé",
-      "description": "Le pintxo que vous recherchez n'existe pas ou a été supprimé."
+      "title": "Pintxo não encontrado",
+      "description": "O pintxo que procura não existe ou foi removido"
     },
-    "noBarsFound": "Aucun bar trouvé servant ce pintxo",
-    "currentView": "Vue actuelle"
+    "backToPintxos": "Voltar aos pintxos",
+    "otherVariations": "Outras variações",
+    "currentView": "Vista atual",
+    "variationReview": "Avaliação da variação",
+    "noBarsFound": "Nenhum bar encontrado para este pintxo",
+    "viewBar": "Ver bar",
+    "ingredients": "Ingredientes",
+    "tags": "Etiquetas",
+    "variationNotFound": {
+      "title": "Variação não encontrada",
+      "description": "A variação de pintxo que procura não existe"
+    }
   },
-  "ingredients": {
-    "mushrooms": "champignons",
-    "garlic": "ail",
-    "parsley": "persil",
-    "olive-oil": "huile d'olive",
-    "salt": "sel",
-    "foie-gras": "foie gras",
-    "apple": "pomme",
-    "sugar": "sucre",
-    "pedro-ximenez-wine": "vin Pedro Ximénez",
-    "butter": "beurre",
-    "piquillo-peppers": "poivrons piquillo",
-    "cod": "morue",
-    "onion": "oignon",
-    "paprika": "paprika",
-    "eggs": "œufs",
-    "potatoes": "pommes de terre"
+  "bars": {
+    "title": "Bares",
+    "subtitle": "Explore todos os bares de Logroño",
+    "all": "Todos",
+    "sortBy": "Ordenar por",
+    "category": "Categoria",
+    "priceRange": "Gama de preços",
+    "allCategories": "Todas as categorias",
+    "allPriceRanges": "Todas as gamas de preços",
+    "rating": "Avaliação",
+    "name": "Nome",
+    "about": "Sobre",
+    "location": "Localização",
+    "features": "Características",
+    "contact": "Contacto",
+    "actions": "Ações",
+    "share": "Partilhar",
+    "getDirections": "Obter direções",
+    "writeReview": "Escrever avaliação",
+    "backToRankings": "Voltar aos rankings",
+    "notFound": {
+      "title": "Bar não encontrado",
+      "description": "O bar que procura não existe ou foi removido",
+      "backHome": "Voltar ao início"
+    },
+    "bestPintxo": "Melhor Pintxo",
+    "allPintxos": "Todos os Pintxos",
+    "priceRangeLabel": "Gama de preços",
+    "featuredPintxos": "Pintxos em destaque",
+    "featuredPintxosCount": "{{count}} pintxos em destaque",
+    "viewDetails": "Ver detalhes",
+    "searchPlaceholder": "Procurar bares...",
+    "noResults": "Nenhum bar encontrado",
+    "tryAdjustingFilters": "Tente ajustar os seus filtros de pesquisa",
+    "clearFilters": "Limpar filtros"
   },
-  "tags": {
-    "vegetarian": "végétarien",
-    "traditional": "traditionnel",
-    "popular": "populaire",
-    "gourmet": "gourmet",
-    "modern": "moderne",
-    "sweet": "sucré",
-    "fish": "poisson",
-    "spicy": "épicé"
-  },
-  "footer": {
-    "description": "Votre guide définitif pour explorer la gastronomie riojane. Découvrez les meilleurs bars, tavernes et restaurants de Logroño.",
-    "quickLinks": "Liens Rapides",
-    "legal": "Légal",
-    "privacyPolicy": "Politique de Confidentialité",
-    "termsOfService": "Conditions d'Utilisation",
-    "cookies": "Politique des Cookies",
-    "allRightsReserved": "Tous droits réservés",
-    "madeWith": "Fait avec ❤️ à Logroño"
-  },
-  "common": {
-    "loading": "Chargement...",
-    "rating": "Note",
-    "error": "Erreur",
-    "retry": "Réessayer",
-    "search": "Rechercher",
-    "filter": "Filtrer",
-    "sort": "Trier",
-    "close": "Fermer",
-    "save": "Enregistrer",
-    "cancel": "Annuler",
-    "edit": "Modifier",
-    "delete": "Supprimer",
-    "share": "Partager",
-    "like": "J'aime",
-    "unlike": "Je n'aime pas",
-    "readMore": "Lire plus",
-    "showLess": "Montrer moins",
-    "viewDetails": "Voir les détails",
-    "view": "Voir"
+  "rankings": {
+    "title": "Rankings",
+    "subtitle": "Os melhores pintxos e bares de Logroño",
+    "searchPlaceholder": "Procurar nos rankings...",
+    "noResults": "Nenhum resultado encontrado",
+    "tryAdjustingFilters": "Tente ajustar os seus filtros de pesquisa",
+    "clearFilters": "Limpar filtros",
+    "sortBy": "Ordenar por",
+    "category": "Categoria",
+    "priceRange": "Gama de preços",
+    "allCategories": "Todas as categorias",
+    "allPriceRanges": "Todas as gamas de preços",
+    "rating": "Avaliação",
+    "popularity": "Popularidade",
+    "name": "Nome",
+    "viewAllRankings": "Ver todos os rankings"
   },
   "categories": {
     "bar": "Bar",
-    "restaurant": "Restaurant",
-    "taberna": "Taverne",
-    "bodega": "Cave"
+    "restaurant": "Restaurante",
+    "taberna": "Taberna",
+    "bodega": "Adega"
+  },
+  "tags": {
+    "traditional": "Tradicional",
+    "modern": "Moderno",
+    "fusion": "Fusão",
+    "vegetarian": "Vegetariano",
+    "seafood": "Marisco",
+    "meat": "Carne"
   },
   "priceRanges": {
-    "€": "Économique",
-    "€€": "Modéré",
-    "€€€": "Cher",
-    "€€€€": "Très cher"
+    "€": "Económico",
+    "€€": "Moderado",
+    "€€€": "Caro",
+    "€€€€": "Muito caro"
   },
-  "metadata": {
-    "title": "Logroñam - Les meilleurs bars et pintxos de Logroño",
-    "description": "Découvrez les meilleurs bars, tavernes et restaurants de Logroño avec nos avis détaillés et classements mis à jour. Votre guide définitif pour la gastronomie riojane.",
-    "keywords": "Logroño, bars, pintxos, gastronomie, La Rioja, tavernes, restaurants, classements",
-    "author": "Équipe Logroñam"
+  "footer": {
+    "description": "O guia definitivo para explorar a cultura gastronómica de Logroño",
+    "quickLinks": "Links rápidos",
+    "categories": "Categorias",
+    "contact": "Contacto",
+    "location": "Localização",
+    "email": "Email",
+    "phone": "Telefone",
+    "followUs": "Siga-nos",
+    "newsletter": {
+      "title": "Newsletter",
+      "subtitle": "Receba as últimas novidades do Logroñam",
+      "placeholder": "O seu email",
+      "button": "Subscrever"
+    },
+    "copyright": "© 2024 Logroñam. Todos os direitos reservados.",
+    "privacy": "Política de privacidade",
+    "terms": "Termos de serviço"
+  },
+  "search": {
+    "placeholder": "Procurar...",
+    "noResults": "Nenhum resultado encontrado",
+    "tryAdjustingFilters": "Tente ajustar os seus filtros de pesquisa"
+  },
+  "filter": {
+    "title": "Filtros",
+    "clear": "Limpar filtros",
+    "apply": "Aplicar filtros"
+  },
+  "sort": {
+    "title": "Ordenar",
+    "by": "Ordenar por",
+    "name": "Nome",
+    "rating": "Avaliação",
+    "price": "Preço",
+    "popularity": "Popularidade"
+  },
+  "view": {
+    "grid": "Vista em grelha",
+    "list": "Vista em lista"
+  },
+  "contentType": {
+    "title": "Tipo de conteúdo",
+    "bars": "Bares",
+    "pintxos": "Pintxos"
+  },
+  "select": {
+    "placeholder": "Selecionar opção",
+    "noOptions": "Nenhuma opção disponível"
+  },
+  "common": {
+    "view": "Ver",
+    "loading": "A carregar...",
+    "error": "Erro",
+    "retry": "Tentar novamente",
+    "back": "Voltar",
+    "next": "Seguinte",
+    "previous": "Anterior",
+    "close": "Fechar",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "add": "Adicionar",
+    "search": "Procurar",
+    "filter": "Filtrar",
+    "sort": "Ordenar",
+    "sortBy": "Ordenar por",
+    "viewDetails": "Ver detalhes",
+    "clearFilters": "Limpar filtros",
+    "category": "Categoria",
+    "priceRange": "Gama de preços",
+    "rating": "Avaliação",
+    "popularity": "Popularidade",
+    "name": "Nome",
+    "ourReview": "A nossa avaliação"
   }
 }
