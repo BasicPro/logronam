@@ -24,7 +24,6 @@ import {
   Instagram,
   Star,
   Banknote,
-  ArrowLeft,
   Share2,
   Navigation,
   Users,

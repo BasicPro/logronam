@@ -162,7 +162,9 @@
     "fusion": "Fusion",
     "vegetarian": "Vegetarian",
     "seafood": "Seafood",
-    "meat": "Meat"
+    "meat": "Meat",
+    "popular": "Popular",
+    "spicy": "Spicy"
   },
   "priceRanges": {
     "€": "Budget",

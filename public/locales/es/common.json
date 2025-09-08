@@ -186,7 +186,9 @@
     "fusion": "Fusión",
     "vegetarian": "Vegetariano",
     "seafood": "Marisco",
-    "meat": "Carne"
+    "meat": "Carne",
+    "popular": "Popular",
+    "spicy": "Picante"
   },
   "priceRanges": {
     "€": "Económico",

@@ -14,12 +14,10 @@ export const Image: React.FC<ImageProps> = ({
   className,
   ...props
 }) => {
-  const [imageSrc, setImageSrc] = React.useState(src);
-
   return (
     <div className={cn("relative overflow-hidden", className)}>
       <img
-        src={imageSrc}
+        src={src}
         alt={alt}
         className={"w-full h-full object-cover transition-opacity duration-300"}
         {...props}

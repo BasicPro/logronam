@@ -21,15 +21,18 @@ interface FilteredItemsGridProps<T> {
 }
 
 // Type guard functions
-function isBar(item: any): item is Bar {
+function isBar(item: unknown): item is Bar {
   return (
-    item && typeof item === "object" && "category" in item && "location" in item
+    item !== null &&
+    typeof item === "object" &&
+    "category" in item &&
+    "location" in item
   );
 }
 
-function isPintxo(item: any): item is Pintxo {
+function isPintxo(item: unknown): item is Pintxo {
   return (
-    item &&
+    item !== null &&
     typeof item === "object" &&
     "ingredients" in item &&
     "tags" in item &&
@@ -37,8 +40,8 @@ function isPintxo(item: any): item is Pintxo {
   );
 }
 
-function isRankingItem(item: any): item is RankingItem {
-  return item && typeof item === "object" && "__typename" in item;
+function isRankingItem(item: unknown): item is RankingItem {
+  return item !== null && typeof item === "object" && "__typename" in item;
 }
 
 export function FilteredItemsGrid<T>({
