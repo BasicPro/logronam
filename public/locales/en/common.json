@@ -19,6 +19,45 @@
       "title": "Logroño Rankings - The best pintxos and bars",
       "description": "Discover the rankings of the best pintxos and bars in Logroño. Based on real user ratings.",
       "keywords": "rankings, best, pintxos, bars, Logroño, ratings, top"
+    },
+    "about": {
+      "title": "About Logroñam - Discover Logroño's gastronomic culture",
+      "description": "Learn about Logroñam's mission to showcase the rich gastronomic culture of Logroño and help you discover the best pintxos and bars.",
+      "keywords": "about, Logroñam, mission, gastronomy, Logroño, culture, pintxos, bars"
+    }
+  },
+  "about": {
+    "hero": {
+      "title": "About Logroñam",
+      "subtitle": "Discover the story behind Logroño's ultimate pintxo guide"
+    },
+    "mission": {
+      "title": "Our Mission",
+      "description": "Logroñam is dedicated to showcasing the rich gastronomic culture of Logroño, helping locals and visitors discover the best pintxos and bars that make this city a culinary destination."
+    },
+    "whatWeDo": {
+      "title": "What We Do",
+      "items": [
+        "Curate the best pintxos and bars in Logroño",
+        "Provide detailed information and ratings",
+        "Help you discover hidden culinary gems",
+        "Support local businesses and traditions"
+      ]
+    },
+    "values": {
+      "title": "Our Values",
+      "items": [
+        "Authenticity in every recommendation",
+        "Quality over quantity",
+        "Community-driven insights",
+        "Preserving culinary heritage"
+      ]
+    },
+    "community": {
+      "title": "Join Our Community",
+      "description": "Be part of Logroño's gastronomic journey. Share your experiences, discover new places, and help others find their perfect pintxo.",
+      "instagramButton": "Follow on Instagram",
+      "shareButton": "Share Your Experience"
     }
   },
   "navigation": {

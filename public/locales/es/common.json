@@ -19,6 +19,45 @@
       "title": "Rankings de Logroño - Los mejores pintxos y bares",
       "description": "Descubre los rankings de los mejores pintxos y bares de Logroño. Basado en valoraciones reales de usuarios.",
       "keywords": "rankings, mejores, pintxos, bares, Logroño, valoraciones, top"
+    },
+    "about": {
+      "title": "Acerca de Logroñam - Descubre la cultura gastronómica de Logroño",
+      "description": "Conoce la misión de Logroñam para mostrar la rica cultura gastronómica de Logroño y ayudarte a descubrir los mejores pintxos y bares.",
+      "keywords": "acerca de, Logroñam, misión, gastronomía, Logroño, cultura, pintxos, bares"
+    }
+  },
+  "about": {
+    "hero": {
+      "title": "Acerca de Logroñam",
+      "subtitle": "Descubre la historia detrás de la guía definitiva de pintxos de Logroño"
+    },
+    "mission": {
+      "title": "Nuestra Misión",
+      "description": "Logroñam está dedicado a mostrar la rica cultura gastronómica de Logroño, ayudando a locales y visitantes a descubrir los mejores pintxos y bares que hacen de esta ciudad un destino culinario."
+    },
+    "whatWeDo": {
+      "title": "Qué Hacemos",
+      "items": [
+        "Seleccionamos los mejores pintxos y bares de Logroño",
+        "Proporcionamos información detallada y valoraciones",
+        "Te ayudamos a descubrir joyas culinarias ocultas",
+        "Apoyamos a los negocios locales y tradiciones"
+      ]
+    },
+    "values": {
+      "title": "Nuestros Valores",
+      "items": [
+        "Autenticidad en cada recomendación",
+        "Calidad sobre cantidad",
+        "Insights impulsados por la comunidad",
+        "Preservar el patrimonio culinario"
+      ]
+    },
+    "community": {
+      "title": "Únete a Nuestra Comunidad",
+      "description": "Sé parte del viaje gastronómico de Logroño. Comparte tus experiencias, descubre nuevos lugares y ayuda a otros a encontrar su pintxo perfecto.",
+      "instagramButton": "Síguenos en Instagram",
+      "shareButton": "Comparte tu Experiencia"
     }
   },
   "navigation": {

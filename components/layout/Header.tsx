@@ -17,11 +17,10 @@ export const Header: React.FC = () => {
 
   const navigation = [
     { name: t("navigation.home"), href: `/${currentLocale}` },
-    { name: t("navigation.rankings"), href: `/${currentLocale}/rankings` },
     { name: t("navigation.pintxos"), href: `/${currentLocale}/pintxos` },
     { name: t("navigation.bars"), href: `/${currentLocale}/bars` },
+    { name: t("navigation.rankings"), href: `/${currentLocale}/rankings` },
     { name: t("navigation.about"), href: `/${currentLocale}/about` },
-    { name: t("navigation.contact"), href: `/${currentLocale}/contact` },
   ];
 
   const languages = [
